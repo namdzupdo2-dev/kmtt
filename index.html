@@ -3,1881 +3,3145 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Bank Data Manager</title>
 
 <style>
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+ box-sizing:border-box;
+ margin:0;
+ padding:0;
 }
 
 body{
-    font-family:Arial,sans-serif;
-    background:#f4f6f8;
-    color:#222;
+ font-family:Arial,sans-serif;
+ background:#f3f4f6;
+ color:#111827;
 }
 
-button,input,select{
-    font:inherit;
+button,input,select,textarea{
+ font:inherit;
 }
 
 button{
-    cursor:pointer;
-    border:0;
+ cursor:pointer;
+ border:0;
 }
 
 .hidden{
-    display:none!important;
+ display:none!important;
 }
 
-/* LOGIN */
-
-.auth-page{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    background:linear-gradient(135deg,#111827,#374151);
+.auth{
+ min-height:100vh;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ padding:20px;
+ background:linear-gradient(135deg,#111827,#374151);
 }
 
 .auth-box{
-    width:100%;
-    max-width:420px;
-    background:white;
-    border-radius:18px;
-    padding:28px;
-    box-shadow:0 20px 50px rgba(0,0,0,.25);
+ width:100%;
+ max-width:420px;
+ background:#fff;
+ border-radius:18px;
+ padding:28px;
+ box-shadow:0 20px 60px rgba(0,0,0,.3);
 }
 
 .logo{
-    text-align:center;
-    font-size:26px;
-    font-weight:800;
-    margin-bottom:8px;
+ text-align:center;
+ font-size:27px;
+ font-weight:800;
+ margin-bottom:8px;
 }
 
-.subtitle{
-    text-align:center;
-    color:#777;
-    margin-bottom:25px;
+.desc{
+ text-align:center;
+ color:#777;
+ margin-bottom:22px;
 }
 
 .tabs{
-    display:flex;
-    gap:8px;
-    margin-bottom:20px;
+ display:flex;
+ gap:8px;
+ margin-bottom:20px;
 }
 
 .tab{
-    flex:1;
-    padding:12px;
-    border-radius:10px;
-    background:#eee;
-    color:#555;
+ flex:1;
+ padding:12px;
+ border-radius:10px;
+ background:#eee;
 }
 
 .tab.active{
-    background:#111827;
-    color:white;
+ background:#111827;
+ color:#fff;
 }
 
 .form-group{
-    margin-bottom:15px;
+ margin-bottom:15px;
 }
 
 .form-group label{
-    display:block;
-    font-size:14px;
-    font-weight:bold;
-    margin-bottom:7px;
+ display:block;
+ font-weight:bold;
+ font-size:14px;
+ margin-bottom:7px;
 }
 
-.form-group input{
-    width:100%;
-    padding:13px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    outline:none;
+input,select,textarea{
+ width:100%;
+ padding:12px;
+ border:1px solid #d1d5db;
+ border-radius:9px;
+ outline:none;
+ background:#fff;
 }
 
-.form-group input:focus{
-    border-color:#111827;
+input:focus,
+select:focus,
+textarea:focus{
+ border-color:#111827;
 }
 
-.primary-btn{
-    width:100%;
-    padding:13px;
-    border-radius:10px;
-    background:#111827;
-    color:white;
-    font-weight:bold;
+.primary{
+ width:100%;
+ padding:13px;
+ border-radius:10px;
+ background:#111827;
+ color:#fff;
+ font-weight:bold;
 }
 
-.primary-btn:hover{
-    opacity:.9;
+.msg{
+ margin-top:14px;
+ padding:11px;
+ border-radius:9px;
+ font-size:14px;
+ display:none;
 }
 
-.message{
-    margin-top:15px;
-    padding:12px;
-    border-radius:10px;
-    font-size:14px;
-    display:none;
+.msg.error{
+ display:block;
+ background:#fee2e2;
+ color:#991b1b;
 }
 
-.message.error{
-    display:block;
-    background:#fee2e2;
-    color:#991b1b;
-}
-
-.message.success{
-    display:block;
-    background:#dcfce7;
-    color:#166534;
+.msg.ok{
+ display:block;
+ background:#dcfce7;
+ color:#166534;
 }
 
 /* APP */
 
-.app{
-    min-height:100vh;
-}
-
 .header{
-    height:65px;
-    background:#111827;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 20px;
-    position:sticky;
-    top:0;
-    z-index:20;
+ height:64px;
+ background:#111827;
+ color:#fff;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:0 18px;
+ position:sticky;
+ top:0;
+ z-index:50;
 }
 
 .header-title{
-    font-size:20px;
-    font-weight:800;
+ font-size:20px;
+ font-weight:800;
 }
 
 .header-right{
-    display:flex;
-    align-items:center;
-    gap:10px;
+ display:flex;
+ align-items:center;
+ gap:9px;
 }
 
 .user-badge{
-    background:#374151;
-    padding:8px 12px;
-    border-radius:20px;
-    font-size:13px;
+ padding:7px 11px;
+ border-radius:20px;
+ background:#374151;
+ font-size:13px;
 }
 
-.logout-btn{
-    background:#ef4444;
-    color:white;
-    padding:9px 13px;
-    border-radius:8px;
+.logout{
+ background:#ef4444;
+ color:#fff;
+ padding:9px 12px;
+ border-radius:8px;
 }
 
 .container{
-    max-width:1200px;
-    margin:auto;
-    padding:20px;
+ max-width:1200px;
+ margin:auto;
+ padding:18px;
 }
 
-/* USER */
+/* NAV */
 
-.search-area{
-    background:white;
-    padding:18px;
-    border-radius:15px;
-    margin-bottom:20px;
-    box-shadow:0 3px 12px rgba(0,0,0,.05);
+.nav{
+ display:flex;
+ gap:8px;
+ overflow-x:auto;
+ margin-bottom:18px;
 }
 
-.search-row{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:10px;
+.nav button{
+ white-space:nowrap;
+ padding:11px 15px;
+ background:#fff;
+ border-radius:9px;
 }
 
-.search-row input,
-.search-row select{
-    width:100%;
-    padding:13px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    outline:none;
-    background:white;
+.nav button.active{
+ background:#111827;
+ color:#fff;
 }
+
+/* CARDS */
 
 .stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-bottom:20px;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:12px;
+ margin-bottom:18px;
 }
 
 .stat{
-    background:white;
-    padding:18px;
-    border-radius:15px;
-    box-shadow:0 3px 12px rgba(0,0,0,.05);
+ background:#fff;
+ border-radius:14px;
+ padding:17px;
+ box-shadow:0 3px 12px rgba(0,0,0,.05);
 }
 
-.stat-title{
-    color:#777;
-    font-size:13px;
+.stat-label{
+ color:#777;
+ font-size:13px;
 }
 
-.stat-number{
-    font-size:25px;
-    font-weight:800;
-    margin-top:5px;
+.stat-num{
+ font-size:25px;
+ font-weight:800;
+ margin-top:5px;
 }
+
+/* SEARCH */
+
+.search-box{
+ background:#fff;
+ border-radius:14px;
+ padding:16px;
+ margin-bottom:15px;
+ box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
+
+.search-grid{
+ display:grid;
+ grid-template-columns:2fr 1fr;
+ gap:10px;
+}
+
+/* DATA */
 
 .data-list{
-    display:grid;
-    gap:10px;
+ display:grid;
+ gap:10px;
 }
 
 .data-card{
-    background:white;
-    border-radius:14px;
-    padding:16px;
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr auto;
-    gap:15px;
-    align-items:center;
-    box-shadow:0 3px 12px rgba(0,0,0,.05);
+ background:#fff;
+ border-radius:14px;
+ padding:16px;
+ display:grid;
+ grid-template-columns:1fr 1fr 1fr auto;
+ gap:15px;
+ align-items:center;
+ box-shadow:0 3px 12px rgba(0,0,0,.05);
 }
 
-.data-label{
-    font-size:12px;
-    color:#888;
-    margin-bottom:4px;
+.label{
+ font-size:11px;
+ color:#888;
+ margin-bottom:5px;
 }
 
-.data-value{
-    font-weight:700;
+.value{
+ font-weight:700;
+ word-break:break-word;
 }
 
 .bank-tag{
-    display:inline-block;
-    background:#e0f2fe;
-    color:#0369a1;
-    padding:5px 9px;
-    border-radius:7px;
-    font-size:13px;
-    font-weight:bold;
+ display:inline-block;
+ padding:5px 9px;
+ border-radius:7px;
+ background:#e0f2fe;
+ color:#0369a1;
+ font-size:12px;
+ font-weight:bold;
 }
 
-.copy-btn{
-    background:#111827;
-    color:white;
-    padding:9px 12px;
-    border-radius:8px;
-}
-
-.empty{
-    background:white;
-    padding:40px;
-    text-align:center;
-    border-radius:15px;
-    color:#777;
-}
-
-/* ADMIN */
-
-.admin-tabs{
-    display:flex;
-    gap:8px;
-    overflow-x:auto;
-    margin-bottom:20px;
-}
-
-.admin-tab{
-    padding:11px 16px;
-    border-radius:9px;
-    background:white;
-    white-space:nowrap;
-}
-
-.admin-tab.active{
-    background:#111827;
-    color:white;
-}
-
-.panel{
-    background:white;
-    border-radius:15px;
-    padding:20px;
-    box-shadow:0 3px 12px rgba(0,0,0,.05);
-    margin-bottom:20px;
-}
-
-.panel h2{
-    margin-bottom:15px;
-    font-size:19px;
-}
-
-.upload-box{
-    border:2px dashed #ccc;
-    border-radius:12px;
-    padding:25px;
-    text-align:center;
-    margin-bottom:15px;
-}
-
-.upload-box input{
-    margin-top:15px;
-}
-
-textarea{
-    width:100%;
-    min-height:180px;
-    padding:12px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    resize:vertical;
-}
-
-.admin-actions{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-top:12px;
-}
-
-.small-btn{
-    padding:10px 14px;
-    border-radius:8px;
-    background:#111827;
-    color:white;
-}
-
-.danger{
-    background:#dc2626;
+.btn{
+ padding:9px 12px;
+ border-radius:8px;
+ color:#fff;
+ background:#111827;
 }
 
 .green{
-    background:#16a34a;
+ background:#16a34a;
 }
 
-.warning{
-    background:#d97706;
+.red{
+ background:#dc2626;
 }
+
+.orange{
+ background:#d97706;
+}
+
+.blue{
+ background:#2563eb;
+}
+
+.empty{
+ background:#fff;
+ padding:40px 20px;
+ text-align:center;
+ border-radius:14px;
+ color:#777;
+}
+
+/* PANEL */
+
+.panel{
+ background:#fff;
+ padding:18px;
+ border-radius:14px;
+ margin-bottom:16px;
+ box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
+
+.panel h2{
+ font-size:19px;
+ margin-bottom:14px;
+}
+
+.panel p{
+ color:#666;
+ font-size:14px;
+}
+
+textarea{
+ min-height:180px;
+ resize:vertical;
+}
+
+.actions{
+ display:flex;
+ flex-wrap:wrap;
+ gap:8px;
+ margin-top:12px;
+}
+
+/* ACC */
+
+.acc-card{
+ background:#fff;
+ border-radius:14px;
+ padding:16px;
+ box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
+
+.acc-top{
+ display:flex;
+ justify-content:space-between;
+ gap:10px;
+ margin-bottom:12px;
+}
+
+.promo{
+ background:#fef3c7;
+ color:#92400e;
+ padding:5px 9px;
+ border-radius:7px;
+ font-size:12px;
+ font-weight:bold;
+}
+
+.price{
+ font-size:21px;
+ font-weight:800;
+ margin:8px 0;
+}
+
+.acc-grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+}
+
+.acc-actions{
+ display:flex;
+ gap:8px;
+ margin-top:12px;
+}
+
+/* TABLE */
 
 .table-wrap{
-    overflow-x:auto;
+ overflow-x:auto;
 }
 
 table{
-    width:100%;
-    border-collapse:collapse;
+ width:100%;
+ border-collapse:collapse;
 }
 
 th,td{
-    padding:12px;
-    border-bottom:1px solid #eee;
-    text-align:left;
-    font-size:14px;
+ text-align:left;
+ padding:11px;
+ border-bottom:1px solid #eee;
+ white-space:nowrap;
+ font-size:14px;
 }
 
 th{
-    background:#f9fafb;
+ background:#f9fafb;
 }
 
 .status{
-    display:inline-block;
-    padding:5px 9px;
-    border-radius:7px;
-    font-size:12px;
-    font-weight:bold;
+ display:inline-block;
+ padding:5px 9px;
+ border-radius:7px;
+ font-size:12px;
+ font-weight:bold;
 }
 
-.status.pending{
-    background:#fef3c7;
-    color:#92400e;
+.pending{
+ background:#fef3c7;
+ color:#92400e;
 }
 
-.status.approved{
-    background:#dcfce7;
-    color:#166534;
+.approved{
+ background:#dcfce7;
+ color:#166534;
 }
 
-.status.blocked{
-    background:#fee2e2;
-    color:#991b1b;
+.blocked{
+ background:#fee2e2;
+ color:#991b1b;
 }
 
-/* RESPONSIVE */
+/* MOBILE */
 
-@media(max-width:700px){
+@media(max-width:750px){
 
-    .header{
-        padding:0 12px;
-    }
+ .stats{
+  grid-template-columns:1fr 1fr;
+ }
 
-    .header-title{
-        font-size:16px;
-    }
+ .search-grid{
+  grid-template-columns:1fr;
+ }
 
-    .user-badge{
-        display:none;
-    }
+ .data-card{
+  grid-template-columns:1fr 1fr;
+ }
 
-    .container{
-        padding:12px;
-    }
+ .data-card .action{
+  grid-column:1/-1;
+ }
 
-    .search-row{
-        grid-template-columns:1fr;
-    }
+ .header-title{
+  font-size:16px;
+ }
 
-    .stats{
-        grid-template-columns:1fr 1fr;
-    }
+ .user-badge{
+  display:none;
+ }
 
-    .data-card{
-        grid-template-columns:1fr 1fr;
-    }
+ .container{
+  padding:12px;
+ }
 
-    .data-card .copy-area{
-        grid-column:1/-1;
-    }
+}
 
-    .table-wrap{
-        font-size:12px;
-    }
+@media(max-width:450px){
+
+ .stats{
+  grid-template-columns:1fr 1fr;
+ }
+
+ .data-card{
+  grid-template-columns:1fr;
+ }
+
+ .acc-grid{
+  grid-template-columns:1fr;
+ }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
 
-<div id="authPage" class="auth-page">
+<!-- ================= LOGIN ================= -->
 
-    <div class="auth-box">
+<div id="authPage" class="auth">
 
-        <div class="logo">🏦 BANK DATA</div>
-        <div class="subtitle">Hệ thống quản lý tài khoản ngân hàng</div>
+ <div class="auth-box">
 
-        <div class="tabs">
-            <button id="loginTab" class="tab active" onclick="showAuth('login')">
-                Đăng nhập
-            </button>
+  <div class="logo">🏦 BANK DATA</div>
 
-            <button id="registerTab" class="tab" onclick="showAuth('register')">
-                Đăng ký
-            </button>
-        </div>
+  <div class="desc">
+   Bank Data & Acc Manager
+  </div>
 
-        <!-- LOGIN FORM -->
+  <div class="tabs">
 
-        <div id="loginForm">
+   <button
+    id="loginTab"
+    class="tab active"
+    onclick="showAuth('login')">
+    Đăng nhập
+   </button>
 
-            <div class="form-group">
-                <label>Tài khoản</label>
-                <input id="loginUsername" type="text" placeholder="Nhập tài khoản">
-            </div>
+   <button
+    id="registerTab"
+    class="tab"
+    onclick="showAuth('register')">
+    Đăng ký
+   </button>
 
-            <div class="form-group">
-                <label>Mật khẩu</label>
-                <input id="loginPassword" type="password" placeholder="Nhập mật khẩu">
-            </div>
+  </div>
 
-            <button class="primary-btn" onclick="login()">
-                Đăng nhập
-            </button>
 
-        </div>
+  <div id="loginForm">
 
-        <!-- REGISTER FORM -->
+   <div class="form-group">
+    <label>Tài khoản</label>
+    <input
+     id="loginUsername"
+     placeholder="Nhập tài khoản">
+   </div>
 
-        <div id="registerForm" class="hidden">
+   <div class="form-group">
+    <label>Mật khẩu</label>
+    <input
+     id="loginPassword"
+     type="password"
+     placeholder="Nhập mật khẩu">
+   </div>
 
-            <div class="form-group">
-                <label>Tài khoản</label>
-                <input id="registerUsername" type="text" placeholder="Tạo tài khoản">
-            </div>
+   <button class="primary" onclick="login()">
+    Đăng nhập
+   </button>
 
-            <div class="form-group">
-                <label>Mật khẩu</label>
-                <input id="registerPassword" type="password" placeholder="Tạo mật khẩu">
-            </div>
+  </div>
 
-            <div class="form-group">
-                <label>Nhập lại mật khẩu</label>
-                <input id="registerPassword2" type="password" placeholder="Nhập lại mật khẩu">
-            </div>
 
-            <button class="primary-btn" onclick="register()">
-                Tạo tài khoản
-            </button>
+  <div id="registerForm" class="hidden">
 
-        </div>
+   <div class="form-group">
+    <label>Tài khoản</label>
+    <input
+     id="registerUsername"
+     placeholder="Tạo tài khoản">
+   </div>
 
-        <div id="authMessage" class="message"></div>
+   <div class="form-group">
+    <label>Mật khẩu</label>
+    <input
+     id="registerPassword"
+     type="password"
+     placeholder="Tạo mật khẩu">
+   </div>
 
-    </div>
+   <div class="form-group">
+    <label>Nhập lại mật khẩu</label>
+    <input
+     id="registerPassword2"
+     type="password"
+     placeholder="Nhập lại mật khẩu">
+   </div>
+
+   <button class="primary" onclick="register()">
+    Tạo tài khoản
+   </button>
+
+  </div>
+
+
+  <div id="authMsg" class="msg"></div>
+
+ </div>
 
 </div>
 
 
-<!-- APP -->
+<!-- ================= APP ================= -->
 
-<div id="app" class="app hidden">
+<div id="app" class="hidden">
 
-    <header class="header">
+ <header class="header">
 
-        <div class="header-title">
-            🏦 BANK DATA
-        </div>
+  <div class="header-title">
+   🏦 BANK DATA
+  </div>
 
-        <div class="header-right">
+  <div class="header-right">
 
-            <div id="userBadge" class="user-badge"></div>
+   <div id="userBadge" class="user-badge"></div>
 
-            <button class="logout-btn" onclick="logout()">
-                Đăng xuất
-            </button>
+   <button class="logout" onclick="logout()">
+    Đăng xuất
+   </button>
 
-        </div>
+  </div>
 
-    </header>
+ </header>
 
 
-    <!-- USER PAGE -->
+ <!-- USER -->
 
-    <main id="userPage" class="container hidden">
+ <main id="userApp" class="container hidden">
 
-        <div class="stats">
+  <div class="nav">
 
-            <div class="stat">
-                <div class="stat-title">Tổng dữ liệu</div>
-                <div id="userTotal" class="stat-number">0</div>
-            </div>
+   <button
+    id="userBankNav"
+    class="active"
+    onclick="userPage('bank',this)">
+    🏦 Bank Data
+   </button>
 
-            <div class="stat">
-                <div class="stat-title">Ngân hàng</div>
-                <div id="userBanks" class="stat-number">0</div>
-            </div>
+   <button
+    onclick="userPage('acc',this)">
+    🎁 Acc khuyến mãi
+   </button>
 
-            <div class="stat">
-                <div class="stat-title">Kết quả</div>
-                <div id="userResults" class="stat-number">0</div>
-            </div>
+  </div>
 
-        </div>
 
+  <!-- USER BANK -->
 
-        <div class="search-area">
+  <section id="userBankPage">
 
-            <div class="search-row">
+   <div class="stats">
 
-                <input
-                    id="userSearch"
-                    type="text"
-                    placeholder="🔎 Tìm theo tên hoặc STK..."
-                    oninput="renderUserData()"
-                >
+    <div class="stat">
+     <div class="stat-label">Tổng Bank Data</div>
+     <div id="uTotal" class="stat-num">0</div>
+    </div>
 
-                <select id="userBankFilter" onchange="renderUserData()">
-                    <option value="">Tất cả ngân hàng</option>
-                </select>
+    <div class="stat">
+     <div class="stat-label">Ngân hàng</div>
+     <div id="uBanks" class="stat-num">0</div>
+    </div>
 
-            </div>
+    <div class="stat">
+     <div class="stat-label">Kết quả</div>
+     <div id="uResults" class="stat-num">0</div>
+    </div>
 
-        </div>
+    <div class="stat">
+     <div class="stat-label">Đã lấy</div>
+     <div id="uTaken" class="stat-num">0</div>
+    </div>
 
+   </div>
 
-        <div id="userDataList" class="data-list"></div>
 
-    </main>
+   <div class="search-box">
 
+    <div class="search-grid">
 
-    <!-- ADMIN PAGE -->
+     <input
+      id="userBankSearch"
+      placeholder="🔎 Tìm STK / tên / ngân hàng..."
+      oninput="renderUserBank()">
 
-    <main id="adminPage" class="container hidden">
+     <select
+      id="userBankFilter"
+      onchange="renderUserBank()">
 
-        <div class="admin-tabs">
+      <option value="">
+       Tất cả ngân hàng Việt Nam
+      </option>
 
-            <button class="admin-tab active" onclick="adminTab('dashboard',this)">
-                📊 Tổng quan
-            </button>
+     </select>
 
-            <button class="admin-tab" onclick="adminTab('data',this)">
-                🏦 Dữ liệu
-            </button>
+    </div>
 
-            <button class="admin-tab" onclick="adminTab('users',this)">
-                👥 Người dùng
-            </button>
+   </div>
 
-        </div>
 
+   <div
+    id="userBankList"
+    class="data-list">
+   </div>
 
-        <!-- DASHBOARD -->
+  </section>
 
-        <section id="adminDashboard">
 
-            <div class="stats">
+  <!-- USER ACC -->
 
-                <div class="stat">
-                    <div class="stat-title">Tổng STK</div>
-                    <div id="adminTotal" class="stat-number">0</div>
-                </div>
+  <section id="userAccPage" class="hidden">
 
-                <div class="stat">
-                    <div class="stat-title">Ngân hàng</div>
-                    <div id="adminBanks" class="stat-number">0</div>
-                </div>
+   <div class="stats">
 
-                <div class="stat">
-                    <div class="stat-title">Người dùng</div>
-                    <div id="adminUsers" class="stat-number">0</div>
-                </div>
+    <div class="stat">
+     <div class="stat-label">Acc còn lại</div>
+     <div id="uAccTotal" class="stat-num">0</div>
+    </div>
 
-            </div>
+    <div class="stat">
+     <div class="stat-label">Đang khuyến mãi</div>
+     <div id="uPromo" class="stat-num">0</div>
+    </div>
 
-            <div class="panel">
+    <div class="stat">
+     <div class="stat-label">Giá thấp nhất</div>
+     <div id="uMinPrice" class="stat-num">0đ</div>
+    </div>
 
-                <h2>📌 Trạng thái hệ thống</h2>
+    <div class="stat">
+     <div class="stat-label">Đã lấy acc</div>
+     <div id="uAccTaken" class="stat-num">0</div>
+    </div>
 
-                <p>
-                    Hệ thống đang chạy bằng
-                    <b>LocalStorage</b>.
-                </p>
+   </div>
 
-                <br>
 
-                <p style="color:#777;font-size:14px">
-                    Đây là phiên bản GitHub test.
-                    Khi nối Supabase, dữ liệu sẽ được đồng bộ giữa tất cả thiết bị.
-                </p>
+   <div class="search-box">
 
-            </div>
+    <input
+     id="userAccSearch"
+     placeholder="🔎 Tìm acc / khuyến mãi..."
+     oninput="renderUserAcc()">
 
-        </section>
+   </div>
 
 
-        <!-- DATA -->
+   <div
+    id="userAccList"
+    class="data-list">
+   </div>
 
-        <section id="adminData" class="hidden">
+  </section>
 
-            <div class="panel">
+ </main>
 
-                <h2>📥 Import dữ liệu</h2>
 
-                <p style="color:#777;font-size:14px;margin-bottom:15px">
-                    Mỗi dòng phải có dạng:
-                </p>
+ <!-- ADMIN -->
 
-                <div style="
-                    background:#111827;
-                    color:#fff;
-                    padding:12px;
-                    border-radius:9px;
-                    font-family:monospace;
-                    margin-bottom:15px;
-                    overflow:auto;
-                ">
-123456789|NGUYEN VAN A|MB BANK<br>
-987654321|TRAN THI B|VCB<br>
-1122334455|LE VAN C|ACB
-                </div>
+ <main id="adminApp" class="container hidden">
 
-                <textarea
-                    id="dataTextarea"
-                    placeholder="Dán dữ liệu STK|TÊN|NGÂN HÀNG vào đây..."
-                ></textarea>
+  <div class="nav">
 
-                <div class="admin-actions">
+   <button
+    class="active"
+    onclick="adminPage('dashboard',this)">
+    📊 Tổng quan
+   </button>
 
-                    <button class="small-btn green" onclick="importData()">
-                        ➕ Import dữ liệu
-                    </button>
+   <button
+    onclick="adminPage('bank',this)">
+    🏦 Bank Data
+   </button>
 
-                    <button class="small-btn danger" onclick="clearAllData()">
-                        🗑 Xóa toàn bộ dữ liệu
-                    </button>
+   <button
+    onclick="adminPage('acc',this)">
+    🎁 Acc
+   </button>
 
-                </div>
+   <button
+    onclick="adminPage('users',this)">
+    👥 Người dùng
+   </button>
 
-            </div>
+   <button
+    onclick="adminPage('settings',this)">
+    ⚙️ Cài đặt
+   </button>
 
+  </div>
 
-            <div class="panel">
 
-                <h2>📋 Dữ liệu hiện tại</h2>
+  <!-- ADMIN DASHBOARD -->
 
-                <div class="search-row">
+  <section id="adminDashboard">
 
-                    <input
-                        id="adminDataSearch"
-                        type="text"
-                        placeholder="Tìm STK / tên / ngân hàng..."
-                        oninput="renderAdminData()"
-                    >
+   <div class="stats">
 
-                    <select id="adminBankFilter" onchange="renderAdminData()">
-                        <option value="">Tất cả ngân hàng</option>
-                    </select>
+    <div class="stat">
+     <div class="stat-label">Bank Data</div>
+     <div id="aBankTotal" class="stat-num">0</div>
+    </div>
 
-                </div>
+    <div class="stat">
+     <div class="stat-label">Ngân hàng</div>
+     <div id="aBankCount" class="stat-num">0</div>
+    </div>
 
-                <br>
+    <div class="stat">
+     <div class="stat-label">Acc</div>
+     <div id="aAccTotal" class="stat-num">0</div>
+    </div>
 
-                <div id="adminDataTable"></div>
+    <div class="stat">
+     <div class="stat-label">Users</div>
+     <div id="aUsers" class="stat-num">0</div>
+    </div>
 
-            </div>
+   </div>
 
-        </section>
 
+   <div class="panel">
 
-        <!-- USERS -->
+    <h2>📌 Hệ thống</h2>
 
-        <section id="adminUsers" class="hidden">
+    <p>
+     Admin và user đều có quyền lấy Bank Data.
+    </p>
 
-            <div class="panel">
+    <br>
 
-                <h2>👥 Quản lý tài khoản</h2>
+    <p>
+     Khi lấy Bank Data, số lượng trong kho sẽ tự động giảm.
+    </p>
 
-                <div id="usersTable"></div>
+    <br>
 
-            </div>
+    <p>
+     Khi tồn kho ngân hàng xuống 0, hệ thống có thể gửi cảnh báo Telegram cho admin.
+    </p>
 
-        </section>
+   </div>
 
-    </main>
+  </section>
+
+
+  <!-- ADMIN BANK -->
+
+  <section id="adminBank" class="hidden">
+
+   <div class="panel">
+
+    <h2>📥 Upload Bank Data</h2>
+
+    <p>
+     Mỗi dòng:
+    </p>
+
+    <br>
+
+    <div style="
+     background:#111827;
+     color:#fff;
+     padding:13px;
+     border-radius:9px;
+     font-family:monospace;
+     overflow:auto;
+    ">
+123456789|NGUYEN VAN A|ACB<br>
+987654321|TRAN THI B|MB BANK<br>
+1122334455|LE VAN C|VIETCOMBANK
+    </div>
+
+    <br>
+
+    <textarea
+     id="bankImport"
+     placeholder="Dán Bank Data vào đây...">
+    </textarea>
+
+    <div class="actions">
+
+     <button
+      class="btn green"
+      onclick="importBank()">
+      ➕ Thêm Bank Data
+     </button>
+
+     <button
+      class="btn red"
+      onclick="clearBanks()">
+      🗑 Xóa toàn bộ
+     </button>
+
+    </div>
+
+   </div>
+
+
+   <div class="panel">
+
+    <h2>🔎 Quản lý Bank Data</h2>
+
+    <div class="search-grid">
+
+     <input
+      id="adminBankSearch"
+      placeholder="Tìm STK / tên / bank..."
+      oninput="renderAdminBank()">
+
+     <select
+      id="adminBankFilter"
+      onchange="renderAdminBank()">
+
+      <option value="">
+       Tất cả ngân hàng
+      </option>
+
+     </select>
+
+    </div>
+
+    <br>
+
+    <div id="adminBankList"></div>
+
+   </div>
+
+  </section>
+
+
+  <!-- ADMIN ACC -->
+
+  <section id="adminAcc" class="hidden">
+
+   <div class="panel">
+
+    <h2>🎁 Upload Acc khuyến mãi</h2>
+
+    <p>
+     Mỗi dòng:
+    </p>
+
+    <br>
+
+    <div style="
+     background:#111827;
+     color:#fff;
+     padding:13px;
+     border-radius:9px;
+     font-family:monospace;
+     overflow:auto;
+    ">
+tk01|mk01|Khuyến mãi 20%|50000<br>
+tk02|mk02|Khuyến mãi 30%|70000
+    </div>
+
+    <br>
+
+    <textarea
+     id="accImport"
+     placeholder="TK|MK|Khuyến mãi|Giá">
+    </textarea>
+
+    <div class="actions">
+
+     <button
+      class="btn green"
+      onclick="importAcc()">
+      ➕ Thêm Acc
+     </button>
+
+     <button
+      class="btn red"
+      onclick="clearAcc()">
+      🗑 Xóa toàn bộ Acc
+     </button>
+
+    </div>
+
+   </div>
+
+
+   <div class="panel">
+
+    <h2>💰 Quản lý giá Acc</h2>
+
+    <div id="adminAccList"></div>
+
+   </div>
+
+  </section>
+
+
+  <!-- ADMIN USERS -->
+
+  <section id="adminUsersPage" class="hidden">
+
+   <div class="panel">
+
+    <h2>👥 Quản lý người dùng</h2>
+
+    <div id="usersList"></div>
+
+   </div>
+
+  </section>
+
+
+  <!-- SETTINGS -->
+
+  <section id="adminSettings" class="hidden">
+
+   <div class="panel">
+
+    <h2>⚙️ Telegram</h2>
+
+    <p>
+     Dùng cho bản test GitHub. Không nên đưa Bot Token thật lên GitHub công khai.
+    </p>
+
+    <br>
+
+    <div class="form-group">
+     <label>Telegram Bot Token</label>
+     <input
+      id="teleToken"
+      type="password"
+      placeholder="123456:ABC...">
+    </div>
+
+    <div class="form-group">
+     <label>Telegram Chat ID</label>
+     <input
+      id="teleChat"
+      placeholder="-100xxxxxxxxxx">
+    </div>
+
+    <div class="form-group">
+     <label>Ngưỡng cảnh báo Bank Data</label>
+     <input
+      id="teleThreshold"
+      type="number"
+      min="0"
+      value="2">
+    </div>
+
+    <div class="actions">
+
+     <button
+      class="btn green"
+      onclick="saveTelegram()">
+      💾 Lưu Telegram
+     </button>
+
+     <button
+      class="btn blue"
+      onclick="testTelegram()">
+      📤 Test Telegram
+     </button>
+
+    </div>
+
+   </div>
+
+
+   <div class="panel">
+
+    <h2>🔐 Admin test</h2>
+
+    <p>
+     Tài khoản admin mặc định:
+    </p>
+
+    <br>
+
+    <b>admin / 123456</b>
+
+    <br><br>
+
+    <p>
+     Quyền admin được lưu LocalStorage để test.
+    </p>
+
+   </div>
+
+  </section>
+
+ </main>
 
 </div>
 
 
 <script>
 
-/* =====================================================
-   DATABASE LOCAL
-===================================================== */
+/* =========================================================
+   CẤU HÌNH
+========================================================= */
 
-const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "123456";
+const ADMIN_USER = "admin";
+const ADMIN_PASS = "123456";
 
 
-function getData(){
+/* Danh sách ngân hàng Việt Nam */
 
-    return JSON.parse(
-        localStorage.getItem("bankData") || "[]"
-    );
+const VIETNAM_BANKS = [
+ "ABBank",
+ "ACB",
+ "Agribank",
+ "BaoViet Bank",
+ "Bac A Bank",
+ "BVBank",
+ "CBBank",
+ "CIMB",
+ "DBS Bank",
+ "Eximbank",
+ "GPBank",
+ "HDBank",
+ "Hong Leong Bank",
+ "HSBC",
+ "Indovina Bank",
+ "KienlongBank",
+ "LPBank",
+ "MB Bank",
+ "MSB",
+ "Nam A Bank",
+ "NCB",
+ "OCB",
+ "PGBank",
+ "Public Bank Vietnam",
+ "PVcomBank",
+ "Sacombank",
+ "Saigonbank",
+ "SCB",
+ "SeABank",
+ "Shinhan Bank",
+ "SHB",
+ "Standard Chartered",
+ "Techcombank",
+ "TPBank",
+ "UOB",
+ "VIB",
+ "VietABank",
+ "VietBank",
+ "Vietcombank",
+ "VietinBank",
+ "VPBank",
+ "Woori Bank"
+];
+
+
+/* =========================================================
+   DATABASE
+========================================================= */
+
+function getBanks(){
+
+ return JSON.parse(
+  localStorage.getItem("bankData") || "[]"
+ );
 
 }
 
 
-function saveData(data){
+function saveBanks(data){
 
-    localStorage.setItem(
-        "bankData",
-        JSON.stringify(data)
-    );
+ localStorage.setItem(
+  "bankData",
+  JSON.stringify(data)
+ );
+
+}
+
+
+function getAcc(){
+
+ return JSON.parse(
+  localStorage.getItem("accData") || "[]"
+ );
+
+}
+
+
+function saveAcc(data){
+
+ localStorage.setItem(
+  "accData",
+  JSON.stringify(data)
+ );
 
 }
 
 
 function getUsers(){
 
-    let users = JSON.parse(
-        localStorage.getItem("bankUsers") || "null"
-    );
+ let users = JSON.parse(
+  localStorage.getItem("bankUsers") || "null"
+ );
 
-    if(!users){
+ if(!users){
 
-        users = [
+  users = [
+   {
+    id:1,
+    username:"admin",
+    password:"123456",
+    role:"admin",
+    status:"approved",
+    takenBank:0,
+    takenAcc:0
+   }
+  ];
 
-            {
-                id:1,
-                username:"admin",
-                password:"123456",
-                role:"admin",
-                status:"approved"
-            }
+  saveUsers(users);
 
-        ];
+ }
 
-        localStorage.setItem(
-            "bankUsers",
-            JSON.stringify(users)
-        );
-
-    }
-
-    return users;
+ return users;
 
 }
 
 
 function saveUsers(users){
 
-    localStorage.setItem(
-        "bankUsers",
-        JSON.stringify(users)
-    );
+ localStorage.setItem(
+  "bankUsers",
+  JSON.stringify(users)
+ );
 
 }
 
 
-/* =====================================================
+/* =========================================================
+   TELEGRAM SETTINGS
+========================================================= */
+
+function getTelegram(){
+
+ return JSON.parse(
+  localStorage.getItem("telegramSettings") || "{}"
+ );
+
+}
+
+
+function saveTelegram(){
+
+ const token =
+  document.getElementById("teleToken").value.trim();
+
+ const chat =
+  document.getElementById("teleChat").value.trim();
+
+ const threshold =
+  Number(
+   document.getElementById("teleThreshold").value
+  ) || 0;
+
+
+ localStorage.setItem(
+  "telegramSettings",
+  JSON.stringify({
+   token:token,
+   chat:chat,
+   threshold:threshold
+  })
+ );
+
+ alert("Đã lưu Telegram.");
+
+}
+
+
+function loadTelegram(){
+
+ const t = getTelegram();
+
+ document.getElementById("teleToken").value =
+  t.token || "";
+
+ document.getElementById("teleChat").value =
+  t.chat || "";
+
+ document.getElementById("teleThreshold").value =
+  t.threshold ?? 2;
+
+}
+
+
+async function sendTelegram(message){
+
+ const t = getTelegram();
+
+ if(!t.token || !t.chat){
+
+  return;
+
+ }
+
+
+ try{
+
+  await fetch(
+   "https://api.telegram.org/bot" +
+   encodeURIComponent(t.token) +
+   "/sendMessage",
+   {
+    method:"POST",
+    headers:{
+     "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+     chat_id:t.chat,
+     text:message
+    })
+   }
+  );
+
+ }catch(e){
+
+  console.log("Telegram error",e);
+
+ }
+
+}
+
+
+function testTelegram(){
+
+ sendTelegram(
+  "✅ BANK DATA TEST\n\nTelegram đã kết nối thành công."
+ );
+
+ alert("Đã gửi yêu cầu test Telegram.");
+
+}
+
+
+/* =========================================================
    AUTH
-===================================================== */
+========================================================= */
 
 function showAuth(type){
 
-    document
-        .getElementById("loginForm")
-        .classList.toggle("hidden",type !== "login");
+ document
+  .getElementById("loginForm")
+  .classList.toggle(
+   "hidden",
+   type !== "login"
+  );
 
-    document
-        .getElementById("registerForm")
-        .classList.toggle("hidden",type !== "register");
+ document
+  .getElementById("registerForm")
+  .classList.toggle(
+   "hidden",
+   type !== "register"
+  );
 
-    document
-        .getElementById("loginTab")
-        .classList.toggle("active",type === "login");
+ document
+  .getElementById("loginTab")
+  .classList.toggle(
+   "active",
+   type === "login"
+  );
 
-    document
-        .getElementById("registerTab")
-        .classList.toggle("active",type === "register");
-
-    clearMessage();
+ document
+  .getElementById("registerTab")
+  .classList.toggle(
+   "active",
+   type === "register"
+  );
 
 }
 
 
-function showMessage(text,type){
+function authMessage(text,type){
 
-    const box = document.getElementById("authMessage");
+ const box =
+  document.getElementById("authMsg");
 
-    box.textContent = text;
+ box.textContent = text;
 
-    box.className = "message " + type;
-
-}
-
-
-function clearMessage(){
-
-    const box = document.getElementById("authMessage");
-
-    box.textContent = "";
-
-    box.className = "message";
+ box.className =
+  "msg " + type;
 
 }
 
 
 function register(){
 
-    const username =
-        document
-        .getElementById("registerUsername")
-        .value
-        .trim();
+ const username =
+  document.getElementById("registerUsername")
+  .value.trim();
 
-    const password =
-        document
-        .getElementById("registerPassword")
-        .value;
+ const password =
+  document.getElementById("registerPassword")
+  .value;
 
-    const password2 =
-        document
-        .getElementById("registerPassword2")
-        .value;
+ const password2 =
+  document.getElementById("registerPassword2")
+  .value;
 
 
-    if(username.length < 3){
+ if(username.length < 3){
 
-        showMessage(
-            "Tài khoản phải có ít nhất 3 ký tự.",
-            "error"
-        );
+  authMessage(
+   "Tài khoản phải có ít nhất 3 ký tự.",
+   "error"
+  );
 
-        return;
+  return;
 
-    }
-
-
-    if(password.length < 4){
-
-        showMessage(
-            "Mật khẩu phải có ít nhất 4 ký tự.",
-            "error"
-        );
-
-        return;
-
-    }
+ }
 
 
-    if(password !== password2){
+ if(password.length < 4){
 
-        showMessage(
-            "Mật khẩu nhập lại không giống nhau.",
-            "error"
-        );
+  authMessage(
+   "Mật khẩu phải có ít nhất 4 ký tự.",
+   "error"
+  );
 
-        return;
+  return;
 
-    }
-
-
-    const users = getUsers();
-
-    const exists = users.some(
-        u => u.username.toLowerCase() === username.toLowerCase()
-    );
+ }
 
 
-    if(exists){
+ if(password !== password2){
 
-        showMessage(
-            "Tài khoản đã tồn tại.",
-            "error"
-        );
+  authMessage(
+   "Mật khẩu nhập lại không giống.",
+   "error"
+  );
 
-        return;
+  return;
 
-    }
-
-
-    users.push({
-
-        id:Date.now(),
-
-        username:username,
-
-        password:password,
-
-        role:"user",
-
-        status:"pending"
-
-    });
+ }
 
 
-    saveUsers(users);
+ const users = getUsers();
 
 
-    showMessage(
-        "Đăng ký thành công. Hãy chờ admin cấp quyền.",
-        "success"
-    );
+ if(
+  users.some(
+   x =>
+   x.username.toLowerCase() ===
+   username.toLowerCase()
+  )
+ ){
+
+  authMessage(
+   "Tài khoản đã tồn tại.",
+   "error"
+  );
+
+  return;
+
+ }
 
 
-    document.getElementById("registerUsername").value="";
-    document.getElementById("registerPassword").value="";
-    document.getElementById("registerPassword2").value="";
+ users.push({
+
+  id:Date.now(),
+
+  username:username,
+
+  password:password,
+
+  role:"user",
+
+  status:"pending",
+
+  takenBank:0,
+
+  takenAcc:0
+
+ });
+
+
+ saveUsers(users);
+
+
+ authMessage(
+  "Đăng ký thành công. Chờ admin cấp quyền.",
+  "ok"
+ );
 
 }
 
 
 function login(){
 
-    const username =
-        document
-        .getElementById("loginUsername")
-        .value
-        .trim();
+ const username =
+  document.getElementById("loginUsername")
+  .value.trim();
 
-    const password =
-        document
-        .getElementById("loginPassword")
-        .value;
+ const password =
+  document.getElementById("loginPassword")
+  .value;
 
 
-    const users = getUsers();
+ const users = getUsers();
 
 
-    const user = users.find(
-        u =>
-        u.username === username &&
-        u.password === password
-    );
+ const user =
+  users.find(
+   x =>
+   x.username === username &&
+   x.password === password
+  );
 
 
-    if(!user){
+ if(!user){
 
-        showMessage(
-            "Sai tài khoản hoặc mật khẩu.",
-            "error"
-        );
+  authMessage(
+   "Sai tài khoản hoặc mật khẩu.",
+   "error"
+  );
 
-        return;
+  return;
 
-    }
-
-
-    if(user.status === "pending"){
-
-        showMessage(
-            "Tài khoản đang chờ admin cấp quyền.",
-            "error"
-        );
-
-        return;
-
-    }
+ }
 
 
-    if(user.status === "blocked"){
+ if(user.status === "pending"){
 
-        showMessage(
-            "Tài khoản đã bị khóa.",
-            "error"
-        );
+  authMessage(
+   "Tài khoản đang chờ admin cấp quyền.",
+   "error"
+  );
 
-        return;
+  return;
 
-    }
-
-
-    localStorage.setItem(
-        "currentUser",
-        JSON.stringify(user)
-    );
+ }
 
 
-    openApp(user);
+ if(user.status === "blocked"){
+
+  authMessage(
+   "Tài khoản đã bị khóa.",
+   "error"
+  );
+
+  return;
+
+ }
+
+
+ localStorage.setItem(
+  "currentUser",
+  JSON.stringify(user)
+ );
+
+
+ openApp(user);
 
 }
 
 
 function logout(){
 
-    localStorage.removeItem("currentUser");
+ localStorage.removeItem("currentUser");
 
-    location.reload();
+ location.reload();
 
 }
 
 
-/* =====================================================
+/* =========================================================
    OPEN APP
-===================================================== */
+========================================================= */
 
 function openApp(user){
 
-    document
-        .getElementById("authPage")
-        .classList.add("hidden");
+ document
+  .getElementById("authPage")
+  .classList.add("hidden");
 
-    document
-        .getElementById("app")
-        .classList.remove("hidden");
-
-
-    document
-        .getElementById("userBadge")
-        .textContent =
-        user.role === "admin"
-        ? "👑 Admin"
-        : "👤 " + user.username;
+ document
+  .getElementById("app")
+  .classList.remove("hidden");
 
 
-    if(user.role === "admin"){
-
-        document
-            .getElementById("adminPage")
-            .classList.remove("hidden");
-
-        document
-            .getElementById("userPage")
-            .classList.add("hidden");
-
-        renderAdmin();
-
-    }else{
-
-        document
-            .getElementById("userPage")
-            .classList.remove("hidden");
-
-        document
-            .getElementById("adminPage")
-            .classList.add("hidden");
-
-        renderUserData();
-
-    }
-
-}
+ document
+  .getElementById("userBadge")
+  .textContent =
+  user.role === "admin"
+   ? "👑 Admin"
+   : "👤 " + user.username;
 
 
-/* =====================================================
-   USER DATA
-===================================================== */
+ if(user.role === "admin"){
 
-function getBanks(){
+  document
+   .getElementById("adminApp")
+   .classList.remove("hidden");
 
-    const data = getData();
+  document
+   .getElementById("userApp")
+   .classList.add("hidden");
 
-    return [...new Set(
-        data.map(item => item.bank)
-    )].sort();
+  renderAdmin();
+
+ }else{
+
+  document
+   .getElementById("userApp")
+   .classList.remove("hidden");
+
+  document
+   .getElementById("adminApp")
+   .classList.add("hidden");
+
+  renderUser();
+
+ }
 
 }
 
 
-function fillBankFilters(){
+/* =========================================================
+   NAV USER
+========================================================= */
 
-    const banks = getBanks();
+function userPage(page,btn){
 
-    const selects = [
+ document
+  .querySelectorAll("#userApp .nav button")
+  .forEach(
+   x => x.classList.remove("active")
+  );
 
-        document.getElementById("userBankFilter"),
-
-        document.getElementById("adminBankFilter")
-
-    ];
-
-
-    selects.forEach(select => {
-
-        if(!select) return;
-
-        const current = select.value;
-
-        select.innerHTML =
-            '<option value="">Tất cả ngân hàng</option>';
-
-        banks.forEach(bank => {
-
-            const option =
-                document.createElement("option");
-
-            option.value = bank;
-            option.textContent = bank;
-
-            select.appendChild(option);
-
-        });
-
-        select.value = current;
-
-    });
-
-}
+ btn.classList.add("active");
 
 
-function renderUserData(){
+ document
+  .getElementById("userBankPage")
+  .classList.toggle(
+   "hidden",
+   page !== "bank"
+  );
 
-    const data = getData();
-
-    const search =
-        document
-        .getElementById("userSearch")
-        .value
-        .trim()
-        .toLowerCase();
-
-    const bank =
-        document
-        .getElementById("userBankFilter")
-        .value;
+ document
+  .getElementById("userAccPage")
+  .classList.toggle(
+   "hidden",
+   page !== "acc"
+  );
 
 
-    const filtered = data.filter(item => {
+ if(page === "bank"){
 
-        const matchSearch =
-            !search ||
-            item.stk.toLowerCase().includes(search) ||
-            item.name.toLowerCase().includes(search) ||
-            item.bank.toLowerCase().includes(search);
+  fillFilters();
 
-        const matchBank =
-            !bank ||
-            item.bank === bank;
+  renderUserBank();
 
-        return matchSearch && matchBank;
-
-    });
+ }
 
 
-    document.getElementById("userTotal").textContent =
-        data.length;
+ if(page === "acc"){
 
-    document.getElementById("userBanks").textContent =
-        getBanks().length;
+  renderUserAcc();
 
-    document.getElementById("userResults").textContent =
-        filtered.length;
-
-
-    const list =
-        document.getElementById("userDataList");
-
-
-    if(filtered.length === 0){
-
-        list.innerHTML =
-            '<div class="empty">Không tìm thấy dữ liệu.</div>';
-
-        return;
-
-    }
-
-
-    list.innerHTML = filtered.map(item => `
-
-        <div class="data-card">
-
-            <div>
-                <div class="data-label">SỐ TÀI KHOẢN</div>
-                <div class="data-value">${escapeHTML(item.stk)}</div>
-            </div>
-
-            <div>
-                <div class="data-label">TÊN</div>
-                <div class="data-value">${escapeHTML(item.name)}</div>
-            </div>
-
-            <div>
-                <div class="data-label">NGÂN HÀNG</div>
-                <span class="bank-tag">
-                    ${escapeHTML(item.bank)}
-                </span>
-            </div>
-
-            <div class="copy-area">
-
-                <button
-                    class="copy-btn"
-                    onclick="copyText('${escapeJS(item.stk)}')"
-                >
-                    📋 Copy STK
-                </button>
-
-            </div>
-
-        </div>
-
-    `).join("");
+ }
 
 }
 
 
-/* =====================================================
-   ADMIN
-===================================================== */
+/* =========================================================
+   ADMIN NAV
+========================================================= */
 
-function renderAdmin(){
+function adminPage(page,btn){
 
-    const data = getData();
+ document
+  .querySelectorAll("#adminApp .nav button")
+  .forEach(
+   x => x.classList.remove("active")
+  );
 
-    const users = getUsers();
-
-    document.getElementById("adminTotal").textContent =
-        data.length;
-
-    document.getElementById("adminBanks").textContent =
-        getBanks().length;
-
-    document.getElementById("adminUsers").textContent =
-        users.filter(u => u.role === "user").length;
+ btn.classList.add("active");
 
 
-    fillBankFilters();
+ const pages = [
+  "adminDashboard",
+  "adminBank",
+  "adminAcc",
+  "adminUsersPage",
+  "adminSettings"
+ ];
 
-    renderAdminData();
 
-    renderUsers();
+ pages.forEach(id => {
+
+  document
+   .getElementById(id)
+   .classList.add("hidden");
+
+ });
+
+
+ const map = {
+
+  dashboard:"adminDashboard",
+
+  bank:"adminBank",
+
+  acc:"adminAcc",
+
+  users:"adminUsersPage",
+
+  settings:"adminSettings"
+
+ };
+
+
+ document
+  .getElementById(map[page])
+  .classList.remove("hidden");
+
+
+ if(page === "dashboard"){
+
+  renderAdmin();
+
+ }
+
+
+ if(page === "bank"){
+
+  fillFilters();
+
+  renderAdminBank();
+
+ }
+
+
+ if(page === "acc"){
+
+  renderAdminAcc();
+
+ }
+
+
+ if(page === "users"){
+
+  renderUsers();
+
+ }
+
+
+ if(page === "settings"){
+
+  loadTelegram();
+
+ }
 
 }
 
 
-function adminTab(tab,button){
+/* =========================================================
+   FILTER
+========================================================= */
 
-    document
-        .querySelectorAll(".admin-tab")
-        .forEach(x => x.classList.remove("active"));
+function bankNames(){
 
-    button.classList.add("active");
+ const data = getBanks();
 
+ const names = [
+  ...VIETNAM_BANKS,
+  ...data.map(x => x.bank)
+ ];
 
-    document
-        .getElementById("adminDashboard")
-        .classList.toggle(
-            "hidden",
-            tab !== "dashboard"
-        );
-
-    document
-        .getElementById("adminData")
-        .classList.toggle(
-            "hidden",
-            tab !== "data"
-        );
-
-    document
-        .getElementById("adminUsers")
-        .classList.toggle(
-            "hidden",
-            tab !== "users"
-        );
-
-
-    if(tab === "data"){
-
-        fillBankFilters();
-        renderAdminData();
-
-    }
-
-
-    if(tab === "users"){
-
-        renderUsers();
-
-    }
+ return [
+  ...new Set(names)
+ ].sort();
 
 }
 
 
-function importData(){
+function fillFilters(){
 
-    const textarea =
-        document.getElementById("dataTextarea");
-
-    const text =
-        textarea.value.trim();
+ const names = bankNames();
 
 
-    if(!text){
+ const selects = [
 
-        alert("Chưa có dữ liệu.");
+  document.getElementById("userBankFilter"),
 
-        return;
+  document.getElementById("adminBankFilter")
 
-    }
-
-
-    const lines =
-        text.split(/\r?\n/);
+ ];
 
 
-    const data = getData();
+ selects.forEach(select => {
 
-    let added = 0;
+  if(!select)return;
 
-    let skipped = 0;
+  const current = select.value;
 
+  select.innerHTML =
+   '<option value="">Tất cả ngân hàng Việt Nam</option>';
 
-    lines.forEach(line => {
+  names.forEach(bank => {
 
-        line = line.trim();
+   const option =
+    document.createElement("option");
 
-        if(!line) return;
+   option.value = bank;
+   option.textContent = bank;
 
+   select.appendChild(option);
 
-        const parts =
-            line.split("|");
+  });
 
+  select.value = current;
 
-        if(parts.length < 3){
-
-            skipped++;
-
-            return;
-
-        }
-
-
-        const stk =
-            parts[0].trim();
-
-        const name =
-            parts[1].trim();
-
-        const bank =
-            parts.slice(2)
-            .join("|")
-            .trim();
-
-
-        if(!stk || !name || !bank){
-
-            skipped++;
-
-            return;
-
-        }
-
-
-        const duplicate =
-            data.some(
-                x => x.stk === stk
-            );
-
-
-        if(duplicate){
-
-            skipped++;
-
-            return;
-
-        }
-
-
-        data.push({
-
-            id:Date.now() + Math.random(),
-
-            stk:stk,
-
-            name:name,
-
-            bank:bank
-
-        });
-
-
-        added++;
-
-    });
-
-
-    saveData(data);
-
-
-    textarea.value="";
-
-
-    alert(
-        "Import thành công: " +
-        added +
-        " dòng.\n" +
-        "Bỏ qua: " +
-        skipped +
-        " dòng."
-    );
-
-
-    renderAdmin();
+ });
 
 }
 
 
-function renderAdminData(){
+/* =========================================================
+   USER BANK
+========================================================= */
 
-    const data = getData();
+function renderUserBank(){
 
+ const data = getBanks();
 
-    const search =
-        document
-        .getElementById("adminDataSearch")
-        .value
-        .trim()
-        .toLowerCase();
+ const search =
+  document.getElementById("userBankSearch")
+  .value.trim()
+  .toLowerCase();
 
-
-    const bank =
-        document
-        .getElementById("adminBankFilter")
-        .value;
-
-
-    const filtered =
-        data.filter(item => {
-
-            const matchSearch =
-                !search ||
-                item.stk.toLowerCase().includes(search) ||
-                item.name.toLowerCase().includes(search) ||
-                item.bank.toLowerCase().includes(search);
-
-            const matchBank =
-                !bank ||
-                item.bank === bank;
-
-            return matchSearch && matchBank;
-
-        });
+ const bank =
+  document.getElementById("userBankFilter")
+  .value;
 
 
-    const box =
-        document.getElementById("adminDataTable");
+ const filtered =
+  data.filter(item => {
+
+   const s =
+    !search ||
+    item.stk.toLowerCase().includes(search) ||
+    item.name.toLowerCase().includes(search) ||
+    item.bank.toLowerCase().includes(search);
+
+   const b =
+    !bank ||
+    item.bank === bank;
+
+   return s && b;
+
+  });
 
 
-    if(filtered.length === 0){
+ document.getElementById("uTotal").textContent =
+  data.length;
 
-        box.innerHTML =
-            '<div class="empty">Không có dữ liệu.</div>';
+ document.getElementById("uBanks").textContent =
+  [...new Set(data.map(x=>x.bank))].length;
 
-        return;
+ document.getElementById("uResults").textContent =
+  filtered.length;
 
-    }
+
+ const current =
+  getCurrentUser();
+
+ document.getElementById("uTaken").textContent =
+  current?.takenBank || 0;
 
 
-    box.innerHTML = `
+ const list =
+  document.getElementById("userBankList");
 
-        <div class="table-wrap">
 
-            <table>
+ if(!filtered.length){
 
-                <thead>
+  list.innerHTML =
+   '<div class="empty">Không có Bank Data.</div>';
 
-                    <tr>
-                        <th>#</th>
-                        <th>STK</th>
-                        <th>Tên</th>
-                        <th>Ngân hàng</th>
-                        <th></th>
-                    </tr>
+  return;
 
-                </thead>
+ }
 
-                <tbody>
 
-                    ${filtered.map((item,index)=>`
+ list.innerHTML =
+  filtered.map(item => `
 
-                        <tr>
+   <div class="data-card">
 
-                            <td>${index+1}</td>
+    <div>
+     <div class="label">SỐ TÀI KHOẢN</div>
+     <div class="value">
+      ${esc(item.stk)}
+     </div>
+    </div>
 
-                            <td>
-                                <b>${escapeHTML(item.stk)}</b>
-                            </td>
+    <div>
+     <div class="label">TÊN</div>
+     <div class="value">
+      ${esc(item.name)}
+     </div>
+    </div>
 
-                            <td>
-                                ${escapeHTML(item.name)}
-                            </td>
+    <div>
+     <div class="label">NGÂN HÀNG</div>
+     <span class="bank-tag">
+      ${esc(item.bank)}
+     </span>
+    </div>
 
-                            <td>
-                                <span class="bank-tag">
-                                    ${escapeHTML(item.bank)}
-                                </span>
-                            </td>
+    <div class="action">
 
-                            <td>
+     <button
+      class="btn green"
+      onclick="takeBank('${escJS(item.id)}')">
+      📥 Lấy Data
+     </button>
 
-                                <button
-                                    class="small-btn danger"
-                                    onclick="deleteData('${escapeJS(item.id)}')"
-                                >
-                                    Xóa
-                                </button>
+    </div>
 
-                            </td>
+   </div>
 
-                        </tr>
-
-                    `).join("")}
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    `;
+  `).join("");
 
 }
 
 
-function deleteData(id){
+/* =========================================================
+   TAKE BANK
+========================================================= */
 
-    if(!confirm("Xóa dữ liệu này?")) return;
+async function takeBank(id){
+
+ const data = getBanks();
+
+ const index =
+  data.findIndex(
+   x => String(x.id) === String(id)
+  );
 
 
-    const data =
-        getData().filter(
-            item => String(item.id) !== String(id)
-        );
+ if(index < 0){
+
+  alert("Data không còn tồn tại.");
+
+  return;
+
+ }
 
 
-    saveData(data);
+ const item = data[index];
 
-    renderAdmin();
+
+ if(
+  !confirm(
+   "Lấy Bank Data này?\n\n" +
+   item.stk +
+   "\n" +
+   item.name +
+   "\n" +
+   item.bank
+  )
+ ){
+
+  return;
+
+ }
+
+
+ data.splice(index,1);
+
+ saveBanks(data);
+
+
+ const user =
+  getCurrentUser();
+
+ if(user){
+
+  const users = getUsers();
+
+  const real =
+   users.find(x => x.id === user.id);
+
+  if(real){
+
+   real.takenBank =
+    Number(real.takenBank || 0) + 1;
+
+   saveUsers(users);
+
+   localStorage.setItem(
+    "currentUser",
+    JSON.stringify(real)
+   );
+
+  }
+
+ }
+
+
+ await navigator.clipboard
+  .writeText(
+   item.stk +
+   "|" +
+   item.name +
+   "|" +
+   item.bank
+  )
+  .catch(()=>{});
+
+
+ const remaining =
+  data.filter(
+   x => x.bank === item.bank
+  ).length;
+
+
+ const settings =
+  getTelegram();
+
+ if(settings.token && settings.chat){
+
+  const threshold =
+   Number(settings.threshold || 0);
+
+
+  if(
+   remaining === 0 ||
+   remaining <= threshold
+  ){
+
+   await sendTelegram(
+    "🏦 BANK DATA CẢNH BÁO\n\n" +
+    "Ngân hàng: " +
+    item.bank +
+    "\n" +
+    "Còn lại: " +
+    remaining +
+    " data\n" +
+    "Người lấy: " +
+    (user?.username || "Không rõ")
+   );
+
+  }else{
+
+   await sendTelegram(
+    "📥 BANK DATA ĐƯỢC LẤY\n\n" +
+    "Ngân hàng: " +
+    item.bank +
+    "\n" +
+    "Còn lại: " +
+    remaining +
+    " data\n" +
+    "Người lấy: " +
+    (user?.username || "Không rõ")
+   );
+
+  }
+
+ }
+
+
+ alert(
+  "Đã lấy Data.\n\n" +
+  item.stk +
+  "|" +
+  item.name +
+  "|" +
+  item.bank +
+  "\n\nĐã copy vào clipboard."
+ );
+
+
+ renderUserBank();
 
 }
 
 
-function clearAllData(){
+/* =========================================================
+   ADMIN BANK
+========================================================= */
 
-    if(!confirm(
-        "Bạn chắc chắn muốn xóa TOÀN BỘ dữ liệu?"
-    )) return;
+function importBank(){
+
+ const text =
+  document.getElementById("bankImport")
+  .value.trim();
 
 
-    localStorage.removeItem("bankData");
+ if(!text){
 
-    renderAdmin();
+  alert("Chưa có dữ liệu.");
+
+  return;
+
+ }
+
+
+ const data = getBanks();
+
+ let added = 0;
+ let skipped = 0;
+
+
+ text.split(/\r?\n/)
+ .forEach(line => {
+
+  line = line.trim();
+
+  if(!line)return;
+
+
+  const parts =
+   line.split("|");
+
+
+  if(parts.length < 3){
+
+   skipped++;
+
+   return;
+
+  }
+
+
+  const stk =
+   parts[0].trim();
+
+  const name =
+   parts[1].trim();
+
+  const bank =
+   parts.slice(2)
+   .join("|")
+   .trim();
+
+
+  if(!stk || !name || !bank){
+
+   skipped++;
+
+   return;
+
+  }
+
+
+  if(
+   data.some(
+    x => x.stk === stk
+   )
+  ){
+
+   skipped++;
+
+   return;
+
+  }
+
+
+  data.push({
+
+   id:
+    Date.now() +
+    Math.random(),
+
+   stk:stk,
+
+   name:name,
+
+   bank:bank
+
+  });
+
+
+  added++;
+
+ });
+
+
+ saveBanks(data);
+
+
+ document.getElementById("bankImport").value="";
+
+
+ alert(
+  "Đã thêm: " +
+  added +
+  "\nBỏ qua: " +
+  skipped
+ );
+
+
+ renderAdmin();
 
 }
 
 
-/* =====================================================
-   USERS
-===================================================== */
+function renderAdminBank(){
+
+ const data = getBanks();
+
+ const search =
+  document.getElementById("adminBankSearch")
+  .value.trim()
+  .toLowerCase();
+
+ const bank =
+  document.getElementById("adminBankFilter")
+  .value;
+
+
+ const filtered =
+  data.filter(item => {
+
+   const s =
+    !search ||
+    item.stk.toLowerCase().includes(search) ||
+    item.name.toLowerCase().includes(search) ||
+    item.bank.toLowerCase().includes(search);
+
+   const b =
+    !bank ||
+    item.bank === bank;
+
+   return s && b;
+
+  });
+
+
+ const box =
+  document.getElementById("adminBankList");
+
+
+ if(!filtered.length){
+
+  box.innerHTML =
+   '<div class="empty">Không có dữ liệu.</div>';
+
+  return;
+
+ }
+
+
+ box.innerHTML = `
+
+  <div class="table-wrap">
+
+   <table>
+
+    <thead>
+
+     <tr>
+      <th>STT</th>
+      <th>STK</th>
+      <th>Tên</th>
+      <th>Bank</th>
+      <th></th>
+     </tr>
+
+    </thead>
+
+    <tbody>
+
+     ${
+      filtered.map(
+       (x,i)=>`
+
+        <tr>
+
+         <td>${i+1}</td>
+
+         <td>
+          <b>${esc(x.stk)}</b>
+         </td>
+
+         <td>
+          ${esc(x.name)}
+         </td>
+
+         <td>
+          <span class="bank-tag">
+           ${esc(x.bank)}
+          </span>
+         </td>
+
+         <td>
+
+          <button
+           class="btn red"
+           onclick="deleteBank('${escJS(x.id)}')">
+           Xóa
+          </button>
+
+         </td>
+
+        </tr>
+
+       `
+      ).join("")
+     }
+
+    </tbody>
+
+   </table>
+
+  </div>
+
+ `;
+
+}
+
+
+function deleteBank(id){
+
+ if(!confirm("Xóa Bank Data này?"))
+  return;
+
+
+ const data =
+  getBanks().filter(
+   x =>
+   String(x.id) !== String(id)
+  );
+
+
+ saveBanks(data);
+
+ renderAdmin();
+
+}
+
+
+function clearBanks(){
+
+ if(!confirm(
+  "Xóa toàn bộ Bank Data?"
+ ))return;
+
+
+ saveBanks([]);
+
+ renderAdmin();
+
+}
+
+
+/* =========================================================
+   ACC ADMIN
+========================================================= */
+
+function importAcc(){
+
+ const text =
+  document.getElementById("accImport")
+  .value.trim();
+
+
+ if(!text){
+
+  alert("Chưa có dữ liệu.");
+
+  return;
+
+ }
+
+
+ const data = getAcc();
+
+ let added=0;
+ let skipped=0;
+
+
+ text.split(/\r?\n/)
+ .forEach(line=>{
+
+  line=line.trim();
+
+  if(!line)return;
+
+
+  const parts =
+   line.split("|");
+
+
+  if(parts.length < 4){
+
+   skipped++;
+
+   return;
+
+  }
+
+
+  const username =
+   parts[0].trim();
+
+  const password =
+   parts[1].trim();
+
+  const promo =
+   parts[2].trim();
+
+  const price =
+   Number(
+    String(parts[3])
+    .replace(/[^\d]/g,"")
+   );
+
+
+  if(
+   !username ||
+   !password ||
+   !promo ||
+   !price
+  ){
+
+   skipped++;
+
+   return;
+
+  }
+
+
+  data.push({
+
+   id:
+    Date.now() +
+    Math.random(),
+
+   username:username,
+
+   password:password,
+
+   promo:promo,
+
+   price:price
+
+  });
+
+
+  added++;
+
+ });
+
+
+ saveAcc(data);
+
+
+ document.getElementById("accImport").value="";
+
+
+ alert(
+  "Đã thêm " +
+  added +
+  " acc.\n" +
+  "Bỏ qua " +
+  skipped
+ );
+
+
+ renderAdminAcc();
+
+}
+
+
+function renderAdminAcc(){
+
+ const data = getAcc();
+
+ const box =
+  document.getElementById("adminAccList");
+
+
+ if(!data.length){
+
+  box.innerHTML =
+   '<div class="empty">Chưa có acc.</div>';
+
+  return;
+
+ }
+
+
+ box.innerHTML = `
+
+  <div class="table-wrap">
+
+   <table>
+
+    <thead>
+
+     <tr>
+      <th>TK</th>
+      <th>MK</th>
+      <th>Khuyến mãi</th>
+      <th>Giá</th>
+      <th>Thao tác</th>
+     </tr>
+
+    </thead>
+
+    <tbody>
+
+     ${
+      data.map(x=>`
+
+       <tr>
+
+        <td>
+         ${esc(x.username)}
+        </td>
+
+        <td>
+         ${esc(x.password)}
+        </td>
+
+        <td>
+         ${esc(x.promo)}
+        </td>
+
+        <td>
+
+         <input
+          id="price_${escJS(x.id)}"
+          type="number"
+          value="${x.price}"
+          style="width:130px">
+
+        </td>
+
+        <td>
+
+         <button
+          class="btn blue"
+          onclick="changePrice('${escJS(x.id)}')">
+          Lưu giá
+         </button>
+
+         <button
+          class="btn red"
+          onclick="deleteAcc('${escJS(x.id)}')">
+          Xóa
+         </button>
+
+        </td>
+
+       </tr>
+
+      `).join("")
+     }
+
+    </tbody>
+
+   </table>
+
+  </div>
+
+ `;
+
+}
+
+
+function changePrice(id){
+
+ const input =
+  document.getElementById(
+   "price_" + id
+  );
+
+
+ const price =
+  Number(input.value);
+
+
+ if(!price || price < 0){
+
+  alert("Giá không hợp lệ.");
+
+  return;
+
+ }
+
+
+ const data = getAcc();
+
+ const item =
+  data.find(
+   x =>
+   String(x.id) === String(id)
+  );
+
+
+ if(!item)return;
+
+
+ item.price=price;
+
+ saveAcc(data);
+
+ alert("Đã đổi giá.");
+
+ renderAdminAcc();
+
+}
+
+
+function deleteAcc(id){
+
+ if(!confirm("Xóa acc này?"))
+  return;
+
+
+ const data =
+  getAcc().filter(
+   x =>
+   String(x.id) !== String(id)
+  );
+
+
+ saveAcc(data);
+
+ renderAdminAcc();
+
+}
+
+
+function clearAcc(){
+
+ if(!confirm(
+  "Xóa toàn bộ Acc?"
+ ))return;
+
+
+ saveAcc([]);
+
+ renderAdminAcc();
+
+}
+
+
+/* =========================================================
+   USER ACC
+========================================================= */
+
+function renderUserAcc(){
+
+ const data = getAcc();
+
+ const search =
+  document.getElementById("userAccSearch")
+  .value.trim()
+  .toLowerCase();
+
+
+ const filtered =
+  data.filter(x => {
+
+   return !search ||
+    x.username.toLowerCase().includes(search) ||
+    x.promo.toLowerCase().includes(search);
+
+  });
+
+
+ document.getElementById("uAccTotal").textContent =
+  data.length;
+
+ document.getElementById("uPromo").textContent =
+  data.filter(x=>x.promo).length;
+
+
+ const min =
+  data.length
+   ? Math.min(...data.map(x=>x.price))
+   : 0;
+
+
+ document.getElementById("uMinPrice").textContent =
+  formatMoney(min);
+
+
+ const current =
+  getCurrentUser();
+
+ document.getElementById("uAccTaken").textContent =
+  current?.takenAcc || 0;
+
+
+ const box =
+  document.getElementById("userAccList");
+
+
+ if(!filtered.length){
+
+  box.innerHTML =
+   '<div class="empty">Không có acc.</div>';
+
+  return;
+
+ }
+
+
+ box.innerHTML =
+  filtered.map(x=>`
+
+   <div class="acc-card">
+
+    <div class="acc-top">
+
+     <div>
+      <div class="label">
+       ACC KHUYẾN MÃI
+      </div>
+
+      <b>
+       ${esc(x.username)}
+      </b>
+     </div>
+
+     <span class="promo">
+      ${esc(x.promo)}
+     </span>
+
+    </div>
+
+    <div class="price">
+     ${formatMoney(x.price)}
+    </div>
+
+    <div class="acc-actions">
+
+     <button
+      class="btn green"
+      onclick="takeAcc('${escJS(x.id)}')">
+      📥 Lấy Acc
+     </button>
+
+    </div>
+
+   </div>
+
+  `).join("");
+
+}
+
+
+async function takeAcc(id){
+
+ const data = getAcc();
+
+ const index =
+  data.findIndex(
+   x =>
+   String(x.id) === String(id)
+  );
+
+
+ if(index < 0){
+
+  alert("Acc này đã được lấy.");
+
+  return;
+
+ }
+
+
+ const item = data[index];
+
+
+ if(
+  !confirm(
+   "Lấy acc này với giá " +
+   formatMoney(item.price) +
+   "?"
+  )
+ ){
+
+  return;
+
+ }
+
+
+ data.splice(index,1);
+
+ saveAcc(data);
+
+
+ const user =
+  getCurrentUser();
+
+
+ if(user){
+
+  const users = getUsers();
+
+  const real =
+   users.find(x=>x.id===user.id);
+
+  if(real){
+
+   real.takenAcc =
+    Number(real.takenAcc || 0) + 1;
+
+   saveUsers(users);
+
+   localStorage.setItem(
+    "currentUser",
+    JSON.stringify(real)
+   );
+
+  }
+
+ }
+
+
+ const result =
+  item.username +
+  "|" +
+  item.password;
+
+
+ await navigator.clipboard
+  .writeText(result)
+  .catch(()=>{});
+
+
+ alert(
+  "Đã lấy acc.\n\n" +
+  result +
+  "\n\nĐã copy."
+ );
+
+
+ renderUserAcc();
+
+}
+
+
+/* =========================================================
+   USERS ADMIN
+========================================================= */
 
 function renderUsers(){
 
-    const users =
-        getUsers().filter(
-            u => u.role === "user"
-        );
+ const users =
+  getUsers().filter(
+   x => x.role !== "admin"
+  );
 
 
-    const box =
-        document.getElementById("usersTable");
+ const box =
+  document.getElementById("usersList");
 
 
-    if(users.length === 0){
+ if(!users.length){
 
-        box.innerHTML =
-            '<div class="empty">Chưa có người dùng.</div>';
+  box.innerHTML =
+   '<div class="empty">Chưa có user.</div>';
 
-        return;
+  return;
 
-    }
+ }
 
 
-    box.innerHTML = `
+ box.innerHTML = `
 
-        <div class="table-wrap">
+  <div class="table-wrap">
 
-            <table>
+   <table>
 
-                <thead>
+    <thead>
 
-                    <tr>
-                        <th>Tài khoản</th>
-                        <th>Trạng thái</th>
-                        <th>Thao tác</th>
-                    </tr>
+     <tr>
+      <th>Tài khoản</th>
+      <th>Trạng thái</th>
+      <th>Đã lấy Bank</th>
+      <th>Đã lấy Acc</th>
+      <th>Thao tác</th>
+     </tr>
 
-                </thead>
+    </thead>
 
-                <tbody>
+    <tbody>
 
-                    ${users.map(user => `
+     ${
+      users.map(u=>`
 
-                        <tr>
+       <tr>
 
-                            <td>
-                                <b>${escapeHTML(user.username)}</b>
-                            </td>
+        <td>
+         <b>${esc(u.username)}</b>
+        </td>
 
-                            <td>
+        <td>
 
-                                ${
-                                    user.status === "pending"
+         ${
+          u.status === "pending"
 
-                                    ? '<span class="status pending">Chờ duyệt</span>'
+          ? '<span class="status pending">Chờ duyệt</span>'
 
-                                    : user.status === "approved"
+          : u.status === "approved"
 
-                                    ? '<span class="status approved">Đã cấp quyền</span>'
+          ? '<span class="status approved">Đã cấp quyền</span>'
 
-                                    : '<span class="status blocked">Đã khóa</span>'
-                                }
+          : '<span class="status blocked">Đã khóa</span>'
+         }
 
-                            </td>
+        </td>
 
-                            <td>
+        <td>
+         ${u.takenBank || 0}
+        </td>
 
-                                ${
-                                    user.status === "pending"
+        <td>
+         ${u.takenAcc || 0}
+        </td>
 
-                                    ? `
-                                        <button
-                                            class="small-btn green"
-                                            onclick="changeUserStatus(${user.id},'approved')"
-                                        >
-                                            Duyệt
-                                        </button>
-                                      `
+        <td>
 
-                                    : user.status === "approved"
+         ${
+          u.status === "pending"
 
-                                    ? `
-                                        <button
-                                            class="small-btn warning"
-                                            onclick="changeUserStatus(${user.id},'blocked')"
-                                        >
-                                            Khóa
-                                        </button>
-                                      `
+          ? `
+           <button
+            class="btn green"
+            onclick="userStatus(${u.id},'approved')">
+            Cấp quyền
+           </button>
+          `
 
-                                    : `
-                                        <button
-                                            class="small-btn green"
-                                            onclick="changeUserStatus(${user.id},'approved')"
-                                        >
-                                            Mở khóa
-                                        </button>
-                                      `
-                                }
+          : u.status === "approved"
 
-                                <button
-                                    class="small-btn danger"
-                                    onclick="deleteUser(${user.id})"
-                                >
-                                    Xóa
-                                </button>
+          ? `
+           <button
+            class="btn orange"
+            onclick="userStatus(${u.id},'blocked')">
+            Khóa
+           </button>
+          `
 
-                            </td>
+          : `
+           <button
+            class="btn green"
+            onclick="userStatus(${u.id},'approved')">
+            Mở khóa
+           </button>
+          `
+         }
 
-                        </tr>
+         <button
+          class="btn red"
+          onclick="deleteUser(${u.id})">
+          Xóa
+         </button>
 
-                    `).join("")}
+        </td>
 
-                </tbody>
+       </tr>
 
-            </table>
+      `).join("")
+     }
 
-        </div>
+    </tbody>
 
-    `;
+   </table>
+
+  </div>
+
+ `;
 
 }
 
 
-function changeUserStatus(id,status){
+function userStatus(id,status){
 
-    const users = getUsers();
+ const users = getUsers();
 
-    const user =
-        users.find(
-            u => u.id === id
-        );
+ const user =
+  users.find(x=>x.id===id);
 
 
-    if(!user) return;
+ if(!user)return;
 
 
-    user.status = status;
+ user.status=status;
 
-    saveUsers(users);
+ saveUsers(users);
 
-    renderUsers();
-
-    document.getElementById("adminUsers").textContent =
-        users.filter(u => u.role === "user").length;
+ renderUsers();
 
 }
 
 
 function deleteUser(id){
 
-    if(!confirm(
-        "Xóa tài khoản người dùng này?"
-    )) return;
+ if(!confirm(
+  "Xóa tài khoản này?"
+ ))return;
 
 
-    const users =
-        getUsers().filter(
-            u => u.id !== id
-        );
+ const users =
+  getUsers().filter(
+   x=>x.id!==id
+  );
 
 
-    saveUsers(users);
+ saveUsers(users);
 
-    renderUsers();
-
-}
-
-
-/* =====================================================
-   COPY
-===================================================== */
-
-function copyText(text){
-
-    navigator.clipboard
-        .writeText(text)
-        .then(()=>{
-            alert("Đã copy STK: " + text);
-        })
-        .catch(()=>{
-            alert("Không thể copy tự động.");
-        });
+ renderUsers();
 
 }
 
 
-/* =====================================================
-   SECURITY HELPERS
-===================================================== */
+/* =========================================================
+   ADMIN DASHBOARD
+========================================================= */
 
-function escapeHTML(text){
+function renderAdmin(){
 
-    return String(text)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+ const banks = getBanks();
+ const acc = getAcc();
+ const users = getUsers();
+
+
+ document.getElementById("aBankTotal").textContent =
+  banks.length;
+
+ document.getElementById("aBankCount").textContent =
+  [...new Set(banks.map(x=>x.bank))].length;
+
+ document.getElementById("aAccTotal").textContent =
+  acc.length;
+
+ document.getElementById("aUsers").textContent =
+  users.filter(x=>x.role==="user").length;
+
+
+ fillFilters();
+
+ renderAdminBank();
+
+ renderAdminAcc();
+
+ renderUsers();
 
 }
 
 
-function escapeJS(text){
+/* =========================================================
+   CURRENT USER
+========================================================= */
 
-    return String(text)
-        .replace(/\\/g,"\\\\")
-        .replace(/'/g,"\\'")
-        .replace(/"/g,'\\"');
+function getCurrentUser(){
+
+ return JSON.parse(
+  localStorage.getItem("currentUser") || "null"
+ );
 
 }
 
 
-/* =====================================================
+/* =========================================================
+   USER RENDER
+========================================================= */
+
+function renderUser(){
+
+ fillFilters();
+
+ renderUserBank();
+
+ renderUserAcc();
+
+}
+
+
+/* =========================================================
+   FORMAT
+========================================================= */
+
+function formatMoney(number){
+
+ return Number(number || 0)
+  .toLocaleString("vi-VN") + "đ";
+
+}
+
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+function esc(text){
+
+ return String(text)
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
+
+}
+
+
+function escJS(text){
+
+ return String(text)
+  .replace(/\\/g,"\\\\")
+  .replace(/'/g,"\\'");
+
+}
+
+
+/* =========================================================
    INIT
-===================================================== */
+========================================================= */
 
 (function(){
 
-    getUsers();
-
-    getData();
-
-
-    const current =
-        JSON.parse(
-            localStorage.getItem("currentUser") || "null"
-        );
+ getUsers();
+ getBanks();
+ getAcc();
 
 
-    if(current){
-
-        const users = getUsers();
-
-        const actual =
-            users.find(
-                u => u.id === current.id
-            );
+ const current =
+  getCurrentUser();
 
 
-        if(
-            actual &&
-            actual.status === "approved"
-        ){
+ if(current){
 
-            openApp(actual);
+  const users =
+   getUsers();
 
-            return;
+  const actual =
+   users.find(
+    x=>x.id===current.id
+   );
 
-        }
 
-    }
+  if(
+   actual &&
+   (
+    actual.role==="admin" ||
+    actual.status==="approved"
+   )
+  ){
 
+   openApp(actual);
+
+  }
+
+ }
 
 })();
 
