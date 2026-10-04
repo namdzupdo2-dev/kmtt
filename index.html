@@ -1,26 +1,28 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>DM STORE - Quản lý kho</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Data & ACC Manager</title>
 
 <style>
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    -webkit-tap-highlight-color:transparent;
 }
 
 body{
     font-family:Arial,Helvetica,sans-serif;
-    background:#0f1115;
+    background:#0d1117;
     color:#fff;
     min-height:100vh;
 }
 
-button,input,select,textarea{
+button,
+input,
+select,
+textarea{
     font:inherit;
 }
 
@@ -32,6 +34,131 @@ button{
     display:none!important;
 }
 
+.container{
+    width:min(1200px,94%);
+    margin:auto;
+}
+
+/* LOGIN */
+
+.login-page{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:
+        radial-gradient(circle at top,#26354b 0,#0d1117 45%);
+}
+
+.login-box{
+    width:100%;
+    max-width:420px;
+    background:#161b22;
+    border:1px solid #30363d;
+    border-radius:20px;
+    padding:28px;
+    box-shadow:0 20px 60px #0008;
+}
+
+.logo{
+    text-align:center;
+    font-size:28px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.sub{
+    text-align:center;
+    color:#8b949e;
+    margin-bottom:25px;
+}
+
+.field{
+    margin-bottom:14px;
+}
+
+.field label{
+    display:block;
+    font-size:13px;
+    color:#8b949e;
+    margin-bottom:7px;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    background:#0d1117;
+    color:#fff;
+    border:1px solid #30363d;
+    border-radius:10px;
+    padding:12px;
+    outline:none;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#58a6ff;
+}
+
+textarea{
+    resize:vertical;
+    min-height:100px;
+}
+
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:11px 15px;
+    color:#fff;
+    background:#238636;
+    font-weight:700;
+}
+
+.btn:hover{
+    opacity:.9;
+}
+
+.btn.blue{
+    background:#1f6feb;
+}
+
+.btn.red{
+    background:#da3633;
+}
+
+.btn.orange{
+    background:#d29922;
+    color:#111;
+}
+
+.btn.gray{
+    background:#30363d;
+}
+
+.btn.small{
+    padding:7px 10px;
+    font-size:12px;
+}
+
+.full{
+    width:100%;
+}
+
+.login-actions{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+
+.login-actions .btn{
+    flex:1;
+}
+
+/* HEADER */
+
 .app{
     min-height:100vh;
 }
@@ -40,21 +167,22 @@ button{
     position:sticky;
     top:0;
     z-index:100;
-    background:#171a21;
-    border-bottom:1px solid #292e38;
-    padding:14px 16px;
+    background:#161b22ee;
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid #30363d;
+}
+
+.header-inner{
+    min-height:65px;
     display:flex;
     align-items:center;
     justify-content:space-between;
+    gap:15px;
 }
 
-.logo{
-    font-size:20px;
-    font-weight:900;
-}
-
-.logo span{
-    color:#ffb52e;
+.brand{
+    font-size:19px;
+    font-weight:800;
 }
 
 .header-right{
@@ -64,244 +192,41 @@ button{
 }
 
 .balance{
-    background:#20252e;
-    border:1px solid #343a46;
+    background:#21262d;
+    border:1px solid #30363d;
+    border-radius:10px;
     padding:8px 12px;
-    border-radius:10px;
-    font-weight:700;
-    color:#ffd166;
-}
-
-.container{
-    width:min(1200px,100%);
-    margin:auto;
-    padding:16px;
-}
-
-.card{
-    background:#171a21;
-    border:1px solid #292e38;
-    border-radius:16px;
-    padding:16px;
-    margin-bottom:14px;
-}
-
-h1,h2,h3{
-    margin-bottom:10px;
-}
-
-h2{
-    font-size:20px;
-}
-
-h3{
-    font-size:17px;
-}
-
-.muted{
-    color:#8e97a6;
-}
-
-.small{
     font-size:13px;
 }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:12px;
+.nav{
+    background:#161b22;
+    border-bottom:1px solid #30363d;
 }
 
-.grid3{
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:12px;
-}
-
-@media(max-width:700px){
-    .grid,
-    .grid3{
-        grid-template-columns:1fr;
-    }
-}
-
-.stat{
-    background:#20242c;
-    border:1px solid #303641;
-    border-radius:14px;
-    padding:15px;
-}
-
-.stat-title{
-    color:#929baa;
-    font-size:13px;
-    margin-bottom:6px;
-}
-
-.stat-value{
-    font-size:23px;
-    font-weight:900;
-}
-
-input,select,textarea{
-    width:100%;
-    background:#101319;
-    border:1px solid #343a46;
-    color:#fff;
-    padding:12px;
-    border-radius:10px;
-    outline:none;
-}
-
-input:focus,select:focus,textarea:focus{
-    border-color:#ffb52e;
-}
-
-textarea{
-    min-height:120px;
-    resize:vertical;
-}
-
-label{
-    display:block;
-    color:#b6bdc9;
-    font-size:13px;
-    margin-bottom:6px;
-}
-
-.field{
-    margin-bottom:12px;
-}
-
-.btn{
-    border:0;
-    border-radius:10px;
-    padding:11px 14px;
-    font-weight:800;
-    color:#111;
-    background:#ffb52e;
-}
-
-.btn:hover{
-    filter:brightness(1.08);
-}
-
-.btn-dark{
-    background:#292f39;
-    color:#fff;
-}
-
-.btn-green{
-    background:#36d399;
-    color:#07150f;
-}
-
-.btn-red{
-    background:#ef5b68;
-    color:#fff;
-}
-
-.btn-blue{
-    background:#5da9ff;
-    color:#06101e;
-}
-
-.btn-full{
-    width:100%;
-}
-
-.actions{
+.nav-inner{
     display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-}
-
-.badge{
-    display:inline-flex;
-    align-items:center;
-    padding:5px 9px;
-    border-radius:999px;
-    background:#292f39;
-    color:#d9dee7;
-    font-size:12px;
-    font-weight:700;
-}
-
-.badge-green{
-    background:#123b2c;
-    color:#61e7ad;
-}
-
-.badge-red{
-    background:#431e24;
-    color:#ff7e89;
-}
-
-.badge-yellow{
-    background:#443716;
-    color:#ffd166;
-}
-
-.top-space{
-    margin-top:14px;
-}
-
-.center{
-    text-align:center;
-}
-
-.auth{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    background:
-        radial-gradient(circle at top,#272d38 0,#0f1115 45%);
-}
-
-.auth-box{
-    width:min(430px,100%);
-    background:#171a21;
-    border:1px solid #303641;
-    border-radius:20px;
-    padding:22px;
-    box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.auth-logo{
-    font-size:27px;
-    font-weight:900;
-    text-align:center;
-    margin-bottom:5px;
-}
-
-.auth-logo span{
-    color:#ffb52e;
-}
-
-.tabs{
-    display:flex;
-    gap:8px;
+    gap:5px;
     overflow-x:auto;
-    padding:3px 0 12px;
-    margin-bottom:4px;
+    padding:8px 0;
 }
 
-.tab{
+.nav button{
     white-space:nowrap;
-    background:#1d222b;
-    color:#aeb6c3;
-    border:1px solid #303641;
+    border:0;
+    background:transparent;
+    color:#8b949e;
     padding:10px 14px;
-    border-radius:10px;
-    font-weight:700;
+    border-radius:9px;
 }
 
-.tab.active{
-    background:#ffb52e;
-    color:#111;
-    border-color:#ffb52e;
+.nav button.active{
+    background:#21262d;
+    color:#fff;
+}
+
+main{
+    padding:25px 0 60px;
 }
 
 .section{
@@ -312,265 +237,294 @@ label{
     display:block;
 }
 
-.product-card{
-    background:#1b2028;
-    border:1px solid #303641;
-    border-radius:16px;
-    padding:15px;
-    position:relative;
+.page-title{
+    font-size:25px;
+    margin-bottom:5px;
 }
 
-.product-top{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom:8px;
+.page-desc{
+    color:#8b949e;
+    margin-bottom:20px;
 }
 
-.product-name{
-    font-size:20px;
-    font-weight:900;
+/* CARDS */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
 }
 
-.product-price{
-    color:#ffd166;
-    font-size:18px;
-    font-weight:900;
+.card{
+    background:#161b22;
+    border:1px solid #30363d;
+    border-radius:15px;
+    padding:18px;
 }
 
-.stock{
-    margin:12px 0;
-    background:#11151b;
-    border-radius:10px;
-    padding:9px;
-    color:#9ca5b3;
+.stat-title{
+    color:#8b949e;
+    font-size:13px;
 }
 
-.product-description{
-    color:#9da5b2;
-    min-height:36px;
-    margin-bottom:10px;
-}
-
-.qty-row{
-    display:flex;
-    gap:8px;
-    align-items:center;
-}
-
-.qty-row input{
-    flex:1;
-}
-
-.price-preview{
-    margin-top:9px;
-    color:#ffd166;
+.stat-value{
+    font-size:28px;
     font-weight:800;
+    margin-top:8px;
 }
 
-.product-admin{
-    background:#1c2129;
-    border:1px solid #303641;
-    border-radius:14px;
-    padding:14px;
+.two{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
 }
 
-.admin-product-header{
+.three{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+}
+
+.toolbar{
     display:flex;
-    justify-content:space-between;
     gap:10px;
-    align-items:flex-start;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+}
+
+.toolbar>*{
+    flex:1;
+    min-width:160px;
 }
 
 .table-wrap{
     overflow-x:auto;
+    background:#161b22;
+    border:1px solid #30363d;
+    border-radius:14px;
 }
 
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:650px;
+    min-width:700px;
 }
 
-th,td{
-    padding:10px;
-    border-bottom:1px solid #2d333e;
+th,
+td{
+    padding:12px;
+    border-bottom:1px solid #21262d;
     text-align:left;
     font-size:13px;
 }
 
 th{
-    color:#9ea7b5;
+    color:#8b949e;
+    font-weight:600;
 }
 
-pre{
-    white-space:pre-wrap;
-    word-break:break-all;
+tr:last-child td{
+    border-bottom:0;
 }
+
+.badge{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:20px;
+    background:#21262d;
+    font-size:11px;
+}
+
+.badge.green{
+    background:#0e4429;
+    color:#3fb950;
+}
+
+.badge.red{
+    background:#490202;
+    color:#ff7b72;
+}
+
+.badge.orange{
+    background:#4d3800;
+    color:#e3b341;
+}
+
+/* PRODUCTS */
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.product-card{
+    background:#161b22;
+    border:1px solid #30363d;
+    border-radius:16px;
+    overflow:hidden;
+}
+
+.product-top{
+    padding:18px;
+}
+
+.product-name{
+    font-size:19px;
+    font-weight:800;
+}
+
+.product-desc{
+    color:#8b949e;
+    font-size:13px;
+    margin-top:8px;
+    min-height:38px;
+}
+
+.price-row{
+    display:flex;
+    gap:8px;
+    margin-top:15px;
+}
+
+.price-box{
+    flex:1;
+    background:#0d1117;
+    border-radius:10px;
+    padding:10px;
+}
+
+.price-label{
+    color:#8b949e;
+    font-size:11px;
+}
+
+.price{
+    font-weight:800;
+    margin-top:4px;
+}
+
+.stock{
+    margin-top:12px;
+    color:#58a6ff;
+    font-weight:700;
+}
+
+.product-actions{
+    display:flex;
+    gap:7px;
+    padding:12px 18px;
+    border-top:1px solid #30363d;
+}
+
+.product-actions button{
+    flex:1;
+}
+
+/* MODAL */
 
 .modal{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.72);
     z-index:500;
-    display:flex;
-    justify-content:center;
+    background:#000b;
+    display:none;
     align-items:center;
-    padding:16px;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
 }
 
 .modal-box{
-    width:min(650px,100%);
+    width:100%;
+    max-width:550px;
     max-height:90vh;
     overflow:auto;
-    background:#171a21;
-    border:1px solid #343a46;
+    background:#161b22;
+    border:1px solid #30363d;
     border-radius:18px;
-    padding:18px;
+    padding:22px;
 }
 
-.modal-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:14px;
-}
-
-.close{
-    width:36px;
-    height:36px;
-    border-radius:10px;
-    border:1px solid #343a46;
-    background:#252b34;
-    color:#fff;
+.modal-title{
     font-size:20px;
+    font-weight:800;
+    margin-bottom:18px;
 }
+
+.modal-actions{
+    display:flex;
+    gap:8px;
+    margin-top:18px;
+}
+
+.modal-actions button{
+    flex:1;
+}
+
+/* TOAST */
 
 .toast{
     position:fixed;
-    left:50%;
-    bottom:20px;
-    transform:translateX(-50%);
-    background:#fff;
-    color:#111;
-    padding:12px 18px;
+    right:18px;
+    bottom:18px;
+    z-index:1000;
+    background:#161b22;
+    border:1px solid #30363d;
+    padding:13px 16px;
     border-radius:12px;
-    font-weight:800;
-    z-index:9999;
-    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    box-shadow:0 10px 30px #0008;
     display:none;
-    max-width:90%;
-    text-align:center;
+    max-width:320px;
 }
 
-.empty{
-    text-align:center;
-    padding:30px 10px;
-    color:#7f8998;
+.toast.show{
+    display:block;
 }
 
-.divider{
-    height:1px;
-    background:#2b313b;
-    margin:16px 0;
-}
+/* MOBILE */
 
-.warning{
-    background:#3a2f13;
-    border:1px solid #6c571d;
-    color:#ffd76a;
-    padding:11px;
-    border-radius:10px;
-    margin-bottom:12px;
-}
-
-.success-box{
-    background:#123528;
-    border:1px solid #1e654b;
-    color:#70edb6;
-    padding:12px;
-    border-radius:10px;
-    margin-bottom:12px;
-}
-
-.bank-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:#1d222a;
-    padding:12px;
-    border-radius:10px;
-    margin-bottom:7px;
-}
-
-.bank-name{
-    font-weight:800;
-}
-
-.money{
-    color:#69e5aa;
-    font-weight:900;
-}
-
-.pending{
-    background:#493714;
-    color:#ffd76a;
-}
-
-.approved{
-    background:#123a2b;
-    color:#62e4ad;
-}
-
-.disabled{
-    background:#431f24;
-    color:#ff7f8a;
-}
-
-.code-box{
-    background:#0b0e12;
-    border:1px solid #2e3540;
-    border-radius:10px;
-    padding:12px;
-    margin-top:10px;
-    font-family:monospace;
-}
-
-.sticky-bottom{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    background:#171a21;
-    border-top:1px solid #303641;
-    padding:10px 14px;
-    z-index:90;
-}
-
-.sticky-inner{
-    width:min(1200px,100%);
-    margin:auto;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-@media(max-width:500px){
-    .header{
-        padding:12px;
+@media(max-width:900px){
+    .grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .container{
-        padding:12px;
+    .product-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .balance{
-        padding:7px 9px;
-        font-size:13px;
+    .three{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:600px){
+    .header-inner{
+        flex-wrap:wrap;
+        padding:10px 0;
     }
 
-    .product-top{
-        flex-direction:column;
+    .header-right{
+        width:100%;
+        justify-content:space-between;
+    }
+
+    .grid,
+    .two,
+    .three,
+    .product-grid{
+        grid-template-columns:1fr;
+    }
+
+    main{
+        padding-top:18px;
+    }
+
+    .login-box{
+        padding:22px;
     }
 }
 </style>
@@ -578,82 +532,42 @@ pre{
 
 <body>
 
-<div id="toast" class="toast"></div>
+<!-- LOGIN -->
 
-<!-- ================= AUTH ================= -->
+<div id="loginPage" class="login-page">
 
-<div id="authPage" class="auth">
+    <div class="login-box">
 
-    <div class="auth-box">
-
-        <div class="auth-logo">
-            DM <span>STORE</span>
+        <div class="logo">
+            DATA & ACC
         </div>
 
-        <div class="center muted small" style="margin-bottom:20px;">
-            Hệ thống quản lý kho
+        <div class="sub">
+            Hệ thống quản lý dữ liệu
         </div>
 
-        <div id="loginForm">
-
-            <h2>Đăng nhập</h2>
-
-            <div class="field">
-                <label>Tài khoản</label>
-                <input id="loginUsername" placeholder="Nhập tài khoản">
-            </div>
-
-            <div class="field">
-                <label>Mật khẩu</label>
-                <input id="loginPassword" type="password" placeholder="Nhập mật khẩu">
-            </div>
-
-            <button class="btn btn-full" onclick="login()">
-                Đăng nhập
-            </button>
-
-            <div style="height:10px"></div>
-
-            <button class="btn btn-dark btn-full" onclick="showRegister()">
-                Đăng ký tài khoản
-            </button>
-
+        <div class="field">
+            <label>Tài khoản</label>
+            <input id="loginUsername" placeholder="Nhập tài khoản">
         </div>
 
+        <div class="field">
+            <label>Mật khẩu</label>
+            <input id="loginPassword" type="password" placeholder="Nhập mật khẩu">
+        </div>
 
-        <div id="registerForm" class="hidden">
+        <button class="btn full" onclick="login()">
+            Đăng nhập
+        </button>
 
-            <h2>Đăng ký</h2>
-
-            <div class="warning">
-                Tài khoản mới cần Admin duyệt trước khi sử dụng.
-            </div>
-
-            <div class="field">
-                <label>Tài khoản</label>
-                <input id="regUsername" placeholder="Tài khoản">
-            </div>
-
-            <div class="field">
-                <label>Mật khẩu</label>
-                <input id="regPassword" type="password" placeholder="Mật khẩu">
-            </div>
-
-            <div class="field">
-                <label>Nhập lại mật khẩu</label>
-                <input id="regPassword2" type="password" placeholder="Nhập lại mật khẩu">
-            </div>
-
-            <button class="btn btn-full" onclick="registerUser()">
-                Gửi đăng ký
+        <div class="login-actions">
+            <button class="btn gray" onclick="openRegister()">
+                Đăng ký
             </button>
+        </div>
 
-            <div style="height:10px"></div>
-
-            <button class="btn btn-dark btn-full" onclick="showLogin()">
-                Quay lại đăng nhập
-            </button>
-
+        <div style="margin-top:18px;text-align:center;color:#8b949e;font-size:12px">
+            Admin mặc định: admin / 123456
         </div>
 
     </div>
@@ -661,738 +575,881 @@ pre{
 </div>
 
 
-<!-- ================= MAIN APP ================= -->
+<!-- APP -->
 
-<div id="appPage" class="app hidden">
+<div id="app" class="app hidden">
 
     <header class="header">
 
-        <div class="logo">
-            DM <span>STORE</span>
-        </div>
+        <div class="container header-inner">
 
-        <div class="header-right">
-
-            <div id="balanceBox" class="balance">
-                0đ
+            <div class="brand">
+                DATA & ACC
             </div>
 
-            <button class="btn btn-dark" onclick="logout()">
-                Thoát
-            </button>
+            <div class="header-right">
+
+                <div class="balance">
+                    Số dư:
+                    <b id="headerBalance">0đ</b>
+                </div>
+
+                <button class="btn gray small" onclick="logout()">
+                    Thoát
+                </button>
+
+            </div>
 
         </div>
 
     </header>
 
 
+    <nav class="nav">
+
+        <div class="container nav-inner" id="nav">
+
+            <!-- user/admin nav tạo bằng JS -->
+
+        </div>
+
+    </nav>
+
+
     <main class="container">
 
-        <div id="userInfoCard" class="card">
-            <h2>Xin chào, <span id="welcomeName"></span></h2>
-            <div class="muted small">
-                Sử dụng hệ thống để lấy dữ liệu ngân hàng hoặc mua ACC.
+        <!-- USER BANK -->
+
+        <section id="sectionBank" class="section">
+
+            <div class="page-title">
+                Kho ngân hàng
             </div>
-        </div>
+
+            <div class="page-desc">
+                Chọn ngân hàng hoặc tìm theo tên để lấy dữ liệu.
+            </div>
+
+            <div class="toolbar">
+
+                <select id="bankSelect">
+                    <option value="">-- Chọn ngân hàng --</option>
+                </select>
+
+                <input
+                    id="bankSearchName"
+                    placeholder="Tìm theo tên..."
+                    oninput="handleNameSearch()"
+                >
+
+                <button
+                    class="btn blue"
+                    onclick="openBankTake()"
+                >
+                    Lấy dữ liệu
+                </button>
+
+                <button
+                    class="btn orange"
+                    onclick="takeRandomBank()"
+                >
+                    Lấy ngẫu nhiên
+                </button>
+
+            </div>
 
 
-        <!-- ================= USER TABS ================= -->
+            <div id="bankSearchResult"></div>
 
-        <div id="userTabs" class="tabs">
-
-            <button class="tab active" onclick="switchUserTab('banks',this)">
-                Ngân hàng
-            </button>
-
-            <button class="tab" onclick="switchUserTab('buyacc',this)">
-                Mua ACC
-            </button>
-
-            <button class="tab" onclick="switchUserTab('history',this)">
-                Lịch sử
-            </button>
-
-        </div>
-
-
-        <!-- ================= BANK SECTION ================= -->
-
-        <section id="banksSection" class="section active">
 
             <div class="card">
 
-                <h2>Lấy dữ liệu ngân hàng</h2>
-
-                <div class="muted small" style="margin-bottom:14px;">
-                    Giá mặc định: <b id="bankPriceText">1.000đ</b> / dữ liệu
+                <div style="font-weight:800;margin-bottom:14px">
+                    Số lượng còn lại
                 </div>
-
-                <div class="grid">
-
-                    <div>
-
-                        <div class="field">
-                            <label>Chọn ngân hàng</label>
-
-                            <select id="bankSelect">
-                                <option value="">-- Chọn ngân hàng --</option>
-                            </select>
-
-                        </div>
-
-                        <div class="field">
-                            <label>Số lượng</label>
-                            <input id="bankQty" type="number" min="1" value="1">
-                        </div>
-
-                        <button class="btn btn-full" onclick="takeBankByBank()">
-                            Lấy dữ liệu
-                        </button>
-
-                    </div>
-
-
-                    <div>
-
-                        <div class="field">
-                            <label>
-                                Tìm theo tên
-                                <span class="muted">(từ 4 ký tự)</span>
-                            </label>
-
-                            <input id="nameSearch"
-                                   placeholder="Nhập tên cần tìm"
-                                   oninput="searchNames()">
-
-                        </div>
-
-                        <div id="nameSearchResult"></div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="divider"></div>
-
-                <h3>Kho ngân hàng</h3>
 
                 <div id="bankStockList"></div>
 
             </div>
 
+        </section>
+
+
+        <!-- USER ACC -->
+
+        <section id="sectionAcc" class="section">
+
+            <div class="page-title">
+                Mua ACC
+            </div>
+
+            <div class="page-desc">
+                Mỗi sản phẩm có kho riêng.
+            </div>
+
+            <div id="userProductGrid" class="product-grid"></div>
+
+        </section>
+
+
+        <!-- USER HISTORY -->
+
+        <section id="sectionUserHistory" class="section">
+
+            <div class="page-title">
+                Lịch sử
+            </div>
+
+            <div class="page-desc">
+                Lịch sử lấy dữ liệu và mua ACC.
+            </div>
+
+            <div id="userHistory"></div>
+
+        </section>
+
+
+        <!-- ADMIN DASHBOARD -->
+
+        <section id="sectionDashboard" class="section">
+
+            <div class="page-title">
+                Tổng quan
+            </div>
+
+            <div class="page-desc">
+                Thống kê hệ thống.
+            </div>
+
+            <div class="grid">
+
+                <div class="card">
+                    <div class="stat-title">Người dùng</div>
+                    <div class="stat-value" id="statUsers">0</div>
+                </div>
+
+                <div class="card">
+                    <div class="stat-title">Dữ liệu ngân hàng</div>
+                    <div class="stat-value" id="statBanks">0</div>
+                </div>
+
+                <div class="card">
+                    <div class="stat-title">Sản phẩm ACC</div>
+                    <div class="stat-value" id="statProducts">0</div>
+                </div>
+
+                <div class="card">
+                    <div class="stat-title">Tổng giao dịch</div>
+                    <div class="stat-value" id="statHistory">0</div>
+                </div>
+
+            </div>
+
+            <div style="height:18px"></div>
+
+            <div class="two">
+
+                <div class="card">
+                    <div style="font-weight:800;margin-bottom:15px">
+                        Người dùng chờ duyệt
+                    </div>
+
+                    <div id="pendingUsers"></div>
+                </div>
+
+                <div class="card">
+                    <div style="font-weight:800;margin-bottom:15px">
+                        Kho ACC
+                    </div>
+
+                    <div id="dashboardProducts"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ADMIN PRODUCTS -->
+
+        <section id="sectionProducts" class="section">
+
+            <div class="page-title">
+                Sản phẩm ACC
+            </div>
+
+            <div class="page-desc">
+                Mỗi sản phẩm có một kho TK|MK riêng.
+            </div>
+
+            <div class="toolbar">
+
+                <button class="btn blue" onclick="openProductModal()">
+                    + Thêm sản phẩm
+                </button>
+
+            </div>
+
+            <div id="adminProductGrid" class="product-grid"></div>
+
+        </section>
+
+
+        <!-- ADMIN BANK -->
+
+        <section id="sectionAdminBank" class="section">
+
+            <div class="page-title">
+                Kho ngân hàng
+            </div>
+
+            <div class="page-desc">
+                Quản lý dữ liệu ngân hàng.
+            </div>
 
             <div class="card">
 
-                <h2>Lấy ngẫu nhiên tất cả ngân hàng</h2>
-
                 <div class="field">
-                    <label>Số lượng</label>
-                    <input id="randomBankQty" type="number" min="1" value="1">
+                    <label>
+                        Ngân hàng
+                    </label>
+
+                    <select id="adminBankSelect"></select>
                 </div>
 
-                <button class="btn btn-full" onclick="takeRandomBank()">
-                    Lấy ngẫu nhiên
+                <div class="field">
+                    <label>
+                        Giá mỗi dữ liệu
+                    </label>
+
+                    <input
+                        id="bankPrice"
+                        type="number"
+                        value="1000"
+                    >
+                </div>
+
+                <div class="field">
+                    <label>
+                        Nhập dữ liệu
+                    </label>
+
+                    <textarea
+                        id="bankImport"
+                        placeholder="STK|Tên|Ngân hàng
+123456789|NGUYEN VAN A|Vietcombank
+987654321|TRAN VAN B|MB Bank"
+                    ></textarea>
+                </div>
+
+                <button class="btn blue" onclick="importBankData()">
+                    Nạp dữ liệu
+                </button>
+
+            </div>
+
+            <div style="height:18px"></div>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Ngân hàng</th>
+                            <th>Số lượng</th>
+                            <th>Giá</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="adminBankTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ADMIN USERS -->
+
+        <section id="sectionUsers" class="section">
+
+            <div class="page-title">
+                Người dùng
+            </div>
+
+            <div class="page-desc">
+                Duyệt tài khoản và quản lý số dư.
+            </div>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Tài khoản</th>
+                            <th>Trạng thái</th>
+                            <th>Số dư</th>
+                            <th>Ngày tạo</th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="usersTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ADMIN HISTORY -->
+
+        <section id="sectionHistory" class="section">
+
+            <div class="page-title">
+                Lịch sử giao dịch
+            </div>
+
+            <div class="page-desc">
+                Toàn bộ giao dịch trong hệ thống.
+            </div>
+
+            <div class="toolbar">
+
+                <button class="btn red" onclick="clearHistory()">
+                    Xóa lịch sử
+                </button>
+
+            </div>
+
+            <div id="adminHistory"></div>
+
+        </section>
+
+
+        <!-- ADMIN SETTINGS -->
+
+        <section id="sectionSettings" class="section">
+
+            <div class="page-title">
+                Cài đặt
+            </div>
+
+            <div class="page-desc">
+                Cài đặt hệ thống và Telegram.
+            </div>
+
+
+            <div class="card">
+
+                <h3 style="margin-bottom:15px">
+                    Telegram
+                </h3>
+
+                <div class="field">
+
+                    <label>
+                        Bot Token
+                    </label>
+
+                    <input
+                        id="telegramToken"
+                        placeholder="123456:ABC..."
+                    >
+
+                </div>
+
+                <div class="field">
+
+                    <label>
+                        Chat ID
+                    </label>
+
+                    <input
+                        id="telegramChatId"
+                        placeholder="-100..."
+                    >
+
+                </div>
+
+                <button
+                    class="btn blue"
+                    onclick="saveTelegram()"
+                >
+                    Lưu Telegram
+                </button>
+
+                <button
+                    class="btn gray"
+                    onclick="testTelegram()"
+                    style="margin-left:6px"
+                >
+                    Test
+                </button>
+
+            </div>
+
+
+            <div style="height:18px"></div>
+
+
+            <div class="card">
+
+                <h3 style="margin-bottom:15px">
+                    Giá dữ liệu ngân hàng
+                </h3>
+
+                <div class="field">
+
+                    <label>
+                        Giá mặc định
+                    </label>
+
+                    <input
+                        id="defaultBankPrice"
+                        type="number"
+                    >
+
+                </div>
+
+                <button
+                    class="btn blue"
+                    onclick="saveDefaultBankPrice()"
+                >
+                    Lưu giá
+                </button>
+
+            </div>
+
+
+            <div style="height:18px"></div>
+
+
+            <div class="card">
+
+                <h3 style="margin-bottom:15px">
+                    Dữ liệu hệ thống
+                </h3>
+
+                <button
+                    class="btn orange"
+                    onclick="exportBackup()"
+                >
+                    Xuất backup
+                </button>
+
+                <button
+                    class="btn red"
+                    onclick="resetSystem()"
+                    style="margin-left:6px"
+                >
+                    Reset toàn bộ
                 </button>
 
             </div>
 
         </section>
 
-
-        <!-- ================= BUY ACC ================= -->
-
-        <section id="buyaccSection" class="section">
-
-            <div class="card">
-
-                <h2>Mua ACC</h2>
-
-                <div class="muted small">
-                    Mỗi sản phẩm có kho riêng. Mua SC88 không ảnh hưởng kho QQ88.
-                </div>
-
-            </div>
-
-            <div id="userProducts" class="grid"></div>
-
-        </section>
-
-
-        <!-- ================= HISTORY ================= -->
-
-        <section id="historySection" class="section">
-
-            <div class="card">
-
-                <h2>Lịch sử giao dịch</h2>
-
-                <div id="userHistory"></div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= ADMIN ================= -->
-
-        <div id="adminArea" class="hidden">
-
-            <div class="divider"></div>
-
-            <div class="card">
-
-                <h2>ADMIN PANEL</h2>
-
-                <div class="tabs">
-
-                    <button class="tab active"
-                            onclick="switchAdminTab('dashboard',this)">
-                        Tổng quan
-                    </button>
-
-                    <button class="tab"
-                            onclick="switchAdminTab('products',this)">
-                        Sản phẩm ACC
-                    </button>
-
-                    <button class="tab"
-                            onclick="switchAdminTab('banksAdmin',this)">
-                        Kho ngân hàng
-                    </button>
-
-                    <button class="tab"
-                            onclick="switchAdminTab('users',this)">
-                        Người dùng
-                    </button>
-
-                    <button class="tab"
-                            onclick="switchAdminTab('orders',this)">
-                        Lịch sử
-                    </button>
-
-                    <button class="tab"
-                            onclick="switchAdminTab('settings',this)">
-                        Cài đặt
-                    </button>
-
-                </div>
-
-
-                <!-- DASHBOARD -->
-
-                <section id="adminDashboard" class="section active">
-
-                    <div class="grid3">
-
-                        <div class="stat">
-                            <div class="stat-title">Người dùng</div>
-                            <div class="stat-value" id="statUsers">0</div>
-                        </div>
-
-                        <div class="stat">
-                            <div class="stat-title">Sản phẩm ACC</div>
-                            <div class="stat-value" id="statProducts">0</div>
-                        </div>
-
-                        <div class="stat">
-                            <div class="stat-title">Tổng ACC tồn</div>
-                            <div class="stat-value" id="statAccStock">0</div>
-                        </div>
-
-                        <div class="stat">
-                            <div class="stat-title">Dữ liệu ngân hàng</div>
-                            <div class="stat-value" id="statBankStock">0</div>
-                        </div>
-
-                        <div class="stat">
-                            <div class="stat-title">Doanh thu</div>
-                            <div class="stat-value" id="statRevenue">0đ</div>
-                        </div>
-
-                        <div class="stat">
-                            <div class="stat-title">Đăng ký chờ duyệt</div>
-                            <div class="stat-value" id="statPending">0</div>
-                        </div>
-
-                    </div>
-
-                    <div class="divider"></div>
-
-                    <div class="actions">
-
-                        <button class="btn btn-blue"
-                                onclick="loadDemoData()">
-                            Nạp dữ liệu demo
-                        </button>
-
-                        <button class="btn btn-red"
-                                onclick="resetAllData()">
-                            Reset toàn bộ
-                        </button>
-
-                    </div>
-
-                </section>
-
-
-                <!-- PRODUCTS -->
-
-                <section id="adminProducts" class="section">
-
-                    <div class="card">
-
-                        <h3>
-                            Tạo sản phẩm ACC
-                        </h3>
-
-                        <div class="grid">
-
-                            <div class="field">
-                                <label>Tên sản phẩm</label>
-                                <input id="newProductName"
-                                       placeholder="Ví dụ: SC88">
-                            </div>
-
-                            <div class="field">
-                                <label>Giá lẻ / ACC</label>
-                                <input id="newProductPrice"
-                                       type="number"
-                                       min="0"
-                                       placeholder="Ví dụ: 50000">
-                            </div>
-
-                            <div class="field">
-                                <label>Giá combo / ACC</label>
-                                <input id="newProductComboPrice"
-                                       type="number"
-                                       min="0"
-                                       placeholder="Ví dụ: 45000">
-                            </div>
-
-                            <div class="field">
-                                <label>Mô tả</label>
-                                <input id="newProductDescription"
-                                       placeholder="Ví dụ: ACC SC88 random">
-                            </div>
-
-                        </div>
-
-                        <button class="btn"
-                                onclick="createProduct()">
-                            + Tạo sản phẩm
-                        </button>
-
-                    </div>
-
-
-                    <div id="adminProductsList"></div>
-
-                </section>
-
-
-                <!-- BANK ADMIN -->
-
-                <section id="adminBanks" class="section">
-
-                    <div class="card">
-
-                        <h3>Thêm dữ liệu ngân hàng</h3>
-
-                        <div class="field">
-
-                            <label>
-                                Mỗi dòng:
-                                STK|Tên|Ngân hàng
-                            </label>
-
-                            <textarea id="bankImportText"
-                                      placeholder="0123456789|NGUYEN VAN A|Vietcombank
-0987654321|TRAN THI B|MB Bank"></textarea>
-
-                        </div>
-
-                        <button class="btn"
-                                onclick="importBanks()">
-                            + Nạp dữ liệu
-                        </button>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <h3>Giá bán dữ liệu</h3>
-
-                        <div class="field">
-                            <input id="adminBankPrice"
-                                   type="number"
-                                   min="0">
-                        </div>
-
-                        <button class="btn"
-                                onclick="saveBankPrice()">
-                            Lưu giá
-                        </button>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <h3>Kho ngân hàng hiện tại</h3>
-
-                        <div id="adminBankStock"></div>
-
-                    </div>
-
-                </section>
-
-
-                <!-- USERS -->
-
-                <section id="adminUsers" class="section">
-
-                    <div class="card">
-
-                        <h3>Người dùng</h3>
-
-                        <div id="adminUsersList"></div>
-
-                    </div>
-
-                </section>
-
-
-                <!-- ORDERS -->
-
-                <section id="adminOrders" class="section">
-
-                    <div class="card">
-
-                        <h3>Lịch sử giao dịch</h3>
-
-                        <div id="adminHistory"></div>
-
-                    </div>
-
-                </section>
-
-
-                <!-- SETTINGS -->
-
-                <section id="adminSettings" class="section">
-
-                    <div class="card">
-
-                        <h3>Cài đặt Telegram</h3>
-
-                        <div class="warning">
-                            Token được lưu trong trình duyệt này để test.
-                            Không nên dùng cách này cho hệ thống production.
-                        </div>
-
-                        <div class="field">
-
-                            <label>Bot Token</label>
-
-                            <input id="telegramToken"
-                                   type="password"
-                                   placeholder="123456:ABC...">
-
-                        </div>
-
-                        <div class="field">
-
-                            <label>Chat ID</label>
-
-                            <input id="telegramChatId"
-                                   placeholder="-100xxxxxxxx">
-
-                        </div>
-
-                        <button class="btn"
-                                onclick="saveTelegramSettings()">
-                            Lưu Telegram
-                        </button>
-
-                        <button class="btn btn-blue"
-                                onclick="testTelegram()">
-                            Test Telegram
-                        </button>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <h3>Thông báo tồn kho thấp</h3>
-
-                        <div class="field">
-
-                            <label>
-                                Báo Telegram khi sản phẩm còn ≤
-                            </label>
-
-                            <input id="lowStockLimit"
-                                   type="number"
-                                   min="0">
-
-                        </div>
-
-                        <button class="btn"
-                                onclick="saveLowStock()">
-                            Lưu
-                        </button>
-
-                    </div>
-
-                </section>
-
-            </div>
-
-        </div>
-
     </main>
 
 </div>
 
 
-<!-- ================= MODAL BUY ACC ================= -->
+<!-- REGISTER MODAL -->
 
-<div id="buyModal" class="modal hidden">
+<div id="registerModal" class="modal">
 
     <div class="modal-box">
 
-        <div class="modal-head">
+        <div class="modal-title">
+            Đăng ký tài khoản
+        </div>
 
-            <div>
-                <h2 id="buyModalTitle">
-                    Mua ACC
-                </h2>
+        <div class="field">
+            <label>Tài khoản</label>
+            <input id="registerUsername">
+        </div>
 
-                <div id="buyModalInfo"
-                     class="muted small">
-                </div>
-            </div>
+        <div class="field">
+            <label>Mật khẩu</label>
+            <input id="registerPassword" type="password">
+        </div>
 
-            <button class="close"
-                    onclick="closeBuyModal()">
-                ×
+        <div class="modal-actions">
+
+            <button class="btn gray" onclick="closeModal('registerModal')">
+                Hủy
+            </button>
+
+            <button class="btn blue" onclick="registerUser()">
+                Đăng ký
             </button>
 
         </div>
 
+    </div>
 
-        <input type="hidden" id="buyProductId">
+</div>
 
+
+<!-- BALANCE MODAL -->
+
+<div id="balanceModal" class="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-title">
+            Cộng tiền
+        </div>
+
+        <div id="balanceUserName"
+             style="color:#8b949e;margin-bottom:15px">
+        </div>
 
         <div class="field">
 
-            <label>Hình thức mua</label>
+            <label>
+                Số tiền
+            </label>
 
-            <select id="buyMode"
-                    onchange="updateBuyPreview()">
+            <input
+                id="balanceAmount"
+                type="number"
+                placeholder="100000"
+            >
+
+        </div>
+
+        <div class="modal-actions">
+
+            <button
+                class="btn gray"
+                onclick="closeModal('balanceModal')"
+            >
+                Hủy
+            </button>
+
+            <button
+                class="btn blue"
+                onclick="addBalance()"
+            >
+                Cộng tiền
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- BANK TAKE MODAL -->
+
+<div id="bankTakeModal" class="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-title">
+            Lấy dữ liệu ngân hàng
+        </div>
+
+        <div id="bankTakeInfo"
+             style="color:#8b949e;margin-bottom:15px">
+        </div>
+
+        <div class="field">
+
+            <label>
+                Số lượng
+            </label>
+
+            <input
+                id="bankTakeQuantity"
+                type="number"
+                min="1"
+                value="1"
+            >
+
+        </div>
+
+        <div id="bankTakePrice"
+             style="margin-top:10px;font-weight:800">
+        </div>
+
+        <div class="modal-actions">
+
+            <button
+                class="btn gray"
+                onclick="closeModal('bankTakeModal')"
+            >
+                Hủy
+            </button>
+
+            <button
+                class="btn blue"
+                onclick="confirmBankTake()"
+            >
+                Lấy dữ liệu
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PRODUCT MODAL -->
+
+<div id="productModal" class="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-title" id="productModalTitle">
+            Thêm sản phẩm
+        </div>
+
+        <input id="productId" type="hidden">
+
+        <div class="field">
+            <label>Tên sản phẩm</label>
+            <input id="productName" placeholder="VD: SC88">
+        </div>
+
+        <div class="field">
+            <label>Mô tả</label>
+            <textarea
+                id="productDescription"
+                placeholder="Mô tả sản phẩm..."
+            ></textarea>
+        </div>
+
+        <div class="field">
+            <label>Giá lẻ / ACC</label>
+            <input id="productPrice" type="number">
+        </div>
+
+        <div class="field">
+            <label>Giá combo / ACC</label>
+            <input id="productComboPrice" type="number">
+        </div>
+
+        <div class="modal-actions">
+
+            <button
+                class="btn gray"
+                onclick="closeModal('productModal')"
+            >
+                Hủy
+            </button>
+
+            <button
+                class="btn blue"
+                onclick="saveProduct()"
+            >
+                Lưu sản phẩm
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- INVENTORY MODAL -->
+
+<div id="inventoryModal" class="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-title">
+            Nạp kho ACC
+        </div>
+
+        <div id="inventoryProductName"
+             style="color:#8b949e;margin-bottom:15px">
+        </div>
+
+        <input id="inventoryProductId" type="hidden">
+
+        <div class="field">
+
+            <label>
+                Danh sách TK|MK
+            </label>
+
+            <textarea
+                id="inventoryText"
+                placeholder="tk1|mk1
+tk2|mk2
+tk3|mk3"
+                style="min-height:220px"
+            ></textarea>
+
+        </div>
+
+        <div class="modal-actions">
+
+            <button
+                class="btn gray"
+                onclick="closeModal('inventoryModal')"
+            >
+                Hủy
+            </button>
+
+            <button
+                class="btn blue"
+                onclick="importInventory()"
+            >
+                Nạp kho
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- BUY ACC MODAL -->
+
+<div id="buyAccModal" class="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-title">
+            Mua ACC
+        </div>
+
+        <div id="buyAccInfo"
+             style="color:#8b949e;margin-bottom:15px">
+        </div>
+
+        <input id="buyAccProductId" type="hidden">
+
+        <div class="field">
+
+            <label>
+                Hình thức
+            </label>
+
+            <select id="buyAccMode"
+                    onchange="updateBuyAccPrice()">
 
                 <option value="single">
-                    Mua lẻ
+                    Giá lẻ
                 </option>
 
                 <option value="combo">
-                    Mua combo
+                    Giá combo
                 </option>
 
             </select>
 
         </div>
 
-
-        <div class="field">
-
-            <label>Số lượng ACC</label>
-
-            <input id="buyQty"
-                   type="number"
-                   min="1"
-                   value="1"
-                   oninput="updateBuyPreview()">
-
-        </div>
-
-
-        <div id="buyPricePreview"
-             class="price-preview">
-            Thành tiền: 0đ
-        </div>
-
-
-        <div style="height:14px"></div>
-
-
-        <button class="btn btn-full"
-                onclick="confirmBuyAcc()">
-            Xác nhận mua
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- ================= MODAL PRODUCT ================= -->
-
-<div id="editProductModal" class="modal hidden">
-
-    <div class="modal-box">
-
-        <div class="modal-head">
-
-            <h2 id="editProductTitle">
-                Sửa sản phẩm
-            </h2>
-
-            <button class="close"
-                    onclick="closeEditProduct()">
-                ×
-            </button>
-
-        </div>
-
-
-        <input type="hidden" id="editProductId">
-
-
-        <div class="field">
-
-            <label>Tên sản phẩm</label>
-
-            <input id="editProductName">
-
-        </div>
-
-
-        <div class="field">
-
-            <label>Giá lẻ</label>
-
-            <input id="editProductPrice"
-                   type="number"
-                   min="0">
-
-        </div>
-
-
-        <div class="field">
-
-            <label>Giá combo / ACC</label>
-
-            <input id="editProductComboPrice"
-                   type="number"
-                   min="0">
-
-        </div>
-
-
-        <div class="field">
-
-            <label>Mô tả</label>
-
-            <input id="editProductDescription">
-
-        </div>
-
-
-        <button class="btn btn-full"
-                onclick="saveProductEdit()">
-            Lưu thay đổi
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- ================= MODAL INVENTORY ================= -->
-
-<div id="inventoryModal" class="modal hidden">
-
-    <div class="modal-box">
-
-        <div class="modal-head">
-
-            <div>
-
-                <h2 id="inventoryTitle">
-                    Nạp kho
-                </h2>
-
-                <div id="inventoryInfo"
-                     class="muted small">
-                </div>
-
-            </div>
-
-            <button class="close"
-                    onclick="closeInventoryModal()">
-                ×
-            </button>
-
-        </div>
-
-
         <div class="field">
 
             <label>
-                Mỗi dòng:
-                TK|MK
+                Số lượng
             </label>
 
-            <textarea id="inventoryText"
-                      placeholder="user001|password001
-user002|password002
-user003|password003"></textarea>
+            <input
+                id="buyAccQuantity"
+                type="number"
+                min="1"
+                value="1"
+                oninput="updateBuyAccPrice()"
+            >
 
         </div>
 
+        <div id="buyAccTotal"
+             style="font-size:18px;font-weight:800">
+        </div>
 
-        <button class="btn btn-full"
-                onclick="importInventory()">
-            + Nạp vào kho này
-        </button>
+        <div class="modal-actions">
 
+            <button
+                class="btn gray"
+                onclick="closeModal('buyAccModal')"
+            >
+                Hủy
+            </button>
 
-        <div class="divider"></div>
+            <button
+                class="btn blue"
+                onclick="confirmBuyAcc()"
+            >
+                Mua ngay
+            </button>
 
-
-        <h3>Kho hiện tại</h3>
-
-        <div id="inventoryList"></div>
+        </div>
 
     </div>
 
 </div>
+
+
+<!-- VIEW INVENTORY MODAL -->
+
+<div id="viewInventoryModal" class="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-title">
+            Kho sản phẩm
+        </div>
+
+        <div id="viewInventoryContent"></div>
+
+        <div class="modal-actions">
+
+            <button
+                class="btn gray"
+                onclick="closeModal('viewInventoryModal')"
+            >
+                Đóng
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
 
 
 <script>
 
 /* =========================================================
-   DATABASE LOCAL STORAGE
+   DATABASE
 ========================================================= */
 
 const DB = {
 
-    users: "dm_users",
-    banks: "dm_banks",
-    products: "dm_acc_products",
-    inventory: "dm_acc_inventory",
-    history: "dm_history",
-    config: "dm_config",
-    current: "dm_current"
+    users:"dm_users",
+    banks:"dm_banks",
+    products:"dm_acc_products",
+    inventory:"dm_acc_inventory",
+    history:"dm_history",
+    config:"dm_config",
+    current:"dm_current"
 
 };
 
 
-const BANKS = [
+const BANK_NAMES = [
 
     "ABBank",
     "ACB",
@@ -1448,111 +1505,199 @@ let history = [];
 
 let config = {
 
-    bankPrice: 1000,
+    defaultBankPrice:1000,
 
-    telegramToken: "",
-
-    telegramChatId: "",
-
-    lowStockLimit: 5
+    telegramToken:"",
+    telegramChatId:""
 
 };
 
+let currentUser = null;
+let balanceTargetUser = null;
+let bankTakeMode = "bank";
+let selectedBank = "";
+let selectedName = "";
+
 
 /* =========================================================
-   UTIL
+   BASIC
 ========================================================= */
 
 function uid(prefix="id"){
 
-    return prefix + "_" +
-        Date.now().toString(36) +
-        Math.random().toString(36).slice(2,8);
+    return prefix +
+        "_" +
+        Date.now() +
+        "_" +
+        Math.random()
+        .toString(36)
+        .substring(2,9);
 
 }
 
 
-function money(number){
+function money(n){
 
-    return Number(number || 0)
+    return Number(n || 0)
         .toLocaleString("vi-VN") + "đ";
 
 }
 
 
-function escapeHtml(str){
+function now(){
 
-    return String(str ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+    return new Date()
+        .toLocaleString("vi-VN");
+
+}
+
+
+function save(key,data){
+
+    localStorage.setItem(
+        key,
+        JSON.stringify(data)
+    );
+
+}
+
+
+function load(key,fallback){
+
+    try{
+
+        const value =
+            localStorage.getItem(key);
+
+        return value
+            ? JSON.parse(value)
+            : fallback;
+
+    }catch(e){
+
+        return fallback;
+
+    }
 
 }
 
 
 function saveDB(){
 
-    localStorage.setItem(DB.users,JSON.stringify(users));
-
-    localStorage.setItem(DB.banks,JSON.stringify(banks));
-
-    localStorage.setItem(DB.products,JSON.stringify(products));
-
-    localStorage.setItem(DB.inventory,JSON.stringify(inventory));
-
-    localStorage.setItem(DB.history,JSON.stringify(history));
-
-    localStorage.setItem(DB.config,JSON.stringify(config));
+    save(DB.users,users);
+    save(DB.banks,banks);
+    save(DB.products,products);
+    save(DB.inventory,inventory);
+    save(DB.history,history);
+    save(DB.config,config);
 
 }
 
 
-function loadDB(){
+/* =========================================================
+   INIT
+========================================================= */
+
+function init(){
 
     users =
-        JSON.parse(localStorage.getItem(DB.users) || "[]");
+        load(DB.users,[]);
 
     banks =
-        JSON.parse(localStorage.getItem(DB.banks) || "[]");
+        load(DB.banks,[]);
 
     products =
-        JSON.parse(localStorage.getItem(DB.products) || "[]");
+        load(DB.products,[]);
 
     inventory =
-        JSON.parse(localStorage.getItem(DB.inventory) || "[]");
+        load(DB.inventory,[]);
 
     history =
-        JSON.parse(localStorage.getItem(DB.history) || "[]");
+        load(DB.history,[]);
 
-    const savedConfig =
-        JSON.parse(localStorage.getItem(DB.config) || "null");
+    config =
+        load(DB.config,config);
 
-    if(savedConfig){
-
-        config = {
-            ...config,
-            ...savedConfig
-        };
-
-    }
-
-    migrateOldAcc();
 
     ensureAdmin();
 
+    initBanks();
+
+    migrateOldAcc();
+
+
+    document
+        .getElementById("defaultBankPrice")
+        .value =
+        config.defaultBankPrice;
+
+
+    document
+        .getElementById("telegramToken")
+        .value =
+        config.telegramToken || "";
+
+
+    document
+        .getElementById("telegramChatId")
+        .value =
+        config.telegramChatId || "";
+
+
+    const savedCurrent =
+        localStorage.getItem(DB.current);
+
+
+    if(savedCurrent){
+
+        const user =
+            users.find(
+                u => u.id === savedCurrent
+            );
+
+
+        /*
+         * ADMIN LUÔN ĐƯỢC VÀO.
+         * USER THƯỜNG PHẢI APPROVED.
+         */
+
+        if(
+            user &&
+            (
+                user.role === "admin" ||
+                (
+                    user.approved &&
+                    !user.disabled
+                )
+            )
+        ){
+
+            currentUser = user;
+
+            openApp();
+
+        }
+
+    }
+
 }
 
 
+/* =========================================================
+   ADMIN
+========================================================= */
+
 function ensureAdmin(){
 
-    const exists =
-        users.find(u => u.username === "admin");
+    let admin =
+        users.find(
+            u => u.username === "admin"
+        );
 
-    if(!exists){
 
-        users.push({
+    if(!admin){
+
+        admin = {
 
             id:uid("user"),
 
@@ -1570,7 +1715,163 @@ function ensureAdmin(){
 
             createdAt:new Date().toISOString()
 
+        };
+
+        users.push(admin);
+
+    }else{
+
+        /*
+         * SỬA ADMIN CŨ:
+         * ADMIN LUÔN ĐƯỢC DUYỆT
+         */
+
+        admin.role = "admin";
+
+        admin.approved = true;
+
+        admin.disabled = false;
+
+    }
+
+
+    save(DB.users,users);
+
+}
+
+
+/* =========================================================
+   BANK INITIALIZE
+========================================================= */
+
+function initBanks(){
+
+    BANK_NAMES.forEach(name => {
+
+        if(
+            !banks.find(
+                b => b.name === name
+            )
+        ){
+
+            banks.push({
+
+                id:uid("bank"),
+
+                name:name,
+
+                price:
+                    Number(
+                        config.defaultBankPrice
+                    ) || 1000
+
+            });
+
+        }
+
+    });
+
+
+    save(DB.banks,banks);
+
+
+    renderBankSelects();
+
+}
+
+
+/* =========================================================
+   OLD ACC MIGRATION
+========================================================= */
+
+function migrateOldAcc(){
+
+    const old =
+        load("dm_acc",null);
+
+
+    if(
+        old &&
+        old.length &&
+        products.length === 0
+    ){
+
+        const product = {
+
+            id:uid("product"),
+
+            name:"ACC VIP",
+
+            description:"Sản phẩm ACC mặc định",
+
+            price:10000,
+
+            comboPrice:9000,
+
+            active:true,
+
+            createdAt:new Date().toISOString()
+
+        };
+
+
+        products.push(product);
+
+
+        old.forEach(item => {
+
+            if(item){
+
+                let tk = "";
+                let mk = "";
+
+
+                if(
+                    typeof item === "string"
+                ){
+
+                    const parts =
+                        item.split("|");
+
+                    tk =
+                        (parts[0] || "").trim();
+
+                    mk =
+                        (parts[1] || "").trim();
+
+                }else{
+
+                    tk =
+                        item.tk || "";
+
+                    mk =
+                        item.mk || "";
+
+                }
+
+
+                if(tk){
+
+                    inventory.push({
+
+                        id:uid("inv"),
+
+                        productId:product.id,
+
+                        tk:tk,
+
+                        mk:mk,
+
+                        createdAt:new Date().toISOString()
+
+                    });
+
+                }
+
+            }
+
         });
+
 
         saveDB();
 
@@ -1580,126 +1881,110 @@ function ensureAdmin(){
 
 
 /* =========================================================
-   MIGRATION OLD ACC
+   LOGIN
 ========================================================= */
 
-function migrateOldAcc(){
+function login(){
 
-    const oldAcc =
-        JSON.parse(localStorage.getItem("dm_acc") || "null");
+    const username =
+        document
+        .getElementById("loginUsername")
+        .value
+        .trim();
 
-    if(!oldAcc || !Array.isArray(oldAcc) || !oldAcc.length){
+
+    const password =
+        document
+        .getElementById("loginPassword")
+        .value;
+
+
+    const user =
+        users.find(
+            u =>
+                u.username === username &&
+                u.password === password
+        );
+
+
+    if(!user){
+
+        toast("Sai tài khoản hoặc mật khẩu.");
 
         return;
 
     }
 
-    if(products.length){
+
+    /*
+     * ADMIN KHÔNG CẦN DUYỆT
+     */
+
+    if(user.role === "admin"){
+
+        user.approved = true;
+
+        user.disabled = false;
+
+        currentUser = user;
+
+        localStorage.setItem(
+            DB.current,
+            user.id
+        );
+
+        saveDB();
+
+        openApp();
 
         return;
 
     }
 
-    const oldConfig =
-        JSON.parse(localStorage.getItem("dm_config") || "{}");
 
-    const product = {
+    /*
+     * USER THƯỜNG
+     */
 
-        id:uid("prod"),
+    if(user.disabled){
 
-        name:"ACC VIP",
+        toast("Tài khoản đã bị khóa.");
 
-        description:"Sản phẩm ACC cũ được chuyển sang kho riêng.",
+        return;
 
-        price:Number(oldConfig.accPrice || 50000),
+    }
 
-        comboPrice:Number(oldConfig.accPrice || 50000),
 
-        active:true,
+    if(!user.approved){
 
-        createdAt:new Date().toISOString()
+        toast("Tài khoản chưa được Admin duyệt.");
 
-    };
+        return;
 
-    products.push(product);
+    }
 
-    oldAcc.forEach(acc => {
 
-        inventory.push({
+    currentUser = user;
 
-            id:uid("acc"),
+    localStorage.setItem(
+        DB.current,
+        user.id
+    );
 
-            productId:product.id,
-
-            username:acc.username || "",
-
-            password:acc.password || "",
-
-            createdAt:new Date().toISOString()
-
-        });
-
-    });
-
-    localStorage.removeItem("dm_acc");
-
-    saveDB();
+    openApp();
 
 }
 
 
 /* =========================================================
-   TOAST
+   REGISTER
 ========================================================= */
 
-let toastTimer;
-
-function toast(message){
-
-    const el =
-        document.getElementById("toast");
-
-    el.textContent = message;
-
-    el.style.display = "block";
-
-    clearTimeout(toastTimer);
-
-    toastTimer = setTimeout(() => {
-
-        el.style.display = "none";
-
-    },3000);
-
-}
-
-
-/* =========================================================
-   AUTH
-========================================================= */
-
-function showRegister(){
+function openRegister(){
 
     document
-        .getElementById("loginForm")
-        .classList.add("hidden");
-
-    document
-        .getElementById("registerForm")
-        .classList.remove("hidden");
-
-}
-
-
-function showLogin(){
-
-    document
-        .getElementById("registerForm")
-        .classList.add("hidden");
-
-    document
-        .getElementById("loginForm")
-        .classList.remove("hidden");
+        .getElementById("registerModal")
+        .classList.add("show");
 
 }
 
@@ -1708,18 +1993,14 @@ function registerUser(){
 
     const username =
         document
-        .getElementById("regUsername")
+        .getElementById("registerUsername")
         .value
         .trim();
 
+
     const password =
         document
-        .getElementById("regPassword")
-        .value;
-
-    const password2 =
-        document
-        .getElementById("regPassword2")
+        .getElementById("registerPassword")
         .value;
 
 
@@ -1741,18 +2022,13 @@ function registerUser(){
     }
 
 
-    if(password !== password2){
-
-        toast("Mật khẩu nhập lại không khớp.");
-
-        return;
-
-    }
-
-
-    if(users.some(u =>
-        u.username.toLowerCase() === username.toLowerCase()
-    )){
+    if(
+        users.some(
+            u =>
+                u.username.toLowerCase() ===
+                username.toLowerCase()
+        )
+    ){
 
         toast("Tài khoản đã tồn tại.");
 
@@ -1765,9 +2041,9 @@ function registerUser(){
 
         id:uid("user"),
 
-        username,
+        username:username,
 
-        password,
+        password:password,
 
         role:"user",
 
@@ -1782,209 +2058,226 @@ function registerUser(){
     });
 
 
-    saveDB();
+    save(DB.users,users);
+
+
+    closeModal("registerModal");
+
+
+    document
+        .getElementById("registerUsername")
+        .value = "";
+
+
+    document
+        .getElementById("registerPassword")
+        .value = "";
+
 
     toast("Đăng ký thành công. Chờ Admin duyệt.");
 
-    document
-        .getElementById("regUsername")
-        .value = "";
+}
+
+
+/* =========================================================
+   OPEN APP
+========================================================= */
+
+function openApp(){
 
     document
-        .getElementById("regPassword")
-        .value = "";
+        .getElementById("loginPage")
+        .classList.add("hidden");
+
 
     document
-        .getElementById("regPassword2")
-        .value = "";
+        .getElementById("app")
+        .classList.remove("hidden");
 
-    showLogin();
+
+    renderNavigation();
+
+    updateHeaderBalance();
+
+
+    if(currentUser.role === "admin"){
+
+        showSection("sectionDashboard");
+
+        refreshAdmin();
+
+    }else{
+
+        showSection("sectionBank");
+
+        refreshUser();
+
+    }
 
 }
 
 
-function login(){
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
-    const username =
-        document
-        .getElementById("loginUsername")
-        .value
-        .trim();
+function renderNavigation(){
 
-    const password =
-        document
-        .getElementById("loginPassword")
-        .value;
+    const nav =
+        document.getElementById("nav");
 
 
-    const user =
-        users.find(u =>
-            u.username === username &&
-            u.password === password
+    if(currentUser.role === "admin"){
+
+        nav.innerHTML = `
+
+            <button
+                onclick="showSection('sectionDashboard')">
+                Tổng quan
+            </button>
+
+            <button
+                onclick="showSection('sectionProducts')">
+                Sản phẩm ACC
+            </button>
+
+            <button
+                onclick="showSection('sectionAdminBank')">
+                Kho ngân hàng
+            </button>
+
+            <button
+                onclick="showSection('sectionUsers')">
+                Người dùng
+            </button>
+
+            <button
+                onclick="showSection('sectionHistory')">
+                Lịch sử
+            </button>
+
+            <button
+                onclick="showSection('sectionSettings')">
+                Cài đặt
+            </button>
+
+        `;
+
+    }else{
+
+        nav.innerHTML = `
+
+            <button
+                onclick="showSection('sectionBank')">
+                Ngân hàng
+            </button>
+
+            <button
+                onclick="showSection('sectionAcc')">
+                Mua ACC
+            </button>
+
+            <button
+                onclick="showSection('sectionUserHistory')">
+                Lịch sử
+            </button>
+
+        `;
+
+    }
+
+}
+
+
+function showSection(id){
+
+    document
+        .querySelectorAll(".section")
+        .forEach(
+            s => s.classList.remove("active")
         );
 
 
-    if(!user){
-
-        toast("Sai tài khoản hoặc mật khẩu.");
-
-        return;
-
-    }
+    const section =
+        document.getElementById(id);
 
 
-    if(user.disabled){
+    if(section){
 
-        toast("Tài khoản đã bị khóa.");
-
-        return;
+        section.classList.add("active");
 
     }
 
 
-    if(!user.approved){
-
-        toast("Tài khoản chưa được Admin duyệt.");
-
-        return;
-
-    }
+    if(id === "sectionDashboard")
+        refreshDashboard();
 
 
-    localStorage.setItem(DB.current,user.id);
+    if(id === "sectionProducts")
+        renderAdminProducts();
 
-    openApp();
+
+    if(id === "sectionAdminBank")
+        renderAdminBanks();
+
+
+    if(id === "sectionUsers")
+        renderUsers();
+
+
+    if(id === "sectionHistory")
+        renderAdminHistory();
+
+
+    if(id === "sectionSettings")
+        loadSettings();
+
+
+    if(id === "sectionBank")
+        refreshBankPage();
+
+
+    if(id === "sectionAcc")
+        renderUserProducts();
+
+
+    if(id === "sectionUserHistory")
+        renderUserHistory();
 
 }
 
+
+/* =========================================================
+   LOGOUT
+========================================================= */
 
 function logout(){
 
     localStorage.removeItem(DB.current);
+
+    currentUser = null;
 
     location.reload();
 
 }
 
 
-function currentUser(){
-
-    const id =
-        localStorage.getItem(DB.current);
-
-    return users.find(u => u.id === id);
-
-}
-
-
 /* =========================================================
-   APP INIT
+   HEADER
 ========================================================= */
 
-function openApp(){
+function updateHeaderBalance(){
 
-    const user = currentUser();
-
-    if(!user){
-
-        return;
-
-    }
-
-    document
-        .getElementById("authPage")
-        .classList.add("hidden");
-
-    document
-        .getElementById("appPage")
-        .classList.remove("hidden");
+    const el =
+        document.getElementById(
+            "headerBalance"
+        );
 
 
-    document
-        .getElementById("welcomeName")
-        .textContent = user.username;
+    if(currentUser){
 
-
-    updateBalance();
-
-    renderBanks();
-
-    renderProducts();
-
-    renderHistory();
-
-
-    if(user.role === "admin"){
-
-        document
-            .getElementById("adminArea")
-            .classList.remove("hidden");
-
-        renderAdmin();
-
-    }
-
-}
-
-
-function updateBalance(){
-
-    const user = currentUser();
-
-    document
-        .getElementById("balanceBox")
-        .textContent = money(user?.balance || 0);
-
-}
-
-
-/* =========================================================
-   USER TABS
-========================================================= */
-
-function switchUserTab(name,button){
-
-    document
-        .querySelectorAll("#userTabs .tab")
-        .forEach(x => x.classList.remove("active"));
-
-    if(button){
-
-        button.classList.add("active");
-
-    }
-
-
-    document
-        .querySelectorAll("#banksSection,#buyaccSection,#historySection")
-        .forEach(x => x.classList.remove("active"));
-
-
-    if(name === "banks"){
-
-        document
-            .getElementById("banksSection")
-            .classList.add("active");
-
-    }
-
-    if(name === "buyacc"){
-
-        document
-            .getElementById("buyaccSection")
-            .classList.add("active");
-
-        renderProducts();
-
-    }
-
-    if(name === "history"){
-
-        document
-            .getElementById("historySection")
-            .classList.add("active");
-
-        renderHistory();
+        el.textContent =
+            money(currentUser.balance);
 
     }
 
@@ -1992,605 +2285,165 @@ function switchUserTab(name,button){
 
 
 /* =========================================================
-   ADMIN TABS
+   BANK SELECT
 ========================================================= */
 
-function switchAdminTab(name,button){
+function renderBankSelects(){
 
-    document
-        .querySelectorAll("#adminArea .tab")
-        .forEach(x => x.classList.remove("active"));
-
-    if(button){
-
-        button.classList.add("active");
-
-    }
+    const userSelect =
+        document.getElementById(
+            "bankSelect"
+        );
 
 
-    document
-        .querySelectorAll(
-            "#adminDashboard,#adminProducts,#adminBanks,#adminUsers,#adminOrders,#adminSettings"
-        )
-        .forEach(x => x.classList.remove("active"));
+    const adminSelect =
+        document.getElementById(
+            "adminBankSelect"
+        );
 
 
-    const map = {
-
-        dashboard:"adminDashboard",
-
-        products:"adminProducts",
-
-        banksAdmin:"adminBanks",
-
-        users:"adminUsers",
-
-        orders:"adminOrders",
-
-        settings:"adminSettings"
-
-    };
-
-
-    document
-        .getElementById(map[name])
-        .classList.add("active");
-
-
-    if(name === "dashboard") renderDashboard();
-
-    if(name === "products") renderAdminProducts();
-
-    if(name === "banksAdmin") renderAdminBanks();
-
-    if(name === "users") renderAdminUsers();
-
-    if(name === "orders") renderAdminHistory();
-
-    if(name === "settings") loadSettings();
-
-}
-
-
-/* =========================================================
-   BANK
-========================================================= */
-
-function populateBankSelect(){
-
-    const select =
-        document.getElementById("bankSelect");
-
-    select.innerHTML =
-        '<option value="">-- Chọn ngân hàng --</option>' +
-        BANKS.map(bank =>
-            `<option value="${escapeHtml(bank)}">${escapeHtml(bank)}</option>`
+    const html =
+        `<option value="">
+            -- Chọn ngân hàng --
+        </option>` +
+        banks.map(
+            b =>
+                `<option value="${escapeHtml(b.name)}">
+                    ${escapeHtml(b.name)}
+                </option>`
         ).join("");
 
-}
 
+    if(userSelect)
+        userSelect.innerHTML = html;
 
-function renderBanks(){
 
-    populateBankSelect();
-
-    document
-        .getElementById("bankPriceText")
-        .textContent = money(config.bankPrice);
-
-
-    const grouped = {};
-
-    banks.forEach(b => {
-
-        const bank = b.bank || "Khác";
-
-        grouped[bank] =
-            (grouped[bank] || 0) + 1;
-
-    });
-
-
-    const html = BANKS.map(bank => {
-
-        const count = grouped[bank] || 0;
-
-        return `
-            <div class="bank-row">
-                <div class="bank-name">
-                    ${escapeHtml(bank)}
-                </div>
-
-                <div class="badge ${count ? "badge-green" : "badge-red"}">
-                    ${count} dữ liệu
-                </div>
-            </div>
-        `;
-
-    }).join("");
-
-
-    document
-        .getElementById("bankStockList")
-        .innerHTML = html ||
-        '<div class="empty">Chưa có dữ liệu.</div>';
-
-}
-
-
-function takeBankByBank(){
-
-    const user = currentUser();
-
-    const bank =
-        document
-        .getElementById("bankSelect")
-        .value;
-
-    const qty =
-        Math.max(
-            1,
-            parseInt(
-                document
-                .getElementById("bankQty")
-                .value || 1
-            )
-        );
-
-
-    if(!bank){
-
-        toast("Chọn ngân hàng.");
-
-        return;
-
-    }
-
-
-    const available =
-        banks.filter(b => b.bank === bank);
-
-
-    if(available.length < qty){
-
-        toast(`Kho ${bank} chỉ còn ${available.length} dữ liệu.`);
-
-        return;
-
-    }
-
-
-    const total =
-        qty * Number(config.bankPrice);
-
-
-    if(user.role !== "admin" &&
-       Number(user.balance) < total){
-
-        toast("Số dư không đủ.");
-
-        return;
-
-    }
-
-
-    const selected =
-        shuffle([...available]).slice(0,qty);
-
-
-    if(user.role !== "admin"){
-
-        user.balance =
-            Number(user.balance) - total;
-
-    }
-
-
-    selected.forEach(item => {
-
-        const index =
-            banks.findIndex(b => b.id === item.id);
-
-        if(index !== -1){
-
-            banks.splice(index,1);
-
-        }
-
-    });
-
-
-    const rows =
-        selected.map(x =>
-            `${x.stk}|${x.name}|${x.bank}`
-        );
-
-
-    addHistory({
-
-        type:"bank",
-
-        userId:user.id,
-
-        username:user.username,
-
-        quantity:qty,
-
-        amount:user.role === "admin" ? 0 : total,
-
-        description:`Lấy ${qty} dữ liệu ${bank}`,
-
-        data:rows.join("\n")
-
-    });
-
-
-    saveDB();
-
-    updateBalance();
-
-    renderBanks();
-
-    renderHistory();
-
-    sendTelegram(
-        `🏦 LẤY DỮ LIỆU NGÂN HÀNG\n\n` +
-        `User: ${user.username}\n` +
-        `Ngân hàng: ${bank}\n` +
-        `Số lượng: ${qty}\n` +
-        `Tiền: ${money(total)}`
-    );
-
-
-    showDataResult(
-        "Dữ liệu ngân hàng",
-        rows.join("\n")
-    );
-
-}
-
-
-function takeRandomBank(){
-
-    const user = currentUser();
-
-    const qty =
-        Math.max(
-            1,
-            parseInt(
-                document
-                .getElementById("randomBankQty")
-                .value || 1
-            )
-        );
-
-
-    if(banks.length < qty){
-
-        toast("Kho không đủ dữ liệu.");
-
-        return;
-
-    }
-
-
-    const total =
-        qty * Number(config.bankPrice);
-
-
-    if(user.role !== "admin" &&
-       Number(user.balance) < total){
-
-        toast("Số dư không đủ.");
-
-        return;
-
-    }
-
-
-    const selected =
-        shuffle([...banks]).slice(0,qty);
-
-
-    if(user.role !== "admin"){
-
-        user.balance -= total;
-
-    }
-
-
-    selected.forEach(item => {
-
-        const index =
-            banks.findIndex(b => b.id === item.id);
-
-        if(index !== -1){
-
-            banks.splice(index,1);
-
-        }
-
-    });
-
-
-    const rows =
-        selected.map(x =>
-            `${x.stk}|${x.name}|${x.bank}`
-        );
-
-
-    addHistory({
-
-        type:"bank",
-
-        userId:user.id,
-
-        username:user.username,
-
-        quantity:qty,
-
-        amount:user.role === "admin" ? 0 : total,
-
-        description:`Lấy ngẫu nhiên ${qty} dữ liệu`,
-
-        data:rows.join("\n")
-
-    });
-
-
-    saveDB();
-
-    updateBalance();
-
-    renderBanks();
-
-    renderHistory();
-
-
-    sendTelegram(
-        `🏦 LẤY BANK RANDOM\n\n` +
-        `User: ${user.username}\n` +
-        `Số lượng: ${qty}\n` +
-        `Tiền: ${money(total)}`
-    );
-
-
-    showDataResult(
-        "Dữ liệu ngân hàng",
-        rows.join("\n")
-    );
+    if(adminSelect)
+        adminSelect.innerHTML =
+            html;
 
 }
 
 
 /* =========================================================
-   SEARCH NAME
+   BANK STOCK
 ========================================================= */
 
-function searchNames(){
+function getBankCount(bankName){
 
-    const keyword =
-        document
-        .getElementById("nameSearch")
-        .value
+    return banksData()
+        .filter(
+            x =>
+                normalizeBank(x.bank) ===
+                normalizeBank(bankName)
+        )
+        .length;
+
+}
+
+
+function banksData(){
+
+    return banks
+        .flatMap(
+            b =>
+                b.records
+                ? b.records
+                : []
+        );
+
+}
+
+
+/*
+ * Dữ liệu ngân hàng thực tế được lưu:
+ *
+ * banks = [
+ *   {
+ *      id,
+ *      name,
+ *      price,
+ *      records:[]
+ *   }
+ * ]
+ *
+ * Hàm này đảm bảo tương thích.
+ */
+
+function getBankRecords(bankName){
+
+    const bank =
+        banks.find(
+            b =>
+                normalizeBank(b.name) ===
+                normalizeBank(bankName)
+        );
+
+
+    return bank
+        ? (bank.records || [])
+        : [];
+
+}
+
+
+function normalizeBank(name){
+
+    return String(name || "")
         .trim()
         .toLowerCase();
 
-
-    const result =
-        document.getElementById("nameSearchResult");
+}
 
 
-    if(keyword.length < 4){
+function refreshBankPage(){
 
-        result.innerHTML =
-            '<div class="muted small">Nhập ít nhất 4 ký tự.</div>';
+    renderBankSelects();
 
-        return;
-
-    }
-
-
-    const matches =
-        banks.filter(b =>
-            String(b.name)
-            .toLowerCase()
-            .includes(keyword)
-        );
-
-
-    if(!matches.length){
-
-        result.innerHTML =
-            '<div class="empty">Không tìm thấy.</div>';
-
-        return;
-
-    }
-
-
-    const grouped = {};
-
-    matches.forEach(x => {
-
-        grouped[x.bank] =
-            (grouped[x.bank] || 0) + 1;
-
-    });
-
-
-    result.innerHTML = `
-
-        <div class="success-box">
-            Tìm thấy ${matches.length} dữ liệu.
-        </div>
-
-        ${Object.entries(grouped).map(([bank,count]) => `
-
-            <div class="bank-row">
-
-                <div>
-                    <div class="bank-name">
-                        ${escapeHtml(bank)}
-                    </div>
-
-                    <div class="muted small">
-                        ${count} kết quả
-                    </div>
-                </div>
-
-                <button class="btn"
-                        onclick="takeBankByName('${encodeURIComponent(bank)}','${encodeURIComponent(keyword)}')">
-                    Lấy
-                </button>
-
-            </div>
-
-        `).join("")}
-
-        <div class="field top-space">
-
-            <label>Số lượng muốn lấy</label>
-
-            <input id="nameTakeQty"
-                   type="number"
-                   min="1"
-                   value="1">
-
-        </div>
-
-    `;
+    renderBankStock();
 
 }
 
 
-function takeBankByName(encodedBank,encodedKeyword){
+function renderBankStock(){
 
-    const bank =
-        decodeURIComponent(encodedBank);
-
-    const keyword =
-        decodeURIComponent(encodedKeyword);
-
-    const user = currentUser();
-
-    const qty =
-        Math.max(
-            1,
-            parseInt(
-                document
-                .getElementById("nameTakeQty")
-                ?.value || 1
-            )
+    const el =
+        document.getElementById(
+            "bankStockList"
         );
 
 
-    const matches =
-        banks.filter(b =>
-            b.bank === bank &&
-            String(b.name)
-            .toLowerCase()
-            .includes(keyword.toLowerCase())
-        );
+    el.innerHTML =
+        banks.map(b => {
+
+            const count =
+                (b.records || []).length;
 
 
-    if(matches.length < qty){
+            return `
 
-        toast("Không đủ dữ liệu phù hợp.");
+                <div
+                    style="
+                    display:flex;
+                    justify-content:space-between;
+                    padding:10px 0;
+                    border-bottom:1px solid #21262d;
+                    "
+                >
 
-        return;
+                    <span>
+                        ${escapeHtml(b.name)}
+                    </span>
 
-    }
+                    <b>
+                        ${count.toLocaleString("vi-VN")}
+                    </b>
 
+                </div>
 
-    const total =
-        qty * Number(config.bankPrice);
+            `;
 
-
-    if(user.role !== "admin" &&
-       user.balance < total){
-
-        toast("Số dư không đủ.");
-
-        return;
-
-    }
-
-
-    const selected =
-        shuffle([...matches]).slice(0,qty);
-
-
-    if(user.role !== "admin"){
-
-        user.balance -= total;
-
-    }
-
-
-    selected.forEach(item => {
-
-        const index =
-            banks.findIndex(b => b.id === item.id);
-
-        if(index !== -1){
-
-            banks.splice(index,1);
-
-        }
-
-    });
-
-
-    const rows =
-        selected.map(x =>
-            `${x.stk}|${x.name}|${x.bank}`
-        );
-
-
-    addHistory({
-
-        type:"bank",
-
-        userId:user.id,
-
-        username:user.username,
-
-        quantity:qty,
-
-        amount:user.role === "admin" ? 0 : total,
-
-        description:`Tìm tên "${keyword}" - ${bank}`,
-
-        data:rows.join("\n")
-
-    });
-
-
-    saveDB();
-
-    updateBalance();
-
-    renderBanks();
-
-    renderHistory();
-
-    searchNames();
-
-
-    sendTelegram(
-        `🏦 LẤY BANK THEO TÊN\n\n` +
-        `User: ${user.username}\n` +
-        `Từ khóa: ${keyword}\n` +
-        `Bank: ${bank}\n` +
-        `SL: ${qty}`
-    );
-
-
-    showDataResult(
-        "Dữ liệu ngân hàng",
-        rows.join("\n")
-    );
+        }).join("");
 
 }
 
@@ -2599,12 +2452,35 @@ function takeBankByName(encodedBank,encodedKeyword){
    BANK IMPORT
 ========================================================= */
 
-function importBanks(){
+function importBankData(){
+
+    const bankName =
+        document
+        .getElementById("adminBankSelect")
+        .value;
+
 
     const text =
         document
-        .getElementById("bankImportText")
+        .getElementById("bankImport")
         .value.trim();
+
+
+    const price =
+        Number(
+            document
+            .getElementById("bankPrice")
+            .value
+        );
+
+
+    if(!bankName){
+
+        toast("Chọn ngân hàng.");
+
+        return;
+
+    }
 
 
     if(!text){
@@ -2616,178 +2492,1086 @@ function importBanks(){
     }
 
 
+    const bank =
+        banks.find(
+            b => b.name === bankName
+        );
+
+
+    if(!bank){
+
+        toast("Không tìm thấy ngân hàng.");
+
+        return;
+
+    }
+
+
+    bank.price =
+        price > 0
+        ? price
+        : config.defaultBankPrice;
+
+
+    if(!bank.records)
+        bank.records = [];
+
+
     const lines =
-        text.split(/\r?\n/);
+        text
+        .split(/\r?\n/)
+        .map(x => x.trim())
+        .filter(Boolean);
+
 
     let added = 0;
 
+
     lines.forEach(line => {
 
-        const parts =
-            line.split("|").map(x => x.trim());
+        const p =
+            line.split("|");
 
-        if(parts.length < 3){
 
-            return;
+        if(p.length >= 2){
+
+            const stk =
+                p[0].trim();
+
+
+            const name =
+                p[1].trim();
+
+
+            if(!stk || !name)
+                return;
+
+
+            const exists =
+                bank.records.some(
+                    r =>
+                        r.stk === stk &&
+                        r.name === name
+                );
+
+
+            if(!exists){
+
+                bank.records.push({
+
+                    id:uid("bankdata"),
+
+                    stk:stk,
+
+                    name:name,
+
+                    bank:bank.name,
+
+                    createdAt:new Date().toISOString()
+
+                });
+
+                added++;
+
+            }
 
         }
-
-
-        const stk = parts[0];
-
-        const name = parts[1];
-
-        const bank = parts.slice(2).join("|");
-
-
-        if(!stk || !name || !bank){
-
-            return;
-
-        }
-
-
-        banks.push({
-
-            id:uid("bank"),
-
-            stk,
-
-            name,
-
-            bank,
-
-            createdAt:new Date().toISOString()
-
-        });
-
-        added++;
 
     });
 
 
     saveDB();
 
+
     document
-        .getElementById("bankImportText")
+        .getElementById("bankImport")
         .value = "";
 
-    renderBanks();
 
     renderAdminBanks();
 
-    renderDashboard();
-
-    toast(`Đã nạp ${added} dữ liệu.`);
-
-}
+    renderBankStock();
 
 
-function saveBankPrice(){
-
-    const price =
-        Number(
-            document
-            .getElementById("adminBankPrice")
-            .value
-        );
+    toast(
+        `Đã nạp ${added} dữ liệu vào ${bankName}.`
+    );
 
 
-    if(price < 0){
-
-        toast("Giá không hợp lệ.");
-
-        return;
-
-    }
-
-
-    config.bankPrice = price;
-
-    saveDB();
-
-    renderBanks();
-
-    toast("Đã lưu giá.");
+    sendTelegram(
+        `📥 NẠP KHO NGÂN HÀNG\n` +
+        `Ngân hàng: ${bankName}\n` +
+        `Số lượng: ${added}`
+    );
 
 }
 
 
 /* =========================================================
-   ACC PRODUCTS
+   ADMIN BANK
 ========================================================= */
 
-function createProduct(){
+function renderAdminBanks(){
 
-    const name =
-        document
-        .getElementById("newProductName")
-        .value
-        .trim();
+    renderBankSelects();
 
-    const price =
-        Number(
-            document
-            .getElementById("newProductPrice")
-            .value
+
+    const tbody =
+        document.getElementById(
+            "adminBankTable"
         );
 
-    const comboPrice =
-        Number(
-            document
-            .getElementById("newProductComboPrice")
-            .value
-        ) || price;
 
-    const description =
+    tbody.innerHTML =
+        banks.map(b => {
+
+            const count =
+                (b.records || []).length;
+
+
+            return `
+
+                <tr>
+
+                    <td>
+                        ${escapeHtml(b.name)}
+                    </td>
+
+                    <td>
+                        ${count.toLocaleString("vi-VN")}
+                    </td>
+
+                    <td>
+                        ${money(b.price)}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="btn small orange"
+                            onclick="clearBank('${b.id}')"
+                        >
+                            Xóa kho
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
+
+function clearBank(id){
+
+    const bank =
+        banks.find(
+            b => b.id === id
+        );
+
+
+    if(!bank)
+        return;
+
+
+    if(
+        !confirm(
+            `Xóa toàn bộ dữ liệu ${bank.name}?`
+        )
+    )
+        return;
+
+
+    bank.records = [];
+
+    saveDB();
+
+    renderAdminBanks();
+
+    toast("Đã xóa kho.");
+
+}
+
+
+/* =========================================================
+   NAME SEARCH
+========================================================= */
+
+function handleNameSearch(){
+
+    const input =
+        document.getElementById(
+            "bankSearchName"
+        );
+
+
+    const result =
+        document.getElementById(
+            "bankSearchResult"
+        );
+
+
+    const value =
+        input.value.trim();
+
+
+    if(value.length < 4){
+
+        result.innerHTML = value
+            ? `
+                <div class="card"
+                     style="margin-bottom:18px;color:#8b949e">
+                    Nhập ít nhất 4 ký tự để tìm tên.
+                </div>
+              `
+            : "";
+
+        selectedName = "";
+
+        return;
+
+    }
+
+
+    const matches = [];
+
+
+    banks.forEach(bank => {
+
+        (bank.records || []).forEach(record => {
+
+            if(
+                normalizeText(record.name)
+                .includes(
+                    normalizeText(value)
+                )
+            ){
+
+                matches.push({
+
+                    bankId:bank.id,
+
+                    bankName:bank.name,
+
+                    record:record
+
+                });
+
+            }
+
+        });
+
+    });
+
+
+    selectedName = value;
+
+
+    if(!matches.length){
+
+        result.innerHTML = `
+            <div class="card"
+                 style="margin-bottom:18px">
+                Không tìm thấy dữ liệu phù hợp.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    const grouped = {};
+
+
+    matches.forEach(x => {
+
+        if(!grouped[x.bankName])
+            grouped[x.bankName] = 0;
+
+        grouped[x.bankName]++;
+
+    });
+
+
+    result.innerHTML = `
+
+        <div class="card"
+             style="margin-bottom:18px">
+
+            <div style="font-weight:800;margin-bottom:12px">
+                Tìm thấy ${matches.length} dữ liệu
+            </div>
+
+            ${Object.entries(grouped)
+                .map(
+                    ([bank,count]) =>
+                    `
+                    <div
+                        style="
+                        display:flex;
+                        justify-content:space-between;
+                        padding:9px 0;
+                        border-bottom:1px solid #21262d;
+                        "
+                    >
+
+                        <span>
+                            ${escapeHtml(bank)}
+                        </span>
+
+                        <b>${count}</b>
+
+                    </div>
+                    `
+                ).join("")}
+
+            <div style="margin-top:14px">
+
+                <button
+                    class="btn blue"
+                    onclick="openNameTake()"
+                >
+                    Lấy theo tên này
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   BANK TAKE
+========================================================= */
+
+function openBankTake(){
+
+    const bankName =
         document
-        .getElementById("newProductDescription")
-        .value
-        .trim();
+        .getElementById("bankSelect")
+        .value;
 
 
-    if(!name){
+    if(!bankName){
 
-        toast("Nhập tên sản phẩm.");
-
-        return;
-
-    }
-
-
-    if(price < 0){
-
-        toast("Giá không hợp lệ.");
+        toast("Hãy chọn ngân hàng.");
 
         return;
 
     }
 
 
-    if(products.some(p =>
-        p.name.toLowerCase() === name.toLowerCase()
-    )){
+    selectedBank = bankName;
 
-        toast("Tên sản phẩm đã tồn tại.");
+    bankTakeMode = "bank";
+
+
+    const bank =
+        banks.find(
+            b => b.name === bankName
+        );
+
+
+    const count =
+        bank
+        ? (bank.records || []).length
+        : 0;
+
+
+    document
+        .getElementById("bankTakeInfo")
+        .innerHTML =
+        `
+        Ngân hàng:
+        <b>${escapeHtml(bankName)}</b>
+        <br>
+        Còn:
+        <b>${count}</b>
+        dữ liệu
+        `;
+
+
+    document
+        .getElementById("bankTakeQuantity")
+        .value = 1;
+
+
+    updateBankTakePrice();
+
+
+    document
+        .getElementById("bankTakeModal")
+        .classList.add("show");
+
+}
+
+
+function openNameTake(){
+
+    if(!selectedName){
+
+        toast("Chưa chọn tên.");
 
         return;
 
     }
 
 
-    products.push({
+    bankTakeMode = "name";
 
-        id:uid("prod"),
 
-        name,
+    document
+        .getElementById("bankTakeInfo")
+        .innerHTML =
+        `
+        Tìm tên:
+        <b>${escapeHtml(selectedName)}</b>
+        <br>
+        Chỉ lấy dữ liệu khớp tên này.
+        `;
 
-        description,
 
-        price,
+    document
+        .getElementById("bankTakeQuantity")
+        .value = 1;
 
-        comboPrice,
 
-        active:true,
+    updateBankTakePrice();
+
+
+    document
+        .getElementById("bankTakeModal")
+        .classList.add("show");
+
+}
+
+
+function updateBankTakePrice(){
+
+    const qty =
+        Math.max(
+            1,
+            Number(
+                document
+                .getElementById(
+                    "bankTakeQuantity"
+                )
+                .value
+            ) || 1
+        );
+
+
+    let price =
+        config.defaultBankPrice;
+
+
+    if(
+        bankTakeMode === "bank" &&
+        selectedBank
+    ){
+
+        const bank =
+            banks.find(
+                b =>
+                    b.name ===
+                    selectedBank
+            );
+
+
+        if(bank)
+            price =
+                Number(bank.price)
+                || price;
+
+    }
+
+
+    document
+        .getElementById("bankTakePrice")
+        .textContent =
+        `Thành tiền: ${money(price * qty)}`;
+
+}
+
+
+document.addEventListener(
+    "input",
+    function(e){
+
+        if(
+            e.target.id ===
+            "bankTakeQuantity"
+        ){
+
+            updateBankTakePrice();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CONFIRM BANK TAKE
+========================================================= */
+
+function confirmBankTake(){
+
+    if(
+        !currentUser ||
+        currentUser.role !== "admin" &&
+        currentUser.disabled
+    ){
+
+        toast("Không thể thực hiện.");
+
+        return;
+
+    }
+
+
+    const qty =
+        Math.max(
+            1,
+            Number(
+                document
+                .getElementById(
+                    "bankTakeQuantity"
+                ).value
+            ) || 1
+        );
+
+
+    let records = [];
+
+
+    if(bankTakeMode === "bank"){
+
+        const bank =
+            banks.find(
+                b =>
+                    b.name ===
+                    selectedBank
+            );
+
+
+        if(!bank){
+
+            toast("Không tìm thấy ngân hàng.");
+
+            return;
+
+        }
+
+
+        records =
+            shuffle(
+                [...(bank.records || [])]
+            ).slice(0,qty);
+
+
+        if(records.length < qty){
+
+            toast("Kho không đủ dữ liệu.");
+
+            return;
+
+        }
+
+
+        const price =
+            Number(bank.price)
+            || config.defaultBankPrice;
+
+
+        const total =
+            price * qty;
+
+
+        if(currentUser.role !== "admin"){
+
+            if(
+                Number(currentUser.balance) <
+                total
+            ){
+
+                toast("Số dư không đủ.");
+
+                return;
+
+            }
+
+
+            currentUser.balance -= total;
+
+        }
+
+
+        const ids =
+            new Set(
+                records.map(
+                    r => r.id
+                )
+            );
+
+
+        bank.records =
+            (bank.records || [])
+            .filter(
+                r => !ids.has(r.id)
+            );
+
+
+        finishBankTransaction(
+            records,
+            selectedBank,
+            total,
+            qty
+        );
+
+    }else{
+
+        const matches = [];
+
+
+        banks.forEach(bank => {
+
+            (bank.records || [])
+                .forEach(record => {
+
+                    if(
+                        normalizeText(record.name)
+                        .includes(
+                            normalizeText(
+                                selectedName
+                            )
+                        )
+                    ){
+
+                        matches.push({
+
+                            bank:bank,
+
+                            record:record
+
+                        });
+
+                    }
+
+                });
+
+        });
+
+
+        const picked =
+            shuffle(matches)
+            .slice(0,qty);
+
+
+        if(picked.length < qty){
+
+            toast("Không đủ dữ liệu theo tên.");
+
+            return;
+
+        }
+
+
+        let total = 0;
+
+
+        picked.forEach(x => {
+
+            total +=
+                Number(x.bank.price)
+                || config.defaultBankPrice;
+
+        });
+
+
+        if(currentUser.role !== "admin"){
+
+            if(
+                Number(currentUser.balance) <
+                total
+            ){
+
+                toast("Số dư không đủ.");
+
+                return;
+
+            }
+
+
+            currentUser.balance -= total;
+
+        }
+
+
+        picked.forEach(x => {
+
+            x.bank.records =
+                x.bank.records.filter(
+                    r =>
+                        r.id !==
+                        x.record.id
+                );
+
+        });
+
+
+        records =
+            picked.map(
+                x => x.record
+            );
+
+
+        finishBankTransaction(
+            records,
+            "Theo tên: " + selectedName,
+            total,
+            qty
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   FINISH BANK
+========================================================= */
+
+function finishBankTransaction(
+    records,
+    bankName,
+    total,
+    qty
+){
+
+    saveDB();
+
+    const transaction = {
+
+        id:uid("history"),
+
+        type:"bank",
+
+        userId:currentUser.id,
+
+        username:currentUser.username,
+
+        bank:bankName,
+
+        quantity:qty,
+
+        amount:
+            currentUser.role === "admin"
+            ? 0
+            : total,
+
+        data:records,
+
+        createdAt:new Date().toISOString()
+
+    };
+
+
+    history.unshift(transaction);
+
+
+    saveDB();
+
+
+    closeModal("bankTakeModal");
+
+
+    updateHeaderBalance();
+
+    renderBankStock();
+
+
+    let text =
+        `🏦 LẤY DỮ LIỆU NGÂN HÀNG\n` +
+        `👤 ${currentUser.username}\n` +
+        `🏦 ${bankName}\n` +
+        `📦 Số lượng: ${qty}\n` +
+        `💰 ${money(total)}`;
+
+
+    sendTelegram(text);
+
+
+    toast(
+        currentUser.role === "admin"
+        ? "Đã lấy dữ liệu."
+        : "Lấy dữ liệu thành công."
+    );
+
+
+    showDataResult(records);
+
+}
+
+
+/* =========================================================
+   RANDOM BANK
+========================================================= */
+
+function takeRandomBank(){
+
+    const all = [];
+
+
+    banks.forEach(bank => {
+
+        (bank.records || [])
+            .forEach(record => {
+
+                all.push({
+
+                    bank:bank,
+
+                    record:record
+
+                });
+
+            });
+
+    });
+
+
+    if(!all.length){
+
+        toast("Kho ngân hàng đang trống.");
+
+        return;
+
+    }
+
+
+    selectedBank = "";
+
+    bankTakeMode = "random";
+
+
+    document
+        .getElementById("bankTakeInfo")
+        .innerHTML =
+        `
+        Lấy ngẫu nhiên trên toàn bộ kho.
+        <br>
+        Còn:
+        <b>${all.length}</b>
+        dữ liệu
+        `;
+
+
+    document
+        .getElementById("bankTakeQuantity")
+        .value = 1;
+
+
+    document
+        .getElementById("bankTakeModal")
+        .classList.add("show");
+
+
+    /*
+     * Tạm dùng hàm riêng để xử lý random.
+     */
+
+    document
+        .getElementById("bankTakeModal")
+        .dataset.random = "1";
+
+
+    updateRandomPrice();
+
+}
+
+
+function updateRandomPrice(){
+
+    const qty =
+        Math.max(
+            1,
+            Number(
+                document
+                .getElementById(
+                    "bankTakeQuantity"
+                ).value
+            ) || 1
+        );
+
+
+    const avg =
+        Number(config.defaultBankPrice);
+
+
+    document
+        .getElementById("bankTakePrice")
+        .textContent =
+        `Giá dự kiến từ ${money(avg * qty)}`;
+
+}
+
+
+document.addEventListener(
+    "click",
+    function(e){
+
+        if(
+            e.target.closest(
+                '[onclick="confirmBankTake()"]'
+            )
+        ){
+
+            if(
+                document
+                .getElementById(
+                    "bankTakeModal"
+                )
+                .dataset.random === "1"
+            ){
+
+                e.preventDefault();
+
+                confirmRandomBank();
+
+            }
+
+        }
+
+    }
+);
+
+
+function confirmRandomBank(){
+
+    const qty =
+        Math.max(
+            1,
+            Number(
+                document
+                .getElementById(
+                    "bankTakeQuantity"
+                ).value
+            ) || 1
+        );
+
+
+    const all = [];
+
+
+    banks.forEach(bank => {
+
+        (bank.records || [])
+            .forEach(record => {
+
+                all.push({
+
+                    bank:bank,
+
+                    record:record
+
+                });
+
+            });
+
+    });
+
+
+    const picked =
+        shuffle(all)
+        .slice(0,qty);
+
+
+    if(picked.length < qty){
+
+        toast("Kho không đủ dữ liệu.");
+
+        return;
+
+    }
+
+
+    let total = 0;
+
+
+    picked.forEach(x => {
+
+        total +=
+            Number(x.bank.price)
+            || config.defaultBankPrice;
+
+    });
+
+
+    if(currentUser.role !== "admin"){
+
+        if(
+            Number(currentUser.balance) <
+            total
+        ){
+
+            toast("Số dư không đủ.");
+
+            return;
+
+        }
+
+
+        currentUser.balance -= total;
+
+    }
+
+
+    picked.forEach(x => {
+
+        x.bank.records =
+            x.bank.records.filter(
+                r =>
+                    r.id !==
+                    x.record.id
+            );
+
+    });
+
+
+    const records =
+        picked.map(
+            x => x.record
+        );
+
+
+    history.unshift({
+
+        id:uid("history"),
+
+        type:"bank",
+
+        userId:currentUser.id,
+
+        username:currentUser.username,
+
+        bank:"Ngẫu nhiên",
+
+        quantity:qty,
+
+        amount:
+            currentUser.role === "admin"
+            ? 0
+            : total,
+
+        data:records,
 
         createdAt:new Date().toISOString()
 
@@ -2797,544 +3581,123 @@ function createProduct(){
     saveDB();
 
 
-    document
-        .getElementById("newProductName")
-        .value = "";
+    closeModal("bankTakeModal");
 
-    document
-        .getElementById("newProductPrice")
-        .value = "";
 
     document
-        .getElementById("newProductComboPrice")
-        .value = "";
-
-    document
-        .getElementById("newProductDescription")
-        .value = "";
+        .getElementById(
+            "bankTakeModal"
+        )
+        .dataset.random = "";
 
 
-    renderAdminProducts();
+    updateHeaderBalance();
 
-    renderProducts();
+    renderBankStock();
 
-    renderDashboard();
 
-    toast(`Đã tạo sản phẩm ${name}.`);
+    sendTelegram(
+        `🎲 LẤY NGẪU NHIÊN\n` +
+        `👤 ${currentUser.username}\n` +
+        `📦 ${qty}\n` +
+        `💰 ${money(total)}`
+    );
+
+
+    showDataResult(records);
 
 }
 
 
 /* =========================================================
-   ADMIN PRODUCT RENDER
+   SHOW DATA
 ========================================================= */
 
-function renderAdminProducts(){
+function showDataResult(records){
+
+    const text =
+        records
+        .map(
+            r =>
+                `${r.stk}|${r.name}|${r.bank}`
+        )
+        .join("\n");
 
-    const box =
-        document.getElementById("adminProductsList");
-
-
-    if(!products.length){
-
-        box.innerHTML =
-            '<div class="empty">Chưa có sản phẩm ACC.</div>';
-
-        return;
-
-    }
-
-
-    box.innerHTML =
-        products.map(product => {
-
-            const stock =
-                inventory.filter(
-                    x => x.productId === product.id
-                ).length;
-
-
-            return `
-
-                <div class="product-admin" style="margin-bottom:12px;">
-
-                    <div class="admin-product-header">
-
-                        <div>
-
-                            <div class="product-name">
-                                ${escapeHtml(product.name)}
-                            </div>
-
-                            <div class="muted small">
-                                ${escapeHtml(product.description || "Không có mô tả")}
-                            </div>
-
-                        </div>
-
-                        <div class="badge ${stock ? "badge-green" : "badge-red"}">
-                            Kho: ${stock}
-                        </div>
-
-                    </div>
-
-
-                    <div style="margin-top:10px;">
-
-                        <span class="badge badge-yellow">
-                            Lẻ: ${money(product.price)}
-                        </span>
-
-                        <span class="badge badge-yellow">
-                            Combo: ${money(product.comboPrice || product.price)}
-                        </span>
-
-                    </div>
-
-
-                    <div class="actions" style="margin-top:12px;">
-
-                        <button class="btn btn-green"
-                                onclick="openInventoryModal('${product.id}')">
-                            Nạp kho
-                        </button>
-
-                        <button class="btn btn-blue"
-                                onclick="openEditProduct('${product.id}')">
-                            Sửa
-                        </button>
-
-                        <button class="btn btn-dark"
-                                onclick="viewInventory('${product.id}')">
-                            Xem kho
-                        </button>
-
-                        <button class="btn btn-red"
-                                onclick="deleteProduct('${product.id}')">
-                            Xóa
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-        }).join("");
-
-}
-
-
-/* =========================================================
-   EDIT PRODUCT
-========================================================= */
-
-function openEditProduct(productId){
-
-    const product =
-        products.find(p => p.id === productId);
-
-    if(!product){
-
-        return;
-
-    }
-
-
-    document
-        .getElementById("editProductId")
-        .value = product.id;
-
-    document
-        .getElementById("editProductName")
-        .value = product.name;
-
-    document
-        .getElementById("editProductPrice")
-        .value = product.price;
-
-    document
-        .getElementById("editProductComboPrice")
-        .value = product.comboPrice || product.price;
-
-    document
-        .getElementById("editProductDescription")
-        .value = product.description || "";
-
-
-    document
-        .getElementById("editProductModal")
-        .classList.remove("hidden");
-
-}
-
-
-function closeEditProduct(){
-
-    document
-        .getElementById("editProductModal")
-        .classList.add("hidden");
-
-}
-
-
-function saveProductEdit(){
-
-    const id =
-        document
-        .getElementById("editProductId")
-        .value;
-
-    const product =
-        products.find(p => p.id === id);
-
-    if(!product){
-
-        return;
-
-    }
-
-
-    const name =
-        document
-        .getElementById("editProductName")
-        .value
-        .trim();
-
-    const price =
-        Number(
-            document
-            .getElementById("editProductPrice")
-            .value
-        );
-
-    const comboPrice =
-        Number(
-            document
-            .getElementById("editProductComboPrice")
-            .value
-        ) || price;
-
-    const description =
-        document
-        .getElementById("editProductDescription")
-        .value
-        .trim();
-
-
-    if(!name){
-
-        toast("Tên sản phẩm không được trống.");
-
-        return;
-
-    }
-
-
-    product.name = name;
-
-    product.price = price;
-
-    product.comboPrice = comboPrice;
-
-    product.description = description;
-
-
-    saveDB();
-
-    closeEditProduct();
-
-    renderAdminProducts();
-
-    renderProducts();
-
-    toast("Đã cập nhật sản phẩm.");
-
-}
-
-
-/* =========================================================
-   DELETE PRODUCT
-========================================================= */
-
-function deleteProduct(productId){
-
-    const product =
-        products.find(p => p.id === productId);
-
-    if(!product){
-
-        return;
-
-    }
-
-
-    const stock =
-        inventory.filter(
-            x => x.productId === productId
-        ).length;
-
-
-    const message =
-        stock > 0
-
-        ? `Sản phẩm ${product.name} đang còn ${stock} ACC. Xóa sẽ xóa luôn kho. Tiếp tục?`
-
-        : `Xóa sản phẩm ${product.name}?`;
-
-
-    if(!confirm(message)){
-
-        return;
-
-    }
-
-
-    products =
-        products.filter(p => p.id !== productId);
-
-    inventory =
-        inventory.filter(x => x.productId !== productId);
-
-
-    saveDB();
-
-    renderAdminProducts();
-
-    renderProducts();
-
-    renderDashboard();
-
-    toast("Đã xóa sản phẩm.");
-
-}
-
-
-/* =========================================================
-   INVENTORY MODAL
-========================================================= */
-
-function openInventoryModal(productId){
-
-    const product =
-        products.find(p => p.id === productId);
-
-    if(!product){
-
-        return;
-
-    }
-
-
-    document
-        .getElementById("inventoryModal")
-        .dataset.productId = productId;
-
-
-    document
-        .getElementById("inventoryTitle")
-        .textContent = "Nạp kho " + product.name;
-
-
-    document
-        .getElementById("inventoryInfo")
-        .textContent =
-            `Kho hiện tại: ${
-                inventory.filter(x => x.productId === productId).length
-            } ACC`;
-
-
-    document
-        .getElementById("inventoryText")
-        .value = "";
-
-
-    renderInventoryModal();
-
-    document
-        .getElementById("inventoryModal")
-        .classList.remove("hidden");
-
-}
-
-
-function closeInventoryModal(){
-
-    document
-        .getElementById("inventoryModal")
-        .classList.add("hidden");
-
-}
-
-
-function renderInventoryModal(){
 
     const modal =
-        document.getElementById("inventoryModal");
-
-    const productId =
-        modal.dataset.productId;
+        document.createElement("div");
 
 
-    const rows =
-        inventory.filter(
-            x => x.productId === productId
-        );
+    modal.className = "modal show";
 
 
-    const box =
-        document.getElementById("inventoryList");
+    modal.innerHTML = `
 
+        <div class="modal-box">
 
-    if(!rows.length){
+            <div class="modal-title">
+                Dữ liệu đã lấy
+            </div>
 
-        box.innerHTML =
-            '<div class="empty">Kho đang trống.</div>';
+            <textarea
+                id="resultData"
+                style="min-height:260px"
+            >${escapeHtml(text)}</textarea>
 
-        return;
+            <div class="modal-actions">
 
-    }
+                <button
+                    class="btn blue"
+                    onclick="copyResult()"
+                >
+                    Sao chép
+                </button>
 
+                <button
+                    class="btn gray"
+                    onclick="this.closest('.modal').remove()"
+                >
+                    Đóng
+                </button>
 
-    box.innerHTML = `
-
-        <div class="muted small"
-             style="margin-bottom:8px;">
-            Có ${rows.length} ACC
-        </div>
-
-        <div class="code-box">
-
-            ${rows.map(x =>
-                `${escapeHtml(x.username)}|${escapeHtml(x.password)}`
-            ).join("\n")}
+            </div>
 
         </div>
 
     `;
 
-}
 
-
-function importInventory(){
-
-    const modal =
-        document.getElementById("inventoryModal");
-
-    const productId =
-        modal.dataset.productId;
-
-
-    const product =
-        products.find(p => p.id === productId);
-
-    if(!product){
-
-        toast("Không tìm thấy sản phẩm.");
-
-        return;
-
-    }
-
-
-    const text =
-        document
-        .getElementById("inventoryText")
-        .value
-        .trim();
-
-
-    if(!text){
-
-        toast("Chưa có dữ liệu.");
-
-        return;
-
-    }
-
-
-    const lines =
-        text.split(/\r?\n/);
-
-    let added = 0;
-
-    lines.forEach(line => {
-
-        const parts =
-            line.split("|");
-
-
-        if(parts.length < 2){
-
-            return;
-
-        }
-
-
-        const username =
-            parts.shift().trim();
-
-        const password =
-            parts.join("|").trim();
-
-
-        if(!username || !password){
-
-            return;
-
-        }
-
-
-        inventory.push({
-
-            id:uid("acc"),
-
-            productId,
-
-            username,
-
-            password,
-
-            createdAt:new Date().toISOString()
-
-        });
-
-        added++;
-
-    });
-
-
-    saveDB();
-
-    document
-        .getElementById("inventoryText")
-        .value = "";
-
-
-    renderInventoryModal();
-
-    renderAdminProducts();
-
-    renderProducts();
-
-    renderDashboard();
-
-
-    toast(`Đã nạp ${added} ACC vào kho ${product.name}.`);
-
-
-    checkLowStock(product);
+    document.body.appendChild(modal);
 
 }
 
 
-/* =========================================================
-   VIEW INVENTORY
-========================================================= */
+function copyResult(){
 
-function viewInventory(productId){
+    const el =
+        document.getElementById(
+            "resultData"
+        );
 
-    openInventoryModal(productId);
+
+    navigator.clipboard
+        .writeText(el.value)
+        .then(
+            () => toast("Đã sao chép.")
+        )
+        .catch(
+            () => {
+
+                el.select();
+
+                document.execCommand(
+                    "copy"
+                );
+
+                toast("Đã sao chép.");
+
+            }
+        );
 
 }
 
@@ -3343,31 +3706,42 @@ function viewInventory(productId){
    USER PRODUCTS
 ========================================================= */
 
-function renderProducts(){
+function renderUserProducts(){
 
-    const box =
-        document.getElementById("userProducts");
+    const grid =
+        document.getElementById(
+            "userProductGrid"
+        );
+
 
     const active =
-        products.filter(p => p.active !== false);
+        products.filter(
+            p =>
+                p.active !== false
+        );
 
 
     if(!active.length){
 
-        box.innerHTML =
-            '<div class="empty">Chưa có sản phẩm ACC.</div>';
+        grid.innerHTML = `
+            <div class="card">
+                Chưa có sản phẩm ACC.
+            </div>
+        `;
 
         return;
 
     }
 
 
-    box.innerHTML =
+    grid.innerHTML =
         active.map(product => {
 
             const stock =
                 inventory.filter(
-                    x => x.productId === product.id
+                    x =>
+                        x.productId ===
+                        product.id
                 ).length;
 
 
@@ -3377,63 +3751,63 @@ function renderProducts(){
 
                     <div class="product-top">
 
-                        <div>
+                        <div class="product-name">
+                            ${escapeHtml(product.name)}
+                        </div>
 
-                            <div class="product-name">
-                                ${escapeHtml(product.name)}
+                        <div class="product-desc">
+                            ${escapeHtml(product.description || "")}
+                        </div>
+
+                        <div class="price-row">
+
+                            <div class="price-box">
+
+                                <div class="price-label">
+                                    GIÁ LẺ
+                                </div>
+
+                                <div class="price">
+                                    ${money(product.price)}
+                                </div>
+
                             </div>
 
-                            <div class="product-description">
-                                ${escapeHtml(
-                                    product.description ||
-                                    "ACC đang có sẵn trong kho."
-                                )}
+                            <div class="price-box">
+
+                                <div class="price-label">
+                                    GIÁ COMBO
+                                </div>
+
+                                <div class="price">
+                                    ${money(product.comboPrice)}
+                                </div>
+
                             </div>
 
                         </div>
 
-                        <div class="product-price">
-                            ${money(product.price)}
+                        <div class="stock">
+                            Kho: ${stock}
                         </div>
 
                     </div>
 
+                    <div class="product-actions">
 
-                    <div>
-
-                        <span class="badge ${stock ? "badge-green" : "badge-red"}">
-                            Còn ${stock} ACC
-                        </span>
-
-                        <span class="badge badge-yellow">
-                            Combo ${money(product.comboPrice || product.price)}
-                        </span>
-
-                    </div>
-
-
-                    <div class="stock">
-
-                        <div>
-                            Giá lẻ:
-                            <b>${money(product.price)}</b>
-                        </div>
-
-                        <div>
-                            Giá combo:
-                            <b>${money(product.comboPrice || product.price)}</b>
-                        </div>
+                        <button
+                            class="btn blue"
+                            ${
+                                stock <= 0
+                                ? "disabled"
+                                : ""
+                            }
+                            onclick="openBuyAcc('${product.id}')"
+                        >
+                            Mua ACC
+                        </button>
 
                     </div>
-
-
-                    <button class="btn btn-full"
-                            ${stock <= 0 ? "disabled" : ""}
-                            onclick="openBuyModal('${product.id}')">
-
-                        ${stock > 0 ? "Mua ACC " + escapeHtml(product.name) : "Hết hàng"}
-
-                    </button>
 
                 </div>
 
@@ -3445,24 +3819,27 @@ function renderProducts(){
 
 
 /* =========================================================
-   BUY MODAL
+   BUY ACC
 ========================================================= */
 
-function openBuyModal(productId){
+function openBuyAcc(productId){
 
     const product =
-        products.find(p => p.id === productId);
+        products.find(
+            p =>
+                p.id === productId
+        );
 
-    if(!product){
 
+    if(!product)
         return;
-
-    }
 
 
     const stock =
         inventory.filter(
-            x => x.productId === productId
+            x =>
+                x.productId ===
+                product.id
         ).length;
 
 
@@ -3476,600 +3853,376 @@ function openBuyModal(productId){
 
 
     document
-        .getElementById("buyProductId")
-        .value = productId;
+        .getElementById(
+            "buyAccProductId"
+        )
+        .value =
+        product.id;
 
 
     document
-        .getElementById("buyModalTitle")
-        .textContent =
-            "Mua " + product.name;
-
-
-    document
-        .getElementById("buyModalInfo")
-        .textContent =
-            `Kho còn ${stock} ACC`;
-
-
-    document
-        .getElementById("buyQty")
+        .getElementById(
+            "buyAccQuantity"
+        )
         .value = 1;
 
 
     document
-        .getElementById("buyMode")
+        .getElementById(
+            "buyAccMode"
+        )
         .value = "single";
 
 
-    updateBuyPreview();
+    document
+        .getElementById(
+            "buyAccInfo"
+        )
+        .innerHTML =
+        `
+        <b>${escapeHtml(product.name)}</b>
+        <br>
+        Còn ${stock} ACC
+        `;
+
+
+    updateBuyAccPrice();
 
 
     document
-        .getElementById("buyModal")
-        .classList.remove("hidden");
+        .getElementById(
+            "buyAccModal"
+        )
+        .classList.add("show");
 
 }
 
 
-function closeBuyModal(){
+function updateBuyAccPrice(){
 
-    document
-        .getElementById("buyModal")
-        .classList.add("hidden");
+    const id =
+        document
+        .getElementById(
+            "buyAccProductId"
+        ).value;
 
-}
-
-
-function updateBuyPreview(){
 
     const product =
         products.find(
-            p =>
-            p.id ===
-            document
-            .getElementById("buyProductId")
-            .value
+            p => p.id === id
         );
 
 
-    if(!product){
-
+    if(!product)
         return;
-
-    }
 
 
     const mode =
         document
-        .getElementById("buyMode")
-        .value;
+        .getElementById(
+            "buyAccMode"
+        ).value;
+
 
     const qty =
         Math.max(
             1,
-            parseInt(
+            Number(
                 document
-                .getElementById("buyQty")
-                .value || 1
-            )
+                .getElementById(
+                    "buyAccQuantity"
+                ).value
+            ) || 1
         );
 
 
-    const unitPrice =
+    const price =
         mode === "combo"
+        ? Number(product.comboPrice)
+        : Number(product.price);
 
-        ? Number(product.comboPrice || product.price)
 
+    document
+        .getElementById(
+            "buyAccTotal"
+        )
+        .textContent =
+        `Thành tiền: ${money(price * qty)}`;
+
+}
+
+
+function confirmBuyAcc(){
+
+    const id =
+        document
+        .getElementById(
+            "buyAccProductId"
+        ).value;
+
+
+    const product =
+        products.find(
+            p => p.id === id
+        );
+
+
+    if(!product)
+        return;
+
+
+    const mode =
+        document
+        .getElementById(
+            "buyAccMode"
+        ).value;
+
+
+    const qty =
+        Math.max(
+            1,
+            Number(
+                document
+                .getElementById(
+                    "buyAccQuantity"
+                ).value
+            ) || 1
+        );
+
+
+    const price =
+        mode === "combo"
+        ? Number(product.comboPrice)
         : Number(product.price);
 
 
     const total =
-        qty * unitPrice;
-
-
-    document
-        .getElementById("buyPricePreview")
-        .textContent =
-            `Thành tiền: ${money(total)}`;
-
-}
-
-
-/* =========================================================
-   CONFIRM BUY ACC
-========================================================= */
-
-function confirmBuyAcc(){
-
-    const user = currentUser();
-
-    const productId =
-        document
-        .getElementById("buyProductId")
-        .value;
-
-    const mode =
-        document
-        .getElementById("buyMode")
-        .value;
-
-    const qty =
-        Math.max(
-            1,
-            parseInt(
-                document
-                .getElementById("buyQty")
-                .value || 1
-            )
-        );
-
-
-    const product =
-        products.find(
-            p => p.id === productId
-        );
-
-
-    if(!product){
-
-        toast("Không tìm thấy sản phẩm.");
-
-        return;
-
-    }
+        price * qty;
 
 
     const stock =
         inventory.filter(
-            x => x.productId === productId
+            x =>
+                x.productId ===
+                product.id
         );
 
 
     if(stock.length < qty){
 
-        toast(
-            `Kho ${product.name} chỉ còn ${stock.length} ACC.`
-        );
+        toast("Kho không đủ ACC.");
 
         return;
 
     }
 
 
-    const unitPrice =
-        mode === "combo"
+    if(
+        Number(currentUser.balance) <
+        total
+    ){
 
-        ? Number(product.comboPrice || product.price)
-
-        : Number(product.price);
-
-
-    const total =
-        qty * unitPrice;
-
-
-    if(user.role !== "admin" &&
-       Number(user.balance) < total){
-
-        toast(
-            `Số dư không đủ. Cần ${money(total)}.`
-        );
+        toast("Số dư không đủ.");
 
         return;
 
     }
 
 
-    const selected =
-        shuffle([...stock]).slice(0,qty);
+    currentUser.balance -= total;
 
 
-    if(user.role !== "admin"){
-
-        user.balance =
-            Number(user.balance) - total;
-
-    }
+    const bought =
+        stock.slice(0,qty);
 
 
-    selected.forEach(acc => {
-
-        const index =
-            inventory.findIndex(
-                x => x.id === acc.id
-            );
-
-        if(index !== -1){
-
-            inventory.splice(index,1);
-
-        }
-
-    });
+    const boughtIds =
+        new Set(
+            bought.map(
+                x => x.id
+            )
+        );
 
 
-    const data =
-        selected.map(
-            x => `${x.username}|${x.password}`
-        ).join("\n");
+    /*
+     * QUAN TRỌNG:
+     * chỉ xóa kho của product đang mua.
+     */
+
+    inventory =
+        inventory.filter(
+            x =>
+                !boughtIds.has(x.id)
+        );
 
 
-    addHistory({
+    history.unshift({
+
+        id:uid("history"),
 
         type:"acc",
 
-        userId:user.id,
+        userId:currentUser.id,
 
-        username:user.username,
+        username:currentUser.username,
 
         productId:product.id,
 
         productName:product.name,
 
-        mode,
+        mode:mode,
 
         quantity:qty,
 
-        amount:user.role === "admin" ? 0 : total,
+        amount:total,
 
-        description:
-            `Mua ${qty} ACC ${product.name} - ${
-                mode === "combo" ? "combo" : "lẻ"
-            }`,
+        data:bought,
 
-        data
+        createdAt:new Date().toISOString()
 
     });
 
 
     saveDB();
 
-    updateBalance();
 
-    renderProducts();
+    closeModal("buyAccModal");
 
-    renderHistory();
 
-    renderAdminProducts();
+    updateHeaderBalance();
 
-    renderDashboard();
 
-    closeBuyModal();
+    renderUserProducts();
+
+
+    showAccResult(
+        bought,
+        product.name
+    );
 
 
     sendTelegram(
-        `🛒 MUA ACC\n\n` +
-        `User: ${user.username}\n` +
-        `Sản phẩm: ${product.name}\n` +
-        `Hình thức: ${mode === "combo" ? "Combo" : "Lẻ"}\n` +
-        `Số lượng: ${qty}\n` +
-        `Tiền: ${money(total)}\n` +
-        `Kho còn: ${
-            inventory.filter(x => x.productId === product.id).length
-        }`
+        `🛒 MUA ACC\n` +
+        `👤 ${currentUser.username}\n` +
+        `📦 ${product.name}\n` +
+        `🔢 SL: ${qty}\n` +
+        `💰 ${money(total)}\n` +
+        `💳 ${mode === "combo" ? "Combo" : "Lẻ"}`
     );
 
 
-    checkLowStock(product);
+    const remaining =
+        inventory.filter(
+            x =>
+                x.productId ===
+                product.id
+        ).length;
 
 
-    showDataResult(
-        `${product.name} - ${qty} ACC`,
-        data
-    );
+    if(
+        remaining <= 5
+    ){
 
-}
-
-
-/* =========================================================
-   RESULT
-========================================================= */
-
-function showDataResult(title,data){
-
-    const win =
-        window.open(
-            "",
-            "_blank",
-            "width=600,height=700"
+        sendTelegram(
+            `⚠️ KHO ACC SẮP HẾT\n` +
+            `📦 ${product.name}\n` +
+            `Còn: ${remaining}`
         );
 
-
-    if(!win){
-
-        alert(data);
-
-        return;
-
     }
-
-
-    win.document.write(`
-
-        <!DOCTYPE html>
-
-        <html lang="vi">
-
-        <head>
-
-            <meta charset="UTF-8">
-
-            <meta name="viewport"
-                  content="width=device-width,initial-scale=1">
-
-            <title>${escapeHtml(title)}</title>
-
-            <style>
-
-                body{
-                    background:#0f1115;
-                    color:#fff;
-                    font-family:Arial;
-                    padding:18px;
-                }
-
-                textarea{
-                    width:100%;
-                    height:70vh;
-                    background:#171a21;
-                    color:#fff;
-                    border:1px solid #333;
-                    border-radius:12px;
-                    padding:14px;
-                    box-sizing:border-box;
-                }
-
-                button{
-                    width:100%;
-                    margin-top:12px;
-                    padding:13px;
-                    border:0;
-                    border-radius:10px;
-                    background:#ffb52e;
-                    font-weight:900;
-                }
-
-            </style>
-
-        </head>
-
-        <body>
-
-            <h2>${escapeHtml(title)}</h2>
-
-            <textarea id="data">${escapeHtml(data)}</textarea>
-
-            <button onclick="copyData()">
-                Copy toàn bộ
-            </button>
-
-            <script>
-
-                function copyData(){
-
-                    navigator.clipboard.writeText(
-                        document.getElementById("data").value
-                    );
-
-                    alert("Đã copy.");
-
-                }
-
-            <\/script>
-
-        </body>
-
-        </html>
-
-    `);
-
-    win.document.close();
 
 }
 
 
-/* =========================================================
-   HISTORY
-========================================================= */
+function showAccResult(
+    records,
+    productName
+){
 
-function addHistory(item){
-
-    history.unshift({
-
-        id:uid("his"),
-
-        ...item,
-
-        createdAt:new Date().toISOString()
-
-    });
-
-}
+    const text =
+        records
+        .map(
+            r =>
+                `${r.tk}|${r.mk}`
+        )
+        .join("\n");
 
 
-function renderHistory(){
-
-    const user = currentUser();
-
-    if(!user){
-
-        return;
-
-    }
+    const modal =
+        document.createElement("div");
 
 
-    const box =
-        document.getElementById("userHistory");
+    modal.className =
+        "modal show";
 
 
-    const rows =
-        history.filter(
-            h => h.userId === user.id
-        );
+    modal.innerHTML = `
 
+        <div class="modal-box">
 
-    if(!rows.length){
+            <div class="modal-title">
+                ACC ${escapeHtml(productName)}
+            </div>
 
-        box.innerHTML =
-            '<div class="empty">Chưa có giao dịch.</div>';
+            <textarea
+                id="accResultData"
+                style="min-height:220px"
+            >${escapeHtml(text)}</textarea>
 
-        return;
+            <div class="modal-actions">
 
-    }
+                <button
+                    class="btn blue"
+                    onclick="copyAccResult()"
+                >
+                    Sao chép
+                </button>
 
-
-    box.innerHTML =
-        rows.map(h => `
-
-            <div class="card"
-                 style="background:#1c2129;">
-
-                <div style="display:flex;
-                            justify-content:space-between;
-                            gap:10px;">
-
-                    <b>
-                        ${escapeHtml(h.description)}
-                    </b>
-
-                    <span class="badge badge-yellow">
-                        ${money(h.amount)}
-                    </span>
-
-                </div>
-
-                <div class="muted small"
-                     style="margin-top:6px;">
-
-                    ${new Date(h.createdAt)
-                        .toLocaleString("vi-VN")}
-
-                </div>
-
-                ${
-                    h.data
-
-                    ? `
-
-                        <div class="code-box">
-                            ${escapeHtml(h.data)}
-                        </div>
-
-                        <button class="btn btn-dark"
-                                style="margin-top:8px;"
-                                onclick="copyText(${JSON.stringify(h.data)})">
-                            Copy
-                        </button>
-
-                    `
-
-                    : ""
-                }
+                <button
+                    class="btn gray"
+                    onclick="this.closest('.modal').remove()"
+                >
+                    Đóng
+                </button>
 
             </div>
 
-        `).join("");
+        </div>
+
+    `;
+
+
+    document.body.appendChild(modal);
 
 }
 
 
-function copyText(text){
+function copyAccResult(){
 
-    navigator.clipboard
-        .writeText(text)
-        .then(() => toast("Đã copy."))
-        .catch(() => {
-
-            const area =
-                document.createElement("textarea");
-
-            area.value = text;
-
-            document.body.appendChild(area);
-
-            area.select();
-
-            document.execCommand("copy");
-
-            area.remove();
-
-            toast("Đã copy.");
-
-        });
-
-}
-
-
-/* =========================================================
-   ADMIN DASHBOARD
-========================================================= */
-
-function renderAdmin(){
-
-    renderDashboard();
-
-    renderAdminProducts();
-
-    renderAdminBanks();
-
-    renderAdminUsers();
-
-    renderAdminHistory();
-
-    loadSettings();
-
-}
-
-
-function renderDashboard(){
-
-    document
-        .getElementById("statUsers")
-        .textContent =
-            users.filter(u => u.role !== "admin").length;
-
-
-    document
-        .getElementById("statProducts")
-        .textContent =
-            products.length;
-
-
-    document
-        .getElementById("statAccStock")
-        .textContent =
-            inventory.length;
-
-
-    document
-        .getElementById("statBankStock")
-        .textContent =
-            banks.length;
-
-
-    const revenue =
-        history.reduce(
-            (sum,h) =>
-                sum + Number(h.amount || 0),
-            0
+    const el =
+        document.getElementById(
+            "accResultData"
         );
 
 
-    document
-        .getElementById("statRevenue")
-        .textContent =
-            money(revenue);
+    navigator.clipboard
+        .writeText(el.value)
+        .then(
+            () => toast("Đã sao chép.")
+        )
+        .catch(
+            () => {
 
+                el.select();
 
-    document
-        .getElementById("statPending")
-        .textContent =
-            users.filter(
-                u =>
-                    u.role !== "admin" &&
-                    !u.approved
-            ).length;
+                document.execCommand(
+                    "copy"
+                );
+
+                toast("Đã sao chép.");
+
+            }
+        );
 
 }
 
@@ -4080,94 +4233,122 @@ function renderDashboard(){
 
 function renderAdminProducts(){
 
-    const box =
-        document.getElementById("adminProductsList");
+    const grid =
+        document.getElementById(
+            "adminProductGrid"
+        );
 
 
     if(!products.length){
 
-        box.innerHTML =
-            '<div class="empty">Chưa có sản phẩm.</div>';
+        grid.innerHTML = `
+            <div class="card">
+                Chưa có sản phẩm.
+            </div>
+        `;
 
         return;
 
     }
 
 
-    box.innerHTML =
+    grid.innerHTML =
         products.map(product => {
 
             const stock =
                 inventory.filter(
-                    x => x.productId === product.id
+                    x =>
+                        x.productId ===
+                        product.id
                 ).length;
 
 
             return `
 
-                <div class="product-admin"
-                     style="margin-bottom:12px;">
+                <div class="product-card">
 
-                    <div class="admin-product-header">
+                    <div class="product-top">
 
-                        <div>
+                        <div class="product-name">
+                            ${escapeHtml(product.name)}
+                        </div>
 
-                            <div class="product-name">
-                                ${escapeHtml(product.name)}
+                        <div class="product-desc">
+                            ${escapeHtml(product.description || "")}
+                        </div>
+
+                        <div class="price-row">
+
+                            <div class="price-box">
+
+                                <div class="price-label">
+                                    GIÁ LẺ
+                                </div>
+
+                                <div class="price">
+                                    ${money(product.price)}
+                                </div>
+
                             </div>
 
-                            <div class="muted small">
-                                ${escapeHtml(product.description || "")}
+                            <div class="price-box">
+
+                                <div class="price-label">
+                                    COMBO
+                                </div>
+
+                                <div class="price">
+                                    ${money(product.comboPrice)}
+                                </div>
+
                             </div>
 
                         </div>
 
-                        <div class="badge ${
-                            stock > 0
-                            ? "badge-green"
-                            : "badge-red"
-                        }">
-
+                        <div class="stock">
                             Kho: ${stock}
+                        </div>
+
+                        <div style="margin-top:8px">
+
+                            ${
+                                product.active !== false
+                                ? `<span class="badge green">Đang bán</span>`
+                                : `<span class="badge red">Tắt bán</span>`
+                            }
 
                         </div>
 
                     </div>
 
 
-                    <div style="margin-top:10px;">
+                    <div class="product-actions">
 
-                        <span class="badge badge-yellow">
-                            Lẻ: ${money(product.price)}
-                        </span>
-
-                        <span class="badge badge-yellow">
-                            Combo: ${money(product.comboPrice || product.price)}
-                        </span>
-
-                    </div>
-
-
-                    <div class="actions"
-                         style="margin-top:12px;">
-
-                        <button class="btn btn-green"
-                                onclick="openInventoryModal('${product.id}')">
+                        <button
+                            class="btn blue small"
+                            onclick="openInventory('${product.id}')"
+                        >
                             Nạp kho
                         </button>
 
-                        <button class="btn btn-blue"
-                                onclick="openEditProduct('${product.id}')">
+                        <button
+                            class="btn gray small"
+                            onclick="viewInventory('${product.id}')"
+                        >
+                            Kho
+                        </button>
+
+                        <button
+                            class="btn orange small"
+                            onclick="editProduct('${product.id}')"
+                        >
                             Sửa
                         </button>
 
-                        <button class="btn btn-dark"
-                                onclick="viewInventory('${product.id}')">
-                            Xem kho
-                        </button>
-
-                        <button class="btn btn-red"
-                                onclick="deleteProduct('${product.id}')">
+                        <button
+                            class="btn red small"
+                            onclick="deleteProduct('${product.id}')"
+                        >
                             Xóa
                         </button>
 
@@ -4182,365 +4363,1114 @@ function renderAdminProducts(){
 }
 
 
-/* =========================================================
-   ADMIN BANKS
-========================================================= */
-
-function renderAdminBanks(){
+function openProductModal(){
 
     document
-        .getElementById("adminBankPrice")
-        .value = config.bankPrice;
+        .getElementById("productModalTitle")
+        .textContent =
+        "Thêm sản phẩm";
 
 
-    const grouped = {};
+    document
+        .getElementById("productId")
+        .value = "";
 
-    banks.forEach(b => {
 
-        grouped[b.bank] =
-            (grouped[b.bank] || 0) + 1;
+    document
+        .getElementById("productName")
+        .value = "";
+
+
+    document
+        .getElementById("productDescription")
+        .value = "";
+
+
+    document
+        .getElementById("productPrice")
+        .value = "";
+
+
+    document
+        .getElementById("productComboPrice")
+        .value = "";
+
+
+    document
+        .getElementById("productModal")
+        .classList.add("show");
+
+}
+
+
+function saveProduct(){
+
+    const id =
+        document
+        .getElementById("productId")
+        .value;
+
+
+    const name =
+        document
+        .getElementById("productName")
+        .value
+        .trim();
+
+
+    const description =
+        document
+        .getElementById("productDescription")
+        .value
+        .trim();
+
+
+    const price =
+        Number(
+            document
+            .getElementById("productPrice")
+            .value
+        );
+
+
+    const comboPrice =
+        Number(
+            document
+            .getElementById(
+                "productComboPrice"
+            ).value
+        );
+
+
+    if(!name){
+
+        toast("Nhập tên sản phẩm.");
+
+        return;
+
+    }
+
+
+    if(price <= 0){
+
+        toast("Giá lẻ không hợp lệ.");
+
+        return;
+
+    }
+
+
+    if(comboPrice <= 0){
+
+        toast("Giá combo không hợp lệ.");
+
+        return;
+
+    }
+
+
+    if(id){
+
+        const product =
+            products.find(
+                p => p.id === id
+            );
+
+
+        if(product){
+
+            product.name = name;
+
+            product.description =
+                description;
+
+            product.price = price;
+
+            product.comboPrice =
+                comboPrice;
+
+        }
+
+    }else{
+
+        products.push({
+
+            id:uid("product"),
+
+            name:name,
+
+            description:description,
+
+            price:price,
+
+            comboPrice:comboPrice,
+
+            active:true,
+
+            createdAt:new Date().toISOString()
+
+        });
+
+    }
+
+
+    saveDB();
+
+
+    closeModal("productModal");
+
+    renderAdminProducts();
+
+    toast("Đã lưu sản phẩm.");
+
+}
+
+
+function editProduct(id){
+
+    const product =
+        products.find(
+            p => p.id === id
+        );
+
+
+    if(!product)
+        return;
+
+
+    document
+        .getElementById(
+            "productModalTitle"
+        )
+        .textContent =
+        "Sửa sản phẩm";
+
+
+    document
+        .getElementById("productId")
+        .value =
+        product.id;
+
+
+    document
+        .getElementById("productName")
+        .value =
+        product.name;
+
+
+    document
+        .getElementById(
+            "productDescription"
+        )
+        .value =
+        product.description || "";
+
+
+    document
+        .getElementById("productPrice")
+        .value =
+        product.price;
+
+
+    document
+        .getElementById(
+            "productComboPrice"
+        )
+        .value =
+        product.comboPrice;
+
+
+    document
+        .getElementById("productModal")
+        .classList.add("show");
+
+}
+
+
+function deleteProduct(id){
+
+    const product =
+        products.find(
+            p => p.id === id
+        );
+
+
+    if(!product)
+        return;
+
+
+    if(
+        !confirm(
+            `Xóa sản phẩm ${product.name}?`
+        )
+    )
+        return;
+
+
+    products =
+        products.filter(
+            p => p.id !== id
+        );
+
+
+    inventory =
+        inventory.filter(
+            x =>
+                x.productId !== id
+        );
+
+
+    saveDB();
+
+
+    renderAdminProducts();
+
+    toast("Đã xóa sản phẩm.");
+
+}
+
+
+/* =========================================================
+   INVENTORY
+========================================================= */
+
+function openInventory(productId){
+
+    const product =
+        products.find(
+            p =>
+                p.id === productId
+        );
+
+
+    if(!product)
+        return;
+
+
+    document
+        .getElementById(
+            "inventoryProductId"
+        )
+        .value =
+        productId;
+
+
+    document
+        .getElementById(
+            "inventoryProductName"
+        )
+        .textContent =
+        `Sản phẩm: ${product.name}`;
+
+
+    document
+        .getElementById(
+            "inventoryText"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "inventoryModal"
+        )
+        .classList.add("show");
+
+}
+
+
+function importInventory(){
+
+    const productId =
+        document
+        .getElementById(
+            "inventoryProductId"
+        ).value;
+
+
+    const text =
+        document
+        .getElementById(
+            "inventoryText"
+        ).value.trim();
+
+
+    if(!productId){
+
+        toast("Không xác định sản phẩm.");
+
+        return;
+
+    }
+
+
+    if(!text){
+
+        toast("Chưa có dữ liệu.");
+
+        return;
+
+    }
+
+
+    const product =
+        products.find(
+            p =>
+                p.id === productId
+        );
+
+
+    const lines =
+        text
+        .split(/\r?\n/)
+        .map(
+            x => x.trim()
+        )
+        .filter(Boolean);
+
+
+    let added = 0;
+
+
+    lines.forEach(line => {
+
+        const p =
+            line.split("|");
+
+
+        const tk =
+            (p[0] || "").trim();
+
+
+        const mk =
+            (p[1] || "").trim();
+
+
+        if(!tk || !mk)
+            return;
+
+
+        const exists =
+            inventory.some(
+                x =>
+                    x.productId === productId &&
+                    x.tk === tk
+            );
+
+
+        if(!exists){
+
+            inventory.push({
+
+                id:uid("inv"),
+
+                productId:productId,
+
+                tk:tk,
+
+                mk:mk,
+
+                createdAt:new Date().toISOString()
+
+            });
+
+            added++;
+
+        }
 
     });
 
 
-    const entries =
-        Object.entries(grouped)
-        .sort((a,b) => b[1]-a[1]);
+    saveDB();
 
 
-    const box =
-        document.getElementById("adminBankStock");
+    closeModal("inventoryModal");
 
 
-    if(!entries.length){
-
-        box.innerHTML =
-            '<div class="empty">Kho ngân hàng trống.</div>';
-
-        return;
-
-    }
+    renderAdminProducts();
 
 
-    box.innerHTML =
-        entries.map(([bank,count]) => `
+    toast(
+        `Đã nạp ${added} ACC vào ${product.name}.`
+    );
 
-            <div class="bank-row">
 
-                <div class="bank-name">
-                    ${escapeHtml(bank)}
-                </div>
-
-                <div class="badge badge-green">
-                    ${count}
-                </div>
-
-            </div>
-
-        `).join("");
+    sendTelegram(
+        `📦 NẠP KHO ACC\n` +
+        `Sản phẩm: ${product.name}\n` +
+        `Số lượng: ${added}`
+    );
 
 }
 
 
-/* =========================================================
-   ADMIN USERS
-========================================================= */
+function viewInventory(productId){
 
-function renderAdminUsers(){
-
-    const box =
-        document.getElementById("adminUsersList");
-
-
-    const rows =
-        users.filter(
-            u => u.role !== "admin"
+    const product =
+        products.find(
+            p =>
+                p.id === productId
         );
 
 
-    if(!rows.length){
-
-        box.innerHTML =
-            '<div class="empty">Chưa có user.</div>';
-
+    if(!product)
         return;
+
+
+    const data =
+        inventory.filter(
+            x =>
+                x.productId ===
+                productId
+        );
+
+
+    const content =
+        document.getElementById(
+            "viewInventoryContent"
+        );
+
+
+    if(!data.length){
+
+        content.innerHTML =
+            `<div class="card">
+                Kho đang trống.
+            </div>`;
+
+    }else{
+
+        content.innerHTML = `
+
+            <div style="margin-bottom:12px;color:#8b949e">
+                ${escapeHtml(product.name)}
+                — ${data.length} ACC
+            </div>
+
+            <textarea
+                style="min-height:300px"
+                readonly
+            >${escapeHtml(
+                data
+                .map(
+                    x =>
+                        `${x.tk}|${x.mk}`
+                )
+                .join("\n")
+            )}</textarea>
+
+        `;
 
     }
 
 
-    box.innerHTML = `
-
-        <div class="table-wrap">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>Tài khoản</th>
-
-                        <th>Trạng thái</th>
-
-                        <th>Số dư</th>
-
-                        <th>Ngày tạo</th>
-
-                        <th>Thao tác</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    ${rows.map(user => `
-
-                        <tr>
-
-                            <td>
-                                <b>${escapeHtml(user.username)}</b>
-                            </td>
-
-                            <td>
-
-                                ${
-                                    user.disabled
-
-                                    ? `<span class="badge disabled">Đã khóa</span>`
-
-                                    : user.approved
-
-                                    ? `<span class="badge approved">Đã duyệt</span>`
-
-                                    : `<span class="badge pending">Chờ duyệt</span>`
-                                }
-
-                            </td>
-
-                            <td>
-                                ${money(user.balance)}
-                            </td>
-
-                            <td>
-                                ${new Date(user.createdAt)
-                                    .toLocaleString("vi-VN")}
-                            </td>
-
-                            <td>
-
-                                <div class="actions">
-
-                                    ${
-                                        !user.approved
-
-                                        ? `<button class="btn btn-green"
-                                                   onclick="approveUser('${user.id}')">
-                                                Duyệt
-                                           </button>`
-
-                                        : ""
-                                    }
-
-
-                                    <button class="btn btn-blue"
-                                            onclick="addBalance('${user.id}')">
-                                        + Tiền
-                                    </button>
-
-
-                                    <button class="btn btn-dark"
-                                            onclick="toggleUser('${user.id}')">
-                                        ${
-                                            user.disabled
-                                            ? "Mở khóa"
-                                            : "Khóa"
-                                        }
-                                    </button>
-
-
-                                    <button class="btn btn-red"
-                                            onclick="deleteUser('${user.id}')">
-                                        Xóa
-                                    </button>
-
-                                </div>
-
-                            </td>
-
-                        </tr>
-
-                    `).join("")}
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    `;
+    document
+        .getElementById(
+            "viewInventoryModal"
+        )
+        .classList.add("show");
 
 }
 
 
 /* =========================================================
-   USER ADMIN ACTIONS
+   ADMIN DASHBOARD
 ========================================================= */
+
+function refreshAdmin(){
+
+    refreshDashboard();
+
+    renderAdminProducts();
+
+    renderAdminBanks();
+
+    renderUsers();
+
+    renderAdminHistory();
+
+    loadSettings();
+
+}
+
+
+function refreshDashboard(){
+
+    document
+        .getElementById(
+            "statUsers"
+        )
+        .textContent =
+        users.filter(
+            u => u.role !== "admin"
+        ).length;
+
+
+    document
+        .getElementById(
+            "statBanks"
+        )
+        .textContent =
+        banks.reduce(
+            (sum,b) =>
+                sum +
+                (b.records || []).length,
+            0
+        );
+
+
+    document
+        .getElementById(
+            "statProducts"
+        )
+        .textContent =
+        products.length;
+
+
+    document
+        .getElementById(
+            "statHistory"
+        )
+        .textContent =
+        history.length;
+
+
+    const pending =
+        users.filter(
+            u =>
+                u.role !== "admin" &&
+                !u.approved &&
+                !u.disabled
+        );
+
+
+    document
+        .getElementById(
+            "pendingUsers"
+        )
+        .innerHTML =
+        pending.length
+        ? pending.map(
+            u =>
+            `
+            <div
+                style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                padding:10px 0;
+                border-bottom:1px solid #21262d;
+                "
+            >
+
+                <span>
+                    ${escapeHtml(u.username)}
+                </span>
+
+                <button
+                    class="btn blue small"
+                    onclick="approveUser('${u.id}')"
+                >
+                    Duyệt
+                </button>
+
+            </div>
+            `
+        ).join("")
+        : `<div style="color:#8b949e">
+            Không có tài khoản chờ duyệt.
+           </div>`;
+
+
+    document
+        .getElementById(
+            "dashboardProducts"
+        )
+        .innerHTML =
+        products.map(
+            p => {
+
+                const stock =
+                    inventory.filter(
+                        x =>
+                            x.productId ===
+                            p.id
+                    ).length;
+
+
+                return `
+                    <div
+                        style="
+                        display:flex;
+                        justify-content:space-between;
+                        padding:9px 0;
+                        border-bottom:1px solid #21262d;
+                        "
+                    >
+
+                        <span>
+                            ${escapeHtml(p.name)}
+                        </span>
+
+                        <b>
+                            ${stock}
+                        </b>
+
+                    </div>
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =========================================================
+   USERS
+========================================================= */
+
+function renderUsers(){
+
+    const tbody =
+        document.getElementById(
+            "usersTable"
+        );
+
+
+    const list =
+        users.filter(
+            u =>
+                u.role !== "admin"
+        );
+
+
+    tbody.innerHTML =
+        list.map(u => {
+
+            let status;
+
+
+            if(u.disabled){
+
+                status =
+                    `<span class="badge red">
+                        Bị khóa
+                     </span>`;
+
+            }else if(u.approved){
+
+                status =
+                    `<span class="badge green">
+                        Đã duyệt
+                     </span>`;
+
+            }else{
+
+                status =
+                    `<span class="badge orange">
+                        Chờ duyệt
+                     </span>`;
+
+            }
+
+
+            return `
+
+                <tr>
+
+                    <td>
+                        ${escapeHtml(u.username)}
+                    </td>
+
+                    <td>
+                        ${status}
+                    </td>
+
+                    <td>
+                        ${money(u.balance)}
+                    </td>
+
+                    <td>
+                        ${formatDate(u.createdAt)}
+                    </td>
+
+                    <td>
+
+                        ${
+                            !u.approved && !u.disabled
+                            ?
+                            `
+                            <button
+                                class="btn blue small"
+                                onclick="approveUser('${u.id}')"
+                            >
+                                Duyệt
+                            </button>
+                            `
+                            :
+                            ""
+                        }
+
+                        ${
+                            !u.disabled
+                            ?
+                            `
+                            <button
+                                class="btn orange small"
+                                onclick="openBalance('${u.id}')"
+                            >
+                                + Tiền
+                            </button>
+
+                            <button
+                                class="btn red small"
+                                onclick="disableUser('${u.id}')"
+                            >
+                                Khóa
+                            </button>
+                            `
+                            :
+                            `
+                            <button
+                                class="btn blue small"
+                                onclick="enableUser('${u.id}')"
+                            >
+                                Mở khóa
+                            </button>
+                            `
+                        }
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
 
 function approveUser(id){
 
     const user =
-        users.find(u => u.id === id);
+        users.find(
+            u => u.id === id
+        );
 
-    if(!user){
 
+    if(!user)
         return;
-
-    }
 
 
     user.approved = true;
 
     user.disabled = false;
 
+
     saveDB();
 
-    renderAdminUsers();
+    renderUsers();
 
-    renderDashboard();
+    refreshDashboard();
 
-    toast(`Đã duyệt ${user.username}.`);
+
+    toast(
+        `Đã duyệt ${user.username}.`
+    );
+
+
+    sendTelegram(
+        `✅ DUYỆT USER\n` +
+        `👤 ${user.username}`
+    );
 
 }
 
 
-function addBalance(id){
+function disableUser(id){
 
     const user =
-        users.find(u => u.id === id);
-
-    if(!user){
-
-        return;
-
-    }
-
-
-    const amount =
-        Number(
-            prompt(
-                `Nhập số tiền cộng cho ${user.username}:`,
-                "100000"
-            )
+        users.find(
+            u => u.id === id
         );
 
 
-    if(!amount || amount <= 0){
-
+    if(!user)
         return;
 
-    }
 
-
-    user.balance =
-        Number(user.balance || 0) + amount;
+    user.disabled = true;
 
 
     saveDB();
 
-    renderAdminUsers();
+    renderUsers();
+
+    refreshDashboard();
+
 
     toast(
-        `Đã cộng ${money(amount)} cho ${user.username}.`
+        `Đã khóa ${user.username}.`
     );
 
 }
 
 
-function toggleUser(id){
+function enableUser(id){
 
     const user =
-        users.find(u => u.id === id);
+        users.find(
+            u => u.id === id
+        );
 
-    if(!user){
 
+    if(!user)
         return;
 
-    }
 
+    user.disabled = false;
 
-    user.disabled = !user.disabled;
+    user.approved = true;
+
 
     saveDB();
 
-    renderAdminUsers();
+    renderUsers();
+
+    refreshDashboard();
+
 
     toast(
-        user.disabled
-        ? "Đã khóa tài khoản."
-        : "Đã mở khóa tài khoản."
+        `Đã mở khóa ${user.username}.`
     );
-
-}
-
-
-function deleteUser(id){
-
-    const user =
-        users.find(u => u.id === id);
-
-    if(!user){
-
-        return;
-
-    }
-
-
-    if(!confirm(
-        `Xóa tài khoản ${user.username}?`
-    )){
-
-        return;
-
-    }
-
-
-    users =
-        users.filter(u => u.id !== id);
-
-
-    saveDB();
-
-    renderAdminUsers();
-
-    renderDashboard();
-
-    toast("Đã xóa user.");
 
 }
 
 
 /* =========================================================
-   ADMIN HISTORY
+   BALANCE
 ========================================================= */
 
-function renderAdminHistory(){
+function openBalance(id){
 
-    const box =
-        document.getElementById("adminHistory");
+    balanceTargetUser =
+        users.find(
+            u => u.id === id
+        );
 
 
-    if(!history.length){
+    if(!balanceTargetUser)
+        return;
 
-        box.innerHTML =
-            '<div class="empty">Chưa có giao dịch.</div>';
+
+    document
+        .getElementById(
+            "balanceUserName"
+        )
+        .textContent =
+        `Tài khoản: ${balanceTargetUser.username}`;
+
+
+    document
+        .getElementById(
+            "balanceAmount"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "balanceModal"
+        )
+        .classList.add("show");
+
+}
+
+
+function addBalance(){
+
+    if(!balanceTargetUser)
+        return;
+
+
+    const amount =
+        Number(
+            document
+            .getElementById(
+                "balanceAmount"
+            ).value
+        );
+
+
+    if(amount <= 0){
+
+        toast("Số tiền không hợp lệ.");
 
         return;
 
     }
 
 
-    box.innerHTML = `
+    balanceTargetUser.balance =
+        Number(
+            balanceTargetUser.balance
+        ) + amount;
+
+
+    saveDB();
+
+
+    const username =
+        balanceTargetUser.username;
+
+
+    closeModal("balanceModal");
+
+
+    renderUsers();
+
+
+    refreshDashboard();
+
+
+    toast(
+        `Đã cộng ${money(amount)} cho ${username}.`
+    );
+
+
+    sendTelegram(
+        `💰 CỘNG TIỀN\n` +
+        `👤 ${username}\n` +
+        `💵 ${money(amount)}\n` +
+        `💳 Số dư mới: ${money(balanceTargetUser.balance)}`
+    );
+
+
+    balanceTargetUser = null;
+
+}
+
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+function renderUserHistory(){
+
+    const el =
+        document.getElementById(
+            "userHistory"
+        );
+
+
+    const data =
+        history.filter(
+            h =>
+                h.userId ===
+                currentUser.id
+        );
+
+
+    if(!data.length){
+
+        el.innerHTML = `
+            <div class="card">
+                Chưa có giao dịch.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    el.innerHTML =
+        data.map(h => {
+
+            if(h.type === "acc"){
+
+                return `
+
+                    <div class="card"
+                         style="margin-bottom:12px">
+
+                        <div style="font-weight:800">
+                            🛒 ${escapeHtml(h.productName)}
+                        </div>
+
+                        <div style="color:#8b949e;margin-top:7px">
+                            ${h.quantity} ACC —
+                            ${h.mode === "combo" ? "Combo" : "Lẻ"}
+                        </div>
+
+                        <div style="margin-top:7px">
+                            ${money(h.amount)}
+                        </div>
+
+                        <div style="color:#8b949e;font-size:12px;margin-top:7px">
+                            ${formatDate(h.createdAt)}
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            return `
+
+                <div class="card"
+                     style="margin-bottom:12px">
+
+                    <div style="font-weight:800">
+                        🏦 ${escapeHtml(h.bank)}
+                    </div>
+
+                    <div style="color:#8b949e;margin-top:7px">
+                        ${h.quantity} dữ liệu
+                    </div>
+
+                    <div style="margin-top:7px">
+                        ${money(h.amount)}
+                    </div>
+
+                    <div style="color:#8b949e;font-size:12px;margin-top:7px">
+                        ${formatDate(h.createdAt)}
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+function renderAdminHistory(){
+
+    const el =
+        document.getElementById(
+            "adminHistory"
+        );
+
+
+    if(!history.length){
+
+        el.innerHTML = `
+            <div class="card">
+                Chưa có giao dịch.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    el.innerHTML = `
 
         <div class="table-wrap">
 
@@ -4551,15 +5481,10 @@ function renderAdminHistory(){
                     <tr>
 
                         <th>Thời gian</th>
-
                         <th>User</th>
-
                         <th>Loại</th>
-
                         <th>Sản phẩm</th>
-
                         <th>SL</th>
-
                         <th>Tiền</th>
 
                     </tr>
@@ -4568,45 +5493,53 @@ function renderAdminHistory(){
 
                 <tbody>
 
-                    ${history.map(h => `
+                    ${
+                        history.map(h => {
 
-                        <tr>
+                            const name =
+                                h.type === "acc"
+                                ? h.productName
+                                : h.bank;
 
-                            <td>
-                                ${new Date(h.createdAt)
-                                    .toLocaleString("vi-VN")}
-                            </td>
 
-                            <td>
-                                ${escapeHtml(h.username)}
-                            </td>
+                            return `
 
-                            <td>
-                                ${
-                                    h.type === "acc"
-                                    ? "ACC"
-                                    : "BANK"
-                                }
-                            </td>
+                                <tr>
 
-                            <td>
-                                ${escapeHtml(
-                                    h.productName ||
-                                    h.description
-                                )}
-                            </td>
+                                    <td>
+                                        ${formatDate(h.createdAt)}
+                                    </td>
 
-                            <td>
-                                ${h.quantity || 0}
-                            </td>
+                                    <td>
+                                        ${escapeHtml(h.username)}
+                                    </td>
 
-                            <td>
-                                ${money(h.amount)}
-                            </td>
+                                    <td>
+                                        ${
+                                            h.type === "acc"
+                                            ? "ACC"
+                                            : "BANK"
+                                        }
+                                    </td>
 
-                        </tr>
+                                    <td>
+                                        ${escapeHtml(name || "")}
+                                    </td>
 
-                    `).join("")}
+                                    <td>
+                                        ${h.quantity}
+                                    </td>
+
+                                    <td>
+                                        ${money(h.amount)}
+                                    </td>
+
+                                </tr>
+
+                            `;
+
+                        }).join("")
+                    }
 
                 </tbody>
 
@@ -4615,6 +5548,27 @@ function renderAdminHistory(){
         </div>
 
     `;
+
+}
+
+
+function clearHistory(){
+
+    if(
+        !confirm(
+            "Xóa toàn bộ lịch sử?"
+        )
+    )
+        return;
+
+
+    history = [];
+
+    saveDB();
+
+    renderAdminHistory();
+
+    toast("Đã xóa lịch sử.");
 
 }
 
@@ -4626,58 +5580,101 @@ function renderAdminHistory(){
 function loadSettings(){
 
     document
-        .getElementById("telegramToken")
-        .value = config.telegramToken || "";
+        .getElementById(
+            "telegramToken"
+        )
+        .value =
+        config.telegramToken || "";
+
 
     document
-        .getElementById("telegramChatId")
-        .value = config.telegramChatId || "";
+        .getElementById(
+            "telegramChatId"
+        )
+        .value =
+        config.telegramChatId || "";
+
 
     document
-        .getElementById("lowStockLimit")
-        .value = config.lowStockLimit ?? 5;
+        .getElementById(
+            "defaultBankPrice"
+        )
+        .value =
+        config.defaultBankPrice;
 
 }
 
 
-function saveTelegramSettings(){
+function saveTelegram(){
 
     config.telegramToken =
         document
-        .getElementById("telegramToken")
-        .value
-        .trim();
+        .getElementById(
+            "telegramToken"
+        ).value.trim();
+
 
     config.telegramChatId =
         document
-        .getElementById("telegramChatId")
-        .value
-        .trim();
+        .getElementById(
+            "telegramChatId"
+        ).value.trim();
 
 
     saveDB();
 
-    toast("Đã lưu Telegram.");
+
+    toast(
+        "Đã lưu cài đặt Telegram."
+    );
 
 }
 
 
-function saveLowStock(){
+function saveDefaultBankPrice(){
 
-    config.lowStockLimit =
-        Math.max(
-            0,
-            Number(
-                document
-                .getElementById("lowStockLimit")
-                .value
-            )
+    const price =
+        Number(
+            document
+            .getElementById(
+                "defaultBankPrice"
+            ).value
         );
+
+
+    if(price <= 0){
+
+        toast("Giá không hợp lệ.");
+
+        return;
+
+    }
+
+
+    config.defaultBankPrice =
+        price;
+
+
+    banks.forEach(
+        b => {
+
+            if(
+                !b.price ||
+                b.price <= 0
+            ){
+
+                b.price = price;
+
+            }
+
+        }
+    );
 
 
     saveDB();
 
-    toast("Đã lưu mức cảnh báo.");
+
+    toast("Đã lưu giá mặc định.");
 
 }
 
@@ -4688,18 +5685,22 @@ function saveLowStock(){
 
 async function sendTelegram(message){
 
-    if(!config.telegramToken ||
-       !config.telegramChatId){
+    const token =
+        config.telegramToken;
 
+
+    const chatId =
+        config.telegramChatId;
+
+
+    if(!token || !chatId)
         return;
-
-    }
 
 
     try{
 
         await fetch(
-            `https://api.telegram.org/bot${config.telegramToken}/sendMessage`,
+            `https://api.telegram.org/bot${token}/sendMessage`,
             {
 
                 method:"POST",
@@ -4711,7 +5712,7 @@ async function sendTelegram(message){
 
                 body:JSON.stringify({
 
-                    chat_id:config.telegramChatId,
+                    chat_id:chatId,
 
                     text:message
 
@@ -4720,9 +5721,12 @@ async function sendTelegram(message){
             }
         );
 
-    }catch(error){
+    }catch(e){
 
-        console.log("Telegram error",error);
+        console.log(
+            "Telegram error:",
+            e
+        );
 
     }
 
@@ -4731,10 +5735,17 @@ async function sendTelegram(message){
 
 async function testTelegram(){
 
-    if(!config.telegramToken ||
-       !config.telegramChatId){
+    saveTelegram();
 
-        toast("Nhập Bot Token và Chat ID trước.");
+
+    if(
+        !config.telegramToken ||
+        !config.telegramChatId
+    ){
+
+        toast(
+            "Nhập Token và Chat ID trước."
+        );
 
         return;
 
@@ -4742,245 +5753,100 @@ async function testTelegram(){
 
 
     await sendTelegram(
-        "✅ DM STORE TEST\nTelegram đang hoạt động."
+        "✅ TEST TELEGRAM\nHệ thống kết nối thành công."
     );
 
 
-    toast("Đã gửi tin test.");
+    toast(
+        "Đã gửi tin nhắn test."
+    );
 
 }
 
 
 /* =========================================================
-   LOW STOCK
+   BACKUP
 ========================================================= */
 
-function checkLowStock(product){
+function exportBackup(){
 
-    const stock =
-        inventory.filter(
-            x => x.productId === product.id
-        ).length;
+    const data = {
+
+        users:users,
+
+        banks:banks,
+
+        products:products,
+
+        inventory:inventory,
+
+        history:history,
+
+        config:config
+
+    };
 
 
-    if(
-        stock <= Number(config.lowStockLimit) &&
-        stock >= 0
-    ){
-
-        sendTelegram(
-            `⚠️ CẢNH BÁO KHO\n\n` +
-            `Sản phẩm: ${product.name}\n` +
-            `Kho còn: ${stock} ACC`
+    const blob =
+        new Blob(
+            [
+                JSON.stringify(
+                    data,
+                    null,
+                    2
+                )
+            ],
+            {
+                type:"application/json"
+            }
         );
 
-    }
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const a =
+        document.createElement("a");
+
+
+    a.href = url;
+
+    a.download =
+        "data-acc-backup.json";
+
+
+    a.click();
+
+
+    URL.revokeObjectURL(url);
 
 }
 
 
-/* =========================================================
-   DEMO DATA
-========================================================= */
+function resetSystem(){
 
-function loadDemoData(){
+    const answer =
+        prompt(
+            "Nhập RESET để xác nhận xóa toàn bộ dữ liệu:"
+        );
 
-    if(!confirm(
-        "Nạp dữ liệu demo vào hệ thống?"
-    )){
 
+    if(answer !== "RESET")
         return;
 
-    }
 
+    Object.values(DB)
+        .forEach(
+            key =>
+                localStorage.removeItem(key)
+        );
 
-    if(!products.some(p => p.name === "SC88")){
 
-        const sc88 = {
+    alert(
+        "Đã reset. Trang sẽ tải lại."
+    );
 
-            id:uid("prod"),
-
-            name:"SC88",
-
-            description:"ACC SC88 demo",
-
-            price:50000,
-
-            comboPrice:45000,
-
-            active:true,
-
-            createdAt:new Date().toISOString()
-
-        };
-
-        products.push(sc88);
-
-
-        [
-
-            ["sc88_user01","sc88_pass01"],
-
-            ["sc88_user02","sc88_pass02"],
-
-            ["sc88_user03","sc88_pass03"],
-
-            ["sc88_user04","sc88_pass04"],
-
-            ["sc88_user05","sc88_pass05"]
-
-        ].forEach(([username,password]) => {
-
-            inventory.push({
-
-                id:uid("acc"),
-
-                productId:sc88.id,
-
-                username,
-
-                password,
-
-                createdAt:new Date().toISOString()
-
-            });
-
-        });
-
-    }
-
-
-    if(!products.some(p => p.name === "QQ88")){
-
-        const qq88 = {
-
-            id:uid("prod"),
-
-            name:"QQ88",
-
-            description:"ACC QQ88 demo",
-
-            price:70000,
-
-            comboPrice:65000,
-
-            active:true,
-
-            createdAt:new Date().toISOString()
-
-        };
-
-        products.push(qq88);
-
-
-        [
-
-            ["qq88_user01","qq88_pass01"],
-
-            ["qq88_user02","qq88_pass02"],
-
-            ["qq88_user03","qq88_pass03"],
-
-            ["qq88_user04","qq88_pass04"]
-
-        ].forEach(([username,password]) => {
-
-            inventory.push({
-
-                id:uid("acc"),
-
-                productId:qq88.id,
-
-                username,
-
-                password,
-
-                createdAt:new Date().toISOString()
-
-            });
-
-        });
-
-    }
-
-
-    if(!banks.length){
-
-        [
-
-            ["0123456789","NGUYEN VAN A","Vietcombank"],
-
-            ["0123456790","TRAN VAN B","MB Bank"],
-
-            ["0123456791","LE THI C","Techcombank"],
-
-            ["0123456792","NGUYEN THI D","ACB"],
-
-            ["0123456793","PHAM VAN E","VietinBank"],
-
-            ["0123456794","TRAN THI F","VPBank"]
-
-        ].forEach(([stk,name,bank]) => {
-
-            banks.push({
-
-                id:uid("bank"),
-
-                stk,
-
-                name,
-
-                bank,
-
-                createdAt:new Date().toISOString()
-
-            });
-
-        });
-
-    }
-
-
-    saveDB();
-
-    renderAdmin();
-
-    renderBanks();
-
-    renderProducts();
-
-    renderDashboard();
-
-    toast("Đã nạp dữ liệu demo.");
-
-}
-
-
-/* =========================================================
-   RESET
-========================================================= */
-
-function resetAllData(){
-
-    if(!confirm(
-        "Xóa toàn bộ dữ liệu localStorage? Không thể hoàn tác."
-    )){
-
-        return;
-
-    }
-
-
-    Object.values(DB).forEach(key => {
-
-        localStorage.removeItem(key);
-
-    });
-
-
-    localStorage.removeItem("dm_acc");
-
-    localStorage.removeItem("dm_config");
 
     location.reload();
 
@@ -4988,24 +5854,248 @@ function resetAllData(){
 
 
 /* =========================================================
-   SHUFFLE
+   MODAL
+========================================================= */
+
+function closeModal(id){
+
+    const modal =
+        document.getElementById(id);
+
+
+    if(modal)
+        modal.classList.remove("show");
+
+}
+
+
+/* =========================================================
+   HELPERS
 ========================================================= */
 
 function shuffle(array){
 
-    for(let i=array.length-1;i>0;i--){
+    for(
+        let i = array.length - 1;
+        i > 0;
+        i--
+    ){
 
         const j =
             Math.floor(
-                Math.random() * (i+1)
+                Math.random() *
+                (i + 1)
             );
 
-        [array[i],array[j]] =
-            [array[j],array[i]];
+
+        [
+            array[i],
+            array[j]
+        ] =
+        [
+            array[j],
+            array[i]
+        ];
 
     }
 
+
     return array;
+
+}
+
+
+function normalizeText(text){
+
+    return String(text || "")
+        .normalize("NFD")
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        )
+        .toLowerCase()
+        .trim();
+
+}
+
+
+function formatDate(value){
+
+    if(!value)
+        return "";
+
+
+    return new Date(value)
+        .toLocaleString("vi-VN");
+
+}
+
+
+function escapeHtml(value){
+
+    return String(value ?? "")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+function toast(message){
+
+    const el =
+        document.getElementById(
+            "toast"
+        );
+
+
+    el.textContent =
+        message;
+
+
+    el.classList.add("show");
+
+
+    clearTimeout(
+        window.__toastTimer
+    );
+
+
+    window.__toastTimer =
+        setTimeout(
+            () =>
+                el.classList.remove(
+                    "show"
+                ),
+            2800
+        );
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL WHEN CLICK OUTSIDE
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(e){
+
+        if(
+            e.target.classList.contains(
+                "modal"
+            )
+        ){
+
+            e.target.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   FIX RANDOM MODAL BUTTON
+========================================================= */
+
+document.addEventListener(
+    "input",
+    function(e){
+
+        if(
+            e.target.id ===
+            "bankTakeQuantity"
+        ){
+
+            const modal =
+                document.getElementById(
+                    "bankTakeModal"
+                );
+
+
+            if(
+                modal.dataset.random === "1"
+            ){
+
+                updateRandomPrice();
+
+            }else{
+
+                updateBankTakePrice();
+
+            }
+
+        }
+
+
+        if(
+            e.target.id ===
+            "buyAccQuantity"
+        ){
+
+            updateBuyAccPrice();
+
+        }
+
+    }
+);
+
+
+/*
+ * confirmBankTake button được đổi hành vi
+ * khi đang ở chế độ random.
+ */
+
+const originalConfirmButton =
+    document.querySelector(
+        '#bankTakeModal .btn.blue'
+    );
+
+
+if(originalConfirmButton){
+
+    originalConfirmButton.onclick =
+        function(){
+
+            const modal =
+                document.getElementById(
+                    "bankTakeModal"
+                );
+
+
+            if(
+                modal.dataset.random === "1"
+            ){
+
+                confirmRandomBank();
+
+            }else{
+
+                confirmBankTake();
+
+            }
+
+        };
 
 }
 
@@ -5014,29 +6104,7 @@ function shuffle(array){
    INIT
 ========================================================= */
 
-loadDB();
-
-const savedCurrent =
-    localStorage.getItem(DB.current);
-
-if(savedCurrent){
-
-    const user =
-        users.find(
-            u => u.id === savedCurrent
-        );
-
-    if(
-        user &&
-        user.approved &&
-        !user.disabled
-    ){
-
-        openApp();
-
-    }
-
-}
+init();
 
 </script>
 
