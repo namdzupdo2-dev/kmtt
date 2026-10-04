@@ -1,14 +1,13 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Data Market</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{--bg:#090d14;--p:#111722;--l:#263144;--t:#f2f5f8;--mu:#8e9aad;--b:#4f8cff}
+:root{--bg:#090d14;--p:#111722;--l:#263144;--mu:#8e9aad;--b:#4f8cff}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:var(--bg);color:var(--t);font:14px -apple-system,Segoe UI,Roboto,Arial,sans-serif}
+body{margin:0;background:var(--bg);color:#f2f5f8;font:14px -apple-system,Segoe UI,Roboto,Arial,sans-serif}
 .hide{display:none!important}
 button,input,select,textarea{font:inherit}
 input,select,textarea{width:100%;background:#0b111a;color:#fff;border:1px solid #293548;border-radius:10px;padding:11px;outline:none}
@@ -24,12 +23,10 @@ label{display:block;color:var(--mu);font-size:12px;margin:10px 0 5px}
 .at button{border:0;background:none;color:#758197;padding:10px;border-radius:8px;font-weight:700}
 .at .on{background:#1b273a;color:#fff}
 .top{position:sticky;top:0;z-index:5;background:#090d14ee;backdrop-filter:blur(12px);border-bottom:1px solid var(--l);display:flex;justify-content:space-between;align-items:center;padding:10px 14px}
-.top b{font-size:17px}
 .bal{background:#182236;border:1px solid #2a3b5b;border-radius:99px;padding:6px 11px;font-weight:800;font-size:12px;margin-right:8px}
 #tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 14px;border-bottom:1px solid var(--l)}
 #tabs button{flex-shrink:0;border:1px solid var(--l);background:var(--p);color:#9da8ba;padding:8px 12px;border-radius:99px;font-weight:700;font-size:12px;white-space:nowrap}
-#tabs .adm{border-color:#3b3566}
-#tabs .on{background:#1a273b;color:#fff;border-color:var(--b)}
+#tabs .adm{border-color:#3b3566}#tabs .on{background:#1a273b;color:#fff;border-color:var(--b)}
 #view{padding:16px;max-width:1100px;margin:auto}
 h2{margin:0 0 14px;font-size:22px}h3{margin:20px 0 10px}
 .card{background:var(--p);border:1px solid var(--l);border-radius:14px;padding:15px;margin-bottom:14px}
@@ -56,7 +53,7 @@ th{background:#151d2a;color:#91a0b5;font-size:11px;text-transform:uppercase}tr:l
 
 <div id="auth" class="hide">
  <div class="box">
-  <div class="logo">DATA <span style="color:var(--b)">MARKET</span></div>
+  <div class="logo">DATA <span>MARKET</span></div>
   <div class="at"><button id="tl" class="on" onclick="authTab(0)">Đăng nhập</button><button id="tr" onclick="authTab(1)">Tạo tài khoản</button></div>
   <div id="fl">
    <label>Tài khoản</label><input id="lu" autocomplete="username">
@@ -81,18 +78,32 @@ th{background:#151d2a;color:#91a0b5;font-size:11px;text-transform:uppercase}tr:l
 <div id="toast"></div>
 
 <script>
-const sb=supabase.createClient("https://xkluafsvaxfbhxbiwpje.supabase.co","sb_publishable_Q2fifBxuVAXMPcGryWM4Lw_u7xM608o");
+const URL_="https://xkluafsvaxfbhxbiwpje.supabase.co",KEY="sb_publishable_Q2fifBxuVAXMPcGryWM4Lw_u7xM608o";
 const $=id=>document.getElementById(id);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=v=>Number(v||0).toLocaleString('vi-VN')+'đ';
 const fmt=v=>v?new Date(v).toLocaleString('vi-VN'):'';
-const mail=u=>u.toLowerCase()+'@datamarket.app';
 const TABS=[['home','🏠 Tổng quan'],['bank','🏦 Bank'],['acc','🎮 ACC'],['reg','📝 REG'],['hist','🧾 Lịch sử']];
 const ADMIN=[['users','👥 Users'],['abank','📥 Kho Bank'],['aprod','📦 ACC Products'],['areg','📋 Đơn REG'],['aset','⚙️ Cài đặt']];
-let me=null,cfg={bank_price:1000,reg_fee:5000},tab='home',tm;
+let me=null,token=null,tab='home',tm;
+try{token=localStorage.getItem('mk_token')}catch{}
+function setToken(t){token=t;try{t?localStorage.setItem('mk_token',t):localStorage.removeItem('mk_token')}catch{}}
 
 function toast(m){const e=$('toast');e.textContent=m;e.classList.add('on');clearTimeout(tm);tm=setTimeout(()=>e.classList.remove('on'),2800)}
-async function run(p){const r=await p;if(r.error){toast(r.error.message);return{err:1}}return{data:r.data}}
+async function rpc(name,args={},auth=true){
+ try{
+  const r=await fetch(URL_+'/rest/v1/rpc/'+name,{method:'POST',
+   headers:{apikey:KEY,'Content-Type':'application/json'},
+   body:JSON.stringify(auth?{p_token:token,...args}:args)});
+  const j=await r.json().catch(()=>null);
+  if(!r.ok){
+   const m=(j&&j.message)||'Lỗi kết nối ('+r.status+')';
+   if(/hết hạn/.test(m)&&auth)expire();
+   toast(m);return{err:1,msg:m};
+  }
+  return{data:j};
+ }catch(e){toast('Không kết nối được máy chủ');return{err:1,msg:'Không kết nối được máy chủ'}}
+}
 function table(h,rows){if(!rows.length)return'<div class="empty">Chưa có dữ liệu.</div>';
  return`<div class="tw"><table><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`}
 function badge(s){const m={pending:['Chờ xử lý','yellow'],processing:['Đang xử lý','blue'],done:['Hoàn thành','green'],cancelled:['Đã hủy','red']}[s]||[s,'blue'];
@@ -103,44 +114,38 @@ function msg(t,ok){$('amsg').innerHTML=t?`<div class="note ${ok?'ok':'err'}">${e
 function authTab(r){$('fl').classList.toggle('hide',!!r);$('fr').classList.toggle('hide',!r);
  $('tl').classList.toggle('on',!r);$('tr').classList.toggle('on',!!r);msg('')}
 function show(b){$('auth').classList.toggle('hide',b);$('app').classList.toggle('hide',!b)}
+function expire(){setToken(null);me=null;show(false)}
 
 async function signup(){
- const u=$('ru').value.trim(),p=$('rp').value;
- if(!/^[a-z0-9_]{3,20}$/i.test(u))return msg('Tài khoản 3-20 ký tự: chữ, số, dấu _');
- if(p.length<6)return msg('Mật khẩu tối thiểu 6 ký tự');
+ const p=$('rp').value;
  if(p!==$('rp2').value)return msg('Mật khẩu nhập lại không khớp');
- const{error}=await sb.auth.signUp({email:mail(u),password:p});
- if(error)return msg(error.message);
- await sb.auth.signOut();
+ const r=await rpc('mk_register',{p_user:$('ru').value,p_pass:p},false);
+ if(r.err)return msg(r.msg);
+ ['ru','rp','rp2'].forEach(i=>$(i).value='');
  msg('Tạo tài khoản thành công. Chờ admin duyệt.',1);
 }
 async function login(){
  msg('');
- const{error}=await sb.auth.signInWithPassword({email:mail($('lu').value.trim()),password:$('lp').value});
- if(error)return msg(error.message==='Invalid login credentials'?'Sai tài khoản hoặc mật khẩu':error.message);
- boot();
+ const r=await rpc('mk_login',{p_user:$('lu').value,p_pass:$('lp').value},false);
+ if(r.err)return msg(r.msg);
+ setToken(r.data.token);$('lp').value='';boot();
 }
-async function loadMe(){
- const{data:s}=await sb.auth.getSession();if(!s.session)return null;
- const{data}=await sb.from('dm_profiles').select('*').eq('id',s.session.user.id).maybeSingle();return data;
-}
-async function refreshMe(){const p=await loadMe();if(p){me=p;$('bal').textContent=money(p.balance)}}
 async function boot(){
- const p=await loadMe();
- if(!p){show(false);return}
- if(p.disabled||!p.approved){await sb.auth.signOut();show(false);msg(p.disabled?'Tài khoản đã bị khóa':'Tài khoản đang chờ admin duyệt');return}
- me=p;
- const{data:c}=await sb.from('dm_settings').select('*').eq('id',1).maybeSingle();if(c)cfg=c;
- show(true);
+ if(!token){show(false);return}
+ const r=await rpc('mk_me');
+ if(r.err){show(false);return}
+ me=r.data;show(true);
  $('tabs').innerHTML=[...TABS,...(me.role==='admin'?ADMIN:[])].map(([k,l],i)=>
   `<button data-k="${k}" class="${i>=TABS.length?'adm':''}" onclick="go('${k}')">${l}</button>`).join('');
  go(tab);
 }
-async function logout(){await sb.auth.signOut();me=null;show(false);authTab(0)}
+async function logout(){if(token)await rpc('mk_logout');expire();authTab(0)}
 
 /* ---------- ROUTER ---------- */
 async function go(k){
- tab=k;await refreshMe();
+ tab=k;
+ const r=await rpc('mk_me');if(r.err)return;
+ me=r.data;$('bal').textContent=money(me.balance);
  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));
  await V[k]();
 }
@@ -149,34 +154,34 @@ const V={
  home(){
   $('view').innerHTML=`<h2>Xin chào ${esc(me.username)}</h2><div class="stats">
   <div class="stat"><span>Số dư</span><b>${money(me.balance)}</b></div>
-  <div class="stat"><span>Giá Bank / data</span><b>${money(cfg.bank_price)}</b></div>
-  <div class="stat"><span>Phí REG</span><b>${money(cfg.reg_fee)}</b></div>
+  <div class="stat"><span>Giá Bank / data</span><b>${money(me.bank_price)}</b></div>
+  <div class="stat"><span>Phí REG</span><b>${money(me.reg_fee)}</b></div>
   <div class="stat"><span>Quyền</span><b>${esc(me.role)}</b></div></div>`;
  },
  async bank(){
   $('view').innerHTML=`<h2>Bank Data</h2><div class="card row">
   <input id="bs" placeholder="Tìm tên (từ 4 ký tự)" oninput="dbn()">
   <input id="bb" placeholder="Ngân hàng (vd: VCB)" oninput="dbn()">
-  <button class="btn p" onclick="buyBank(null)">Mua ngẫu nhiên ${money(cfg.bank_price)}</button></div><div id="bl"></div>`;
+  <button class="btn p" onclick="buyBank(null)">Mua ngẫu nhiên ${money(me.bank_price)}</button></div><div id="bl"></div>`;
   bankList();
  },
  async acc(){
-  const r=await run(sb.rpc('dm_products_list'));if(r.err)return;
+  const r=await rpc('mk_products');if(r.err)return;
   const l=r.data.filter(p=>p.active);
   $('view').innerHTML='<h2>ACC</h2>'+(l.length?`<div class="grid">${l.map(p=>`<div class="card"><b>${esc(p.name)}</b>
   <p class="mu">${esc(p.description||'')}</p><p class="mu">Tồn kho: <b>${p.stock}</b></p>
   <div class="price">${money(p.price)}</div><button class="btn p" ${p.stock?'':'disabled'} onclick="buyAcc('${p.id}')">Mua</button></div>`).join('')}</div>`:'<div class="empty">Chưa có sản phẩm.</div>');
  },
  async reg(){
-  const r=await run(sb.from('dm_reg').select('*').eq('user_id',me.id).order('created_at',{ascending:false}));if(r.err)return;
+  const r=await rpc('mk_my_reg');if(r.err)return;
   $('view').innerHTML=`<h2>REG ACC</h2><div class="card"><div class="row"><input id="gs" placeholder="STK"><input id="gn" placeholder="Tên chủ TK"></div>
   <div class="row" style="margin-top:10px"><input id="gb" placeholder="Ngân hàng"><input id="gt" placeholder="Ghi chú"></div>
-  <div class="note">Phí REG: <b>${money(cfg.reg_fee)}</b></div><button class="btn p" onclick="mkReg()">Gửi đơn REG</button></div>
+  <div class="note">Phí REG: <b>${money(me.reg_fee)}</b></div><button class="btn p" onclick="mkReg()">Gửi đơn REG</button></div>
   <h3>Đơn của tôi</h3>`+table(['STK','Tên','Bank','Phí','Trạng thái'],r.data.map(x=>
   `<tr><td>${esc(x.stk)}</td><td>${esc(x.name)}</td><td>${esc(x.bank)}</td><td>${money(x.fee)}</td><td>${badge(x.status)}</td></tr>`));
  },
  async hist(){
-  const r=await run(sb.from('dm_history').select('*').eq('user_id',me.id).order('created_at',{ascending:false}).limit(200));if(r.err)return;
+  const r=await rpc('mk_history');if(r.err)return;
   $('view').innerHTML='<h2>Lịch sử</h2>'+table(['Loại','Nội dung','Số tiền','Thời gian'],r.data.map(x=>
   `<tr><td><span class="bd blue">${esc(x.type)}</span></td><td>${esc(x.content)}</td>
   <td><b style="color:${x.amount<0?'#ff7180':'#55e4aa'}">${x.amount>0?'+':''}${money(x.amount)}</b></td><td>${fmt(x.created_at)}</td></tr>`));
@@ -184,27 +189,26 @@ const V={
 
  /* ---- admin ---- */
  async users(){
-  const r=await run(sb.from('dm_profiles').select('*').order('created_at',{ascending:false}));if(r.err)return;
+  const r=await rpc('mk_admin_users');if(r.err)return;
   $('view').innerHTML='<h2>Users</h2>'+table(['User','Quyền','Duyệt','Khóa','Số dư',''],r.data.map(u=>
   `<tr><td><b>${esc(u.username)}</b></td><td>${esc(u.role)}</td>
   <td>${u.approved?'<span class="bd green">Đã duyệt</span>':'<span class="bd yellow">Chờ duyệt</span>'}</td>
   <td>${u.disabled?'<span class="bd red">Khóa</span>':'<span class="bd green">Mở</span>'}</td><td>${money(u.balance)}</td>
   <td>${u.id===me.id?'<span class="bd blue">Bạn</span>':`
-  <button class="btn s g" onclick="updU('${u.id}',{approved:${!u.approved}})">${u.approved?'Bỏ duyệt':'Duyệt'}</button>
-  <button class="btn s w" onclick="updU('${u.id}',{disabled:${!u.disabled}})">${u.disabled?'Mở':'Khóa'}</button>
+  <button class="btn s g" onclick="updU('${u.id}',{p_approved:${!u.approved}})">${u.approved?'Bỏ duyệt':'Duyệt'}</button>
+  <button class="btn s w" onclick="updU('${u.id}',{p_disabled:${!u.disabled}})">${u.disabled?'Mở':'Khóa'}</button>
   <button class="btn s p" onclick="addBal('${u.id}','${esc(u.username)}')">± Tiền</button>`}</td></tr>`));
  },
  async abank(){
-  const[c,l]=await Promise.all([sb.from('dm_bank').select('*',{count:'exact',head:true}),
-   sb.from('dm_bank').select('*').order('created_at',{ascending:false}).limit(100)]);
-  $('view').innerHTML=`<h2>Kho Bank</h2><div class="card"><div class="note">Mỗi dòng: <b>STK|Tên|Ngân hàng</b> · Kho hiện có <b>${c.count||0}</b></div>
+  const r=await rpc('mk_admin_bank_list');if(r.err)return;
+  $('view').innerHTML=`<h2>Kho Bank</h2><div class="card"><div class="note">Mỗi dòng: <b>STK|Tên|Ngân hàng</b> · Kho hiện có <b>${r.data.count}</b></div>
   <textarea id="bu" placeholder="123456789|NGUYEN VAN A|VCB"></textarea>
   <button class="btn g" style="margin-top:10px" onclick="upBank()">Upload dữ liệu</button></div>`+
-  table(['STK','Tên','Bank',''],(l.data||[]).map(x=>`<tr><td>${esc(x.stk)}</td><td>${esc(x.name)}</td><td>${esc(x.bank)}</td>
-  <td><button class="btn s d" onclick="del('dm_bank','${x.id}','abank')">Xóa</button></td></tr>`));
+  table(['STK','Tên','Bank',''],r.data.rows.map(x=>`<tr><td>${esc(x.stk)}</td><td>${esc(x.name)}</td><td>${esc(x.bank)}</td>
+  <td><button class="btn s d" onclick="del('bank','${x.id}','abank')">Xóa</button></td></tr>`));
  },
  async aprod(){
-  const r=await run(sb.rpc('dm_products_list'));if(r.err)return;const l=r.data;
+  const r=await rpc('mk_products');if(r.err)return;const l=r.data;
   $('view').innerHTML=`<h2>ACC Products</h2>
   <div class="card"><div class="row"><input id="pn" placeholder="Tên sản phẩm"><input id="pd" placeholder="Mô tả"><input id="pp" type="number" placeholder="Giá"></div>
   <button class="btn p" style="margin-top:10px" onclick="addProd()">+ Thêm sản phẩm</button></div>
@@ -214,18 +218,18 @@ const V={
   table(['Tên','Giá','Tồn','Trạng thái',''],l.map(p=>`<tr><td><b>${esc(p.name)}</b></td><td>${money(p.price)}</td><td>${p.stock}</td>
   <td>${p.active?'<span class="bd green">ON</span>':'<span class="bd red">OFF</span>'}</td>
   <td><button class="btn s w" onclick="togProd('${p.id}',${!p.active})">${p.active?'Tắt':'Bật'}</button>
-  <button class="btn s d" onclick="del('dm_products','${p.id}','aprod')">Xóa</button></td></tr>`));
+  <button class="btn s d" onclick="del('product','${p.id}','aprod')">Xóa</button></td></tr>`));
  },
  async areg(){
-  const r=await run(sb.from('dm_reg').select('*').order('created_at',{ascending:false}));if(r.err)return;
+  const r=await rpc('mk_admin_reg_list');if(r.err)return;
   const o=(x,v,t)=>`<option value="${v}" ${x.status===v?'selected':''}>${t}</option>`;
   $('view').innerHTML='<h2>Đơn REG</h2>'+table(['User','STK','Tên','Bank','Phí','Ghi chú','Trạng thái'],r.data.map(x=>
   `<tr><td>${esc(x.username)}</td><td>${esc(x.stk)}</td><td>${esc(x.name)}</td><td>${esc(x.bank)}</td><td>${money(x.fee)}</td><td>${esc(x.note||'')}</td>
   <td><select onchange="regStatus('${x.id}',this.value)">${o(x,'pending','Chờ')}${o(x,'processing','Đang xử lý')}${o(x,'done','Hoàn thành')}${o(x,'cancelled','Hủy')}</select></td></tr>`));
  },
  aset(){
-  $('view').innerHTML=`<h2>Cài đặt</h2><div class="card"><label>Giá Bank / data</label><input id="sb" type="number" value="${cfg.bank_price}">
-  <label>Phí REG</label><input id="sr" type="number" value="${cfg.reg_fee}"><button class="btn p" style="margin-top:12px" onclick="saveSet()">Lưu cài đặt</button></div>`;
+  $('view').innerHTML=`<h2>Cài đặt</h2><div class="card"><label>Giá Bank / data</label><input id="sb" type="number" value="${me.bank_price}">
+  <label>Phí REG</label><input id="sr" type="number" value="${me.reg_fee}"><button class="btn p" style="margin-top:12px" onclick="saveSet()">Lưu cài đặt</button></div>`;
  }
 };
 
@@ -233,58 +237,57 @@ const V={
 const dbn=()=>{clearTimeout(tm);tm=setTimeout(bankList,350)};
 async function bankList(){
  const s=$('bs').value.trim();
- const r=await run(sb.rpc('dm_bank_list',{p_search:s.length>=4?s:'',p_bank:$('bb').value.trim()}));if(r.err)return;
+ const r=await rpc('mk_bank_list',{p_search:s.length>=4?s:'',p_bank:$('bb').value.trim()});if(r.err)return;
  $('bl').innerHTML=table(['STK','Tên','Bank',''],r.data.map(x=>`<tr><td>${esc(x.stk)}</td><td>${esc(x.name)}</td><td>${esc(x.bank)}</td>
- <td><button class="btn s p" onclick="buyBank('${x.id}')">Mua ${money(cfg.bank_price)}</button></td></tr>`));
+ <td><button class="btn s p" onclick="buyBank('${x.id}')">Mua ${money(me.bank_price)}</button></td></tr>`));
 }
 async function buyBank(id){
- if(!confirm('Mua dữ liệu này với giá '+money(cfg.bank_price)+'?'))return;
- const r=await run(sb.rpc('dm_buy_bank',{p_id:id}));if(r.err)return;
+ if(!confirm('Mua dữ liệu này với giá '+money(me.bank_price)+'?'))return;
+ const r=await rpc('mk_buy_bank',{p_id:id});if(r.err)return;
  alert(`STK: ${r.data.stk}\nTên: ${r.data.name}\nNgân hàng: ${r.data.bank}`);go('bank');
 }
 async function buyAcc(id){
  if(!confirm('Xác nhận mua?'))return;
- const r=await run(sb.rpc('dm_buy_acc',{p_product:id}));if(r.err)return;
+ const r=await rpc('mk_buy_acc',{p_product:id});if(r.err)return;
  alert(`${r.data.product}\n\nTK: ${r.data.acc_user}\nMK: ${r.data.acc_pass}`);go('acc');
 }
 async function mkReg(){
  const v=['gs','gn','gb','gt'].map(i=>$(i).value.trim());
  if(!v[0]||!v[1]||!v[2])return toast('Nhập đủ STK, tên và ngân hàng');
- const r=await run(sb.rpc('dm_create_reg',{p_stk:v[0],p_name:v[1],p_bank:v[2],p_note:v[3]}));if(r.err)return;
+ const r=await rpc('mk_reg_create',{p_stk:v[0],p_name:v[1],p_bank:v[2],p_note:v[3]});if(r.err)return;
  toast('Đã gửi đơn REG');go('reg');
 }
-async function updU(id,f){const r=await run(sb.from('dm_profiles').update(f).eq('id',id));if(!r.err)go('users')}
+async function updU(id,f){const r=await rpc('mk_admin_user_set',{p_id:id,...f});if(!r.err)go('users')}
 async function addBal(id,name){
  const a=Number(prompt('Cộng bao nhiêu tiền cho '+name+'? (số âm để trừ)'));if(!a)return;
- const r=await run(sb.rpc('dm_add_balance',{p_user:id,p_amount:a}));if(!r.err){toast('Đã cập nhật');go('users')}
+ const r=await rpc('mk_admin_balance',{p_id:id,p_amount:a});if(!r.err){toast('Đã cập nhật');go('users')}
 }
-async function del(table,id,back){
+async function del(kind,id,back){
  if(!confirm('Xóa mục này?'))return;
- const r=await run(sb.from(table).delete().eq('id',id));if(!r.err){toast('Đã xóa');go(back)}
+ const r=await rpc('mk_admin_delete',{p_kind:kind,p_id:id});if(!r.err){toast('Đã xóa');go(back)}
 }
 const lines=t=>t.split(/\r?\n/).map(x=>x.trim()).filter(Boolean).map(x=>x.split('|').map(y=>y.trim()));
 async function upBank(){
  const rows=lines($('bu').value).filter(p=>p.length>=3).map(p=>({stk:p[0],name:p[1],bank:p.slice(2).join('|')}));
  if(!rows.length)return toast('Không đọc được dữ liệu');
- const r=await run(sb.from('dm_bank').insert(rows));if(!r.err){toast(`Đã upload ${rows.length} dữ liệu`);go('abank')}
+ const r=await rpc('mk_admin_bank_add',{p_rows:rows});if(!r.err){toast(`Đã upload ${r.data} dữ liệu`);go('abank')}
 }
 async function addProd(){
- const name=$('pn').value.trim();if(!name)return toast('Nhập tên sản phẩm');
- const r=await run(sb.from('dm_products').insert({name,description:$('pd').value.trim(),price:Number($('pp').value||0)}));
+ const n=$('pn').value.trim();if(!n)return toast('Nhập tên sản phẩm');
+ const r=await rpc('mk_admin_product_add',{p_name:n,p_desc:$('pd').value.trim(),p_price:Number($('pp').value||0)});
  if(!r.err){toast('Đã thêm');go('aprod')}
 }
 async function upStock(){
  const pid=$('ps').value;if(!pid)return toast('Hãy tạo sản phẩm trước');
- const rows=lines($('pu').value).filter(p=>p.length>=2&&p[0]).map(p=>({product_id:pid,acc_user:p[0],acc_pass:p.slice(1).join('|')}));
+ const rows=lines($('pu').value).filter(p=>p.length>=2&&p[0]).map(p=>({u:p[0],p:p.slice(1).join('|')}));
  if(!rows.length)return toast('Không đọc được dữ liệu');
- const r=await run(sb.from('dm_stock').insert(rows));if(!r.err){toast(`Đã upload ${rows.length} ACC`);go('aprod')}
+ const r=await rpc('mk_admin_stock_add',{p_product:pid,p_rows:rows});if(!r.err){toast(`Đã upload ${r.data} ACC`);go('aprod')}
 }
-async function togProd(id,v){const r=await run(sb.from('dm_products').update({active:v}).eq('id',id));if(!r.err)go('aprod')}
-async function regStatus(id,status){const r=await run(sb.from('dm_reg').update({status}).eq('id',id));if(!r.err)toast('Đã cập nhật')}
+async function togProd(id,v){const r=await rpc('mk_admin_product_toggle',{p_id:id,p_active:v});if(!r.err)go('aprod')}
+async function regStatus(id,s){const r=await rpc('mk_admin_reg_status',{p_id:id,p_status:s});if(!r.err)toast('Đã cập nhật')}
 async function saveSet(){
- const v={bank_price:Number($('sb').value||1000),reg_fee:Number($('sr').value||5000)};
- const r=await run(sb.from('dm_settings').update(v).eq('id',1));if(r.err)return;
- cfg={...cfg,...v};toast('Đã lưu cài đặt');
+ const r=await rpc('mk_admin_settings',{p_bank_price:Number($('sb').value||1000),p_reg_fee:Number($('sr').value||5000)});
+ if(!r.err){toast('Đã lưu cài đặt');go('aset')}
 }
 
 boot();
