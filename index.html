@@ -4,1811 +4,4305 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Bank Data Manager</title>
+<title>Data & Acc Manager</title>
+
 <style>
 *{box-sizing:border-box}
+
 body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  background:#0f1115;color:#eee;
+    margin:0;
+    background:#0d1015;
+    color:#f1f1f1;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
 }
-button,input,select{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
+
+button,input,select,textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+.container{
+    width:100%;
+    max-width:1150px;
+    margin:auto;
+    padding:15px;
+}
 
 .header{
-  background:#171a21;
-  padding:15px;
-  position:sticky;top:0;z-index:20;
-  border-bottom:1px solid #292d36;
+    background:#171b22;
+    border-bottom:1px solid #292e38;
+    position:sticky;
+    top:0;
+    z-index:50;
 }
-.header h1{margin:0;font-size:20px}
-.header small{color:#888}
 
-.container{max-width:1100px;margin:auto;padding:15px}
+.header-inner{
+    max-width:1150px;
+    margin:auto;
+    padding:13px 15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-title{
+    font-size:19px;
+    font-weight:800;
+}
+
+.logo-sub{
+    font-size:12px;
+    color:#777;
+    margin-top:2px;
+}
+
+.user-area{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
 .card{
-  background:#171a21;
-  border:1px solid #292d36;
-  border-radius:14px;
-  padding:16px;
-  margin-bottom:15px;
+    background:#171b22;
+    border:1px solid #292e38;
+    border-radius:15px;
+    padding:16px;
+    margin-bottom:15px;
 }
-.card h2,.card h3{margin-top:0}
 
-input,select{
-  width:100%;
-  background:#0f1115;
-  color:#fff;
-  border:1px solid #343945;
-  border-radius:9px;
-  padding:11px 12px;
-  outline:none;
+.card h2{
+    margin:0 0 14px;
+    font-size:18px;
 }
-input:focus,select:focus{border-color:#f5b400}
 
-.btn{
-  border:0;
-  border-radius:9px;
-  padding:11px 15px;
-  color:#fff;
-  background:#333844;
+.card h3{
+    margin:0 0 10px;
 }
-.btn:hover{filter:brightness(1.1)}
-.btn-primary{background:#e09f00;color:#111;font-weight:700}
-.btn-danger{background:#c93636}
-.btn-success{background:#16834a}
-.btn-blue{background:#286bd6}
+
+input,select,textarea{
+    width:100%;
+    background:#0d1015;
+    color:#fff;
+    border:1px solid #353b47;
+    border-radius:9px;
+    padding:11px 12px;
+    outline:none;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#e2a800;
+}
+
+textarea{
+    resize:vertical;
+    min-height:130px;
+}
+
+label{
+    display:block;
+    color:#9da3ad;
+    font-size:13px;
+    margin-bottom:5px;
+}
+
+.field{
+    margin-bottom:12px;
+}
 
 .row{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
 }
-.row3{grid-template-columns:repeat(3,1fr)}
-@media(max-width:650px){
-  .row,.row3{grid-template-columns:1fr}
+
+.row3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+@media(max-width:700px){
+    .row,
+    .row3{
+        grid-template-columns:1fr;
+    }
+}
+
+.btn{
+    border:0;
+    border-radius:9px;
+    padding:10px 14px;
+    background:#333945;
+    color:#fff;
+}
+
+.btn-primary{
+    background:#e0a300;
+    color:#111;
+    font-weight:700;
+}
+
+.btn-success{
+    background:#17864d;
+}
+
+.btn-danger{
+    background:#c83c3c;
+}
+
+.btn-blue{
+    background:#286bd5;
+}
+
+.btn-small{
+    padding:7px 9px;
+    font-size:12px;
+}
+
+.full{
+    width:100%;
 }
 
 .tabs{
-  display:flex;
-  gap:7px;
-  overflow:auto;
-  margin-bottom:15px;
+    display:flex;
+    gap:7px;
+    overflow:auto;
+    margin-bottom:15px;
 }
+
 .tab{
-  white-space:nowrap;
-  padding:10px 14px;
-  border-radius:9px;
-  border:1px solid #343945;
-  background:#171a21;color:#aaa;
+    flex:none;
+    border:1px solid #343a46;
+    background:#171b22;
+    color:#aaa;
+    padding:10px 14px;
+    border-radius:9px;
 }
-.tab.active{background:#e09f00;color:#111;border-color:#e09f00;font-weight:700}
+
+.tab.active{
+    background:#e0a300;
+    border-color:#e0a300;
+    color:#111;
+    font-weight:700;
+}
+
+/* WALLET */
+
+.wallet{
+    background:linear-gradient(135deg,#312500,#19150a);
+    border:1px solid #6e5400;
+    border-radius:15px;
+    padding:17px;
+    margin-bottom:15px;
+}
+
+.wallet-label{
+    color:#c9bd91;
+    font-size:13px;
+}
+
+.wallet-money{
+    font-size:29px;
+    font-weight:900;
+    margin-top:4px;
+    color:#ffd447;
+}
+
+.wallet-info{
+    margin-top:8px;
+    color:#aaa;
+    font-size:12px;
+}
+
+/* STATS */
 
 .stat-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
 }
-@media(max-width:700px){.stat-grid{grid-template-columns:repeat(2,1fr)}}
+
+@media(max-width:700px){
+    .stat-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
 .stat{
-  background:#101217;
-  border:1px solid #292d36;
-  padding:14px;
-  border-radius:12px;
+    background:#0f1217;
+    border:1px solid #292e38;
+    border-radius:12px;
+    padding:13px;
 }
-.stat b{font-size:25px;display:block;margin-top:5px}
-.stat span{color:#888;font-size:13px}
+
+.stat span{
+    display:block;
+    color:#858b95;
+    font-size:12px;
+}
+
+.stat b{
+    display:block;
+    font-size:23px;
+    margin-top:5px;
+}
+
+/* BANK */
 
 .bank-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:9px;
 }
-@media(max-width:700px){.bank-grid{grid-template-columns:repeat(2,1fr)}}
+
+@media(max-width:700px){
+    .bank-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
 .bank-box{
-  background:#101217;
-  border:1px solid #292d36;
-  border-radius:11px;
-  padding:13px;
+    background:#0f1217;
+    border:1px solid #292e38;
+    border-radius:11px;
+    padding:12px;
 }
-.bank-box .bank-name{font-weight:700}
-.bank-box .bank-count{
-  color:#e6aa00;
-  font-size:23px;
-  font-weight:800;
-  margin-top:5px;
+
+.bank-name{
+    font-weight:700;
+    font-size:13px;
 }
-.bank-box small{color:#777}
+
+.bank-count{
+    color:#e9b400;
+    font-size:22px;
+    font-weight:900;
+    margin-top:4px;
+}
+
+.bank-price{
+    color:#777;
+    font-size:11px;
+    margin-top:2px;
+}
+
+/* TAKE MODE */
 
 .mode-buttons{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-}
-@media(max-width:650px){.mode-buttons{grid-template-columns:1fr}}
-.mode-btn{
-  background:#101217;
-  color:#bbb;
-  border:1px solid #343945;
-  border-radius:10px;
-  padding:13px;
-}
-.mode-btn.active{
-  background:#332600;
-  color:#ffc400;
-  border-color:#e09f00;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
 }
 
-.search-results{
-  max-height:260px;
-  overflow:auto;
-  margin-top:8px;
+@media(max-width:650px){
+    .mode-buttons{
+        grid-template-columns:1fr;
+    }
 }
-.name-result{
-  padding:12px;
-  border:1px solid #30343d;
-  background:#101217;
-  border-radius:9px;
-  margin-bottom:7px;
-  cursor:pointer;
+
+.mode-btn{
+    border:1px solid #353b47;
+    background:#0f1217;
+    color:#aaa;
+    border-radius:10px;
+    padding:12px;
 }
-.name-result.selected{
-  border-color:#e09f00;
-  background:#332600;
+
+.mode-btn.active{
+    background:#342900;
+    border-color:#e0a300;
+    color:#ffd13b;
 }
-.name-result b{display:block}
-.name-result span{color:#888;font-size:13px}
 
 .notice{
-  padding:11px 13px;
-  border-radius:9px;
-  background:#222731;
-  color:#bbb;
-  margin-top:10px;
-  font-size:14px;
+    margin-top:10px;
+    padding:10px 12px;
+    border-radius:9px;
+    background:#222731;
+    color:#b8bec8;
+    font-size:13px;
 }
-.notice.warn{background:#392b00;color:#ffd45b}
-.notice.success{background:#103b27;color:#75e0a7}
-.notice.error{background:#3d1818;color:#ff9b9b}
+
+.notice.success{
+    background:#103b27;
+    color:#78e3aa;
+}
+
+.notice.error{
+    background:#401a1a;
+    color:#ff9d9d;
+}
+
+.notice.warn{
+    background:#3c2d00;
+    color:#ffd761;
+}
+
+/* SEARCH */
+
+.name-result{
+    background:#0f1217;
+    border:1px solid #303641;
+    border-radius:10px;
+    padding:11px;
+    margin-top:7px;
+    cursor:pointer;
+}
+
+.name-result:hover,
+.name-result.selected{
+    border-color:#e0a300;
+    background:#302700;
+}
+
+.name-result b{
+    display:block;
+}
+
+.name-result small{
+    color:#858b95;
+}
+
+.results{
+    max-height:260px;
+    overflow:auto;
+}
+
+/* OUTPUT */
 
 .output{
-  background:#080a0d;
-  border:1px solid #292d36;
-  border-radius:10px;
-  padding:12px;
-  white-space:pre-wrap;
-  word-break:break-all;
-  max-height:300px;
-  overflow:auto;
-  font-family:monospace;
-  font-size:13px;
+    background:#080a0d;
+    border:1px solid #292e38;
+    border-radius:10px;
+    padding:12px;
+    max-height:320px;
+    overflow:auto;
+    white-space:pre-wrap;
+    word-break:break-all;
+    font-family:monospace;
+    font-size:13px;
 }
 
-.table-wrap{overflow:auto}
-table{width:100%;border-collapse:collapse;min-width:600px}
+/* ACC */
+
+.acc-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+@media(max-width:900px){
+    .acc-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .acc-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+.acc-card{
+    background:#101319;
+    border:1px solid #303641;
+    border-radius:14px;
+    padding:15px;
+}
+
+.acc-icon{
+    width:42px;
+    height:42px;
+    border-radius:11px;
+    background:#292100;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.acc-title{
+    font-weight:800;
+    font-size:16px;
+}
+
+.acc-desc{
+    color:#858b95;
+    font-size:12px;
+    min-height:32px;
+    margin-top:4px;
+}
+
+.acc-price{
+    font-size:20px;
+    color:#ffd13b;
+    font-weight:900;
+    margin-top:12px;
+}
+
+.acc-stock{
+    color:#8e959f;
+    font-size:12px;
+    margin:5px 0 12px;
+}
+
+/* TABLE */
+
+.table-wrap{
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    min-width:650px;
+    border-collapse:collapse;
+}
+
 th,td{
-  padding:10px;
-  border-bottom:1px solid #292d36;
-  text-align:left;
+    padding:9px;
+    border-bottom:1px solid #292e38;
+    text-align:left;
+    font-size:13px;
 }
-th{color:#aaa;font-size:13px}
-td{font-size:14px}
 
-.login{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+th{
+    color:#858b95;
 }
-.login-box{
-  width:100%;
-  max-width:420px;
-  background:#171a21;
-  border:1px solid #292d36;
-  border-radius:18px;
-  padding:22px;
-}
-.login-box h1{margin-top:0}
-.field{margin-bottom:11px}
-.field label{
-  display:block;
-  color:#aaa;
-  font-size:13px;
-  margin-bottom:5px;
-}
-.full{width:100%}
-
-.top-user{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-.top-user span{color:#aaa;font-size:14px}
 
 .badge{
-  display:inline-block;
-  padding:4px 8px;
-  border-radius:20px;
-  font-size:11px;
-  background:#263044;
-  color:#9db9ff;
+    display:inline-block;
+    border-radius:20px;
+    padding:4px 8px;
+    font-size:10px;
 }
-.badge.admin{background:#4a3600;color:#ffc400}
-.badge.pending{background:#493700;color:#ffd45b}
-.badge.approved{background:#103b27;color:#72e0a3}
-.badge.disabled{background:#411919;color:#ff9999}
 
-hr{border:0;border-top:1px solid #292d36;margin:18px 0}
+.badge-admin{
+    background:#493700;
+    color:#ffd13b;
+}
 
-.preview{
-  background:#101217;
-  border:1px dashed #353a45;
-  border-radius:10px;
-  padding:12px;
-  margin-top:10px;
+.badge-approved{
+    background:#103b27;
+    color:#73dfa4;
+}
+
+.badge-pending{
+    background:#493700;
+    color:#ffd761;
+}
+
+.badge-disabled{
+    background:#401a1a;
+    color:#ff9999;
+}
+
+/* LOGIN */
+
+.login-page{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.login-box{
+    width:100%;
+    max-width:410px;
+    background:#171b22;
+    border:1px solid #292e38;
+    border-radius:18px;
+    padding:22px;
+}
+
+.login-box h1{
+    margin:0;
+}
+
+.login-sub{
+    color:#777;
+    font-size:13px;
+    margin:5px 0 20px;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:200;
+    background:rgba(0,0,0,.75);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+}
+
+.modal-box{
+    width:100%;
+    max-width:520px;
+    max-height:90vh;
+    overflow:auto;
+    background:#171b22;
+    border:1px solid #303641;
+    border-radius:16px;
+    padding:18px;
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.modal-head h2{
+    margin:0;
+}
+
+/* HISTORY */
+
+.history-item{
+    background:#0f1217;
+    border:1px solid #292e38;
+    border-radius:10px;
+    padding:11px;
+    margin-bottom:7px;
+}
+
+.history-top{
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+}
+
+.history-money{
+    font-weight:800;
+}
+
+.money-plus{
+    color:#4de391;
+}
+
+.money-minus{
+    color:#ff7777;
 }
 
 .empty{
-  text-align:center;
-  padding:25px;
-  color:#777;
+    text-align:center;
+    color:#666;
+    padding:25px 10px;
+}
+
+hr{
+    border:0;
+    border-top:1px solid #292e38;
+    margin:18px 0;
+}
+
+code{
+    background:#0a0c10;
+    padding:2px 5px;
+    border-radius:4px;
 }
 </style>
 </head>
 
 <body>
 
-<div id="loginPage" class="login">
-  <div class="login-box">
-    <h1>🏦 Bank Data Manager</h1>
-    <p style="color:#888">Đăng nhập hoặc đăng ký tài khoản</p>
+<!-- =====================================================
+LOGIN
+===================================================== -->
 
-    <div class="field">
-      <label>Tài khoản</label>
-      <input id="loginUsername" placeholder="Nhập tài khoản">
+<div id="loginPage" class="login-page">
+
+    <div class="login-box">
+
+        <h1>🏦 Data Manager</h1>
+        <div class="login-sub">
+            Hệ thống quản lý data & acc
+        </div>
+
+        <div class="field">
+            <label>Tài khoản</label>
+            <input id="loginUsername" placeholder="Nhập tài khoản">
+        </div>
+
+        <div class="field">
+            <label>Mật khẩu</label>
+            <input id="loginPassword" type="password" placeholder="Nhập mật khẩu">
+        </div>
+
+        <button class="btn btn-primary full" onclick="login()">
+            Đăng nhập
+        </button>
+
+        <button class="btn full" style="margin-top:8px" onclick="openRegister()">
+            Đăng ký tài khoản
+        </button>
+
+        <div id="loginMsg"></div>
+
     </div>
 
-    <div class="field">
-      <label>Mật khẩu</label>
-      <input id="loginPassword" type="password" placeholder="Nhập mật khẩu">
-    </div>
-
-    <button class="btn btn-primary full" onclick="login()">Đăng nhập</button>
-
-    <button class="btn full" style="margin-top:8px" onclick="showRegister()">
-      Đăng ký tài khoản
-    </button>
-
-    <div id="loginMsg"></div>
-  </div>
 </div>
+
+
+<!-- =====================================================
+APP
+===================================================== -->
 
 <div id="app" class="hidden">
 
-  <div class="header">
-    <div class="container" style="padding:0">
-      <div class="top-user">
-        <div>
-          <h1>🏦 Bank Data Manager</h1>
-          <small id="userInfo"></small>
-        </div>
-        <button class="btn" onclick="logout()">Thoát</button>
-      </div>
-    </div>
-  </div>
+    <div class="header">
 
-  <div class="container">
+        <div class="header-inner">
 
-    <div id="mainTabs" class="tabs"></div>
+            <div>
+                <div class="logo-title">
+                    🏦 Data Manager
+                </div>
 
-    <!-- USER / ADMIN DATA -->
-    <section id="dataSection">
-
-      <div class="card">
-        <h2>📦 Kho data</h2>
-        <p style="color:#888;margin-top:-5px">
-          Chỉ hiển thị số lượng. STK và tên không hiển thị trước khi xuất.
-        </p>
-
-        <div id="bankStats" class="bank-grid"></div>
-      </div>
-
-      <div class="card">
-        <h2>📤 Lấy data</h2>
-
-        <div class="mode-buttons">
-          <button class="mode-btn active" id="modeBankBtn" onclick="setTakeMode('bank')">
-            🏦 Theo ngân hàng
-          </button>
-
-          <button class="mode-btn" id="modeNameBtn" onclick="setTakeMode('name')">
-            🔎 Theo tên
-          </button>
-
-          <button class="mode-btn" id="modeRandomBtn" onclick="setTakeMode('random')">
-            🎲 Ngẫu nhiên toàn kho
-          </button>
-        </div>
-
-        <hr>
-
-        <!-- BANK MODE -->
-        <div id="bankMode">
-          <div class="row">
-            <div class="field">
-              <label>Chọn ngân hàng</label>
-              <select id="takeBank"></select>
+                <div class="logo-sub" id="headerUser"></div>
             </div>
 
-            <div class="field">
-              <label>Số lượng</label>
-              <input id="bankQty" type="number" min="1" value="1">
-            </div>
-          </div>
+            <div class="user-area">
 
-          <button class="btn btn-primary full" onclick="takeByBank()">
-            🎲 Xuất ngẫu nhiên theo ngân hàng
-          </button>
-        </div>
-
-        <!-- NAME MODE -->
-        <div id="nameMode" class="hidden">
-
-          <div class="field">
-            <label>
-              Nhập tên cần tìm
-              <span style="color:#e0a900">(tối thiểu 4 ký tự)</span>
-            </label>
-
-            <input
-              id="nameSearch"
-              placeholder="Ví dụ: NGUY"
-              oninput="searchNames()"
-            >
-          </div>
-
-          <div id="nameResults"></div>
-
-          <div id="selectedNameBox" class="hidden">
-            <div class="preview">
-              <b>Tên đã chọn:</b>
-              <span id="selectedNameText"></span>
-            </div>
-
-            <div class="row" style="margin-top:10px">
-              <div>
-                <label style="display:block;color:#aaa;font-size:13px;margin-bottom:5px">
-                  Số lượng
-                </label>
-                <input id="nameQty" type="number" min="1" value="1">
-              </div>
-              <div style="display:flex;align-items:end">
-                <button class="btn btn-primary full" onclick="takeByName()">
-                  🎲 Xuất ngẫu nhiên
+                <button class="btn btn-small" onclick="openHistory()">
+                    📜 Lịch sử
                 </button>
-              </div>
+
+                <button class="btn btn-small" onclick="logout()">
+                    Thoát
+                </button>
+
             </div>
-          </div>
+
         </div>
 
-        <!-- RANDOM MODE -->
-        <div id="randomMode" class="hidden">
+    </div>
 
-          <div class="field">
-            <label>Số lượng cần lấy</label>
-            <input id="randomQty" type="number" min="1" value="1">
-          </div>
 
-          <button class="btn btn-primary full" onclick="takeRandom()">
-            🎲 Lấy ngẫu nhiên toàn kho
-          </button>
+    <div class="container">
 
-          <div class="notice">
-            Hệ thống sẽ lấy ngẫu nhiên từ toàn bộ ngân hàng đang còn data.
-          </div>
-        </div>
+        <div id="tabs" class="tabs"></div>
 
-        <div id="takeMsg"></div>
-      </div>
 
-      <div id="resultCard" class="card hidden">
-        <h2>📋 Data vừa xuất</h2>
+        <!-- =================================================
+        DATA USER
+        ================================================= -->
 
-        <div id="resultOutput" class="output"></div>
+        <section id="dataSection">
 
-        <button class="btn btn-success full" style="margin-top:10px" onclick="copyResult()">
-          📋 Sao chép lại
-        </button>
-      </div>
+            <div class="wallet">
 
-    </section>
+                <div class="wallet-label">
+                    SỐ DƯ CỦA BẠN
+                </div>
 
-    <!-- ADMIN -->
-    <section id="adminSection" class="hidden">
+                <div class="wallet-money" id="userBalance">
+                    0đ
+                </div>
 
-      <div class="card">
-        <h2>📊 Tổng quan</h2>
+                <div class="wallet-info">
+                    Giá data: <b>1.000đ / data</b>
+                </div>
 
-        <div class="stat-grid">
-          <div class="stat">
-            <span>Tổng data</span>
-            <b id="totalBankStat">0</b>
-          </div>
+            </div>
 
-          <div class="stat">
-            <span>Đã xuất</span>
-            <b id="takenBankStat">0</b>
-          </div>
 
-          <div class="stat">
-            <span>Acc còn lại</span>
-            <b id="totalAccStat">0</b>
-          </div>
+            <div class="card">
 
-          <div class="stat">
-            <span>User chờ duyệt</span>
-            <b id="pendingUserStat">0</b>
-          </div>
-        </div>
-      </div>
+                <h2>📦 Kho data</h2>
 
-      <div class="card">
-        <h2>👥 Quản lý người dùng</h2>
-        <div id="usersTable"></div>
-      </div>
+                <div class="notice">
+                    STK và tên sẽ <b>không hiển thị trước khi xuất</b>.
+                    Bạn chỉ nhìn thấy số lượng còn lại của từng ngân hàng.
+                </div>
 
-      <div class="card">
-        <h2>📥 Nhập bank data</h2>
+                <div id="bankGrid" class="bank-grid" style="margin-top:12px"></div>
 
-        <p style="color:#888">
-          Mỗi dòng:
-          <code>stk|tên|ngân hàng</code>
-        </p>
+            </div>
 
-        <textarea
-          id="bankImport"
-          style="width:100%;min-height:180px;background:#0f1115;color:white;border:1px solid #343945;border-radius:10px;padding:12px"
-          placeholder="0123456789|NGUYEN VAN A|MB Bank&#10;0987654321|TRAN VAN B|Vietcombank"
-        ></textarea>
 
-        <button class="btn btn-primary" style="margin-top:10px" onclick="importBankData()">
-          📥 Thêm vào kho
-        </button>
+            <div class="card">
 
-        <div id="importMsg"></div>
-      </div>
+                <h2>📤 Lấy data</h2>
 
-      <div class="card">
-        <h2>🎁 Kho acc khuyến mãi</h2>
+                <div class="mode-buttons">
 
-        <p style="color:#888">
-          Mỗi dòng:
-          <code>tk|mk|Khuyến mãi|Giá</code>
-        </p>
+                    <button id="modeBank" class="mode-btn active"
+                        onclick="setMode('bank')">
+                        🏦 Theo ngân hàng
+                    </button>
 
-        <textarea
-          id="accImport"
-          style="width:100%;min-height:150px;background:#0f1115;color:white;border:1px solid #343945;border-radius:10px;padding:12px"
-          placeholder="account1|password1|KM 50K|50000"
-        ></textarea>
+                    <button id="modeName" class="mode-btn"
+                        onclick="setMode('name')">
+                        🔎 Theo tên
+                    </button>
 
-        <button class="btn btn-primary" style="margin-top:10px" onclick="importAccData()">
-          📥 Thêm acc
-        </button>
+                    <button id="modeRandom" class="mode-btn"
+                        onclick="setMode('random')">
+                        🎲 Ngẫu nhiên
+                    </button>
 
-        <div id="accTable" style="margin-top:15px"></div>
-      </div>
+                </div>
 
-      <div class="card">
-        <h2>⚙️ Cài đặt Telegram</h2>
 
-        <div class="field">
-          <label>Telegram Bot Token</label>
-          <input id="tgToken" placeholder="123456:ABC-DEF...">
-        </div>
+                <hr>
 
-        <div class="field">
-          <label>Telegram Chat ID</label>
-          <input id="tgChatId" placeholder="-100xxxxxxxxxx">
-        </div>
 
-        <div class="field">
-          <label>Cảnh báo khi data còn ≤</label>
-          <input id="tgThreshold" type="number" min="0" value="10">
-        </div>
+                <!-- BANK -->
 
-        <button class="btn btn-primary" onclick="saveTelegram()">
-          💾 Lưu cài đặt
-        </button>
+                <div id="bankMode">
 
-        <button class="btn btn-success" onclick="testTelegram()">
-          📲 Test Telegram
-        </button>
+                    <div class="row">
 
-        <div id="tgMsg"></div>
+                        <div class="field">
 
-        <div class="notice warn">
-          Bản test lưu Token/Chat ID trong trình duyệt bằng LocalStorage.
-        </div>
-      </div>
+                            <label>Ngân hàng</label>
 
-      <div class="card">
-        <h2>🧹 Dữ liệu test</h2>
-        <button class="btn btn-danger" onclick="resetTestData()">
-          Xóa toàn bộ dữ liệu local
-        </button>
-      </div>
+                            <select id="takeBank"></select>
 
-    </section>
+                        </div>
 
-  </div>
+                        <div class="field">
+
+                            <label>Số lượng</label>
+
+                            <input id="bankQty"
+                                type="number"
+                                min="1"
+                                value="1">
+
+                        </div>
+
+                    </div>
+
+                    <div class="notice">
+                        Hệ thống sẽ chọn ngẫu nhiên trong ngân hàng đã chọn.
+                        Giá: <b>1.000đ/data</b>.
+                    </div>
+
+                    <button class="btn btn-primary full"
+                        style="margin-top:10px"
+                        onclick="takeBankData()">
+                        🎲 Xuất ngẫu nhiên
+                    </button>
+
+                </div>
+
+
+                <!-- NAME -->
+
+                <div id="nameMode" class="hidden">
+
+                    <div class="field">
+
+                        <label>
+                            Tìm tên — tối thiểu 4 ký tự
+                        </label>
+
+                        <input id="nameSearch"
+                            placeholder="Ví dụ: NGUY"
+                            oninput="searchNames()">
+
+                    </div>
+
+                    <div id="nameResults" class="results"></div>
+
+                    <div id="selectedNameArea" class="hidden">
+
+                        <div class="notice success">
+                            Tên đã chọn:
+                            <b id="selectedNameText"></b>
+                        </div>
+
+                        <div class="row" style="margin-top:10px">
+
+                            <div class="field">
+
+                                <label>Số lượng</label>
+
+                                <input id="nameQty"
+                                    type="number"
+                                    min="1"
+                                    value="1">
+
+                            </div>
+
+                            <div style="display:flex;align-items:end">
+
+                                <button class="btn btn-primary full"
+                                    onclick="takeNameData()">
+                                    🎲 Xuất ngẫu nhiên
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RANDOM -->
+
+                <div id="randomMode" class="hidden">
+
+                    <div class="field">
+
+                        <label>Số lượng cần lấy</label>
+
+                        <input id="randomQty"
+                            type="number"
+                            min="1"
+                            value="1">
+
+                    </div>
+
+                    <div class="notice">
+                        Lấy ngẫu nhiên từ toàn bộ ngân hàng.
+                    </div>
+
+                    <button class="btn btn-primary full"
+                        style="margin-top:10px"
+                        onclick="takeRandomData()">
+                        🎲 Xuất ngẫu nhiên toàn kho
+                    </button>
+
+                </div>
+
+                <div id="takeMsg"></div>
+
+            </div>
+
+
+            <!-- RESULT -->
+
+            <div id="resultCard" class="card hidden">
+
+                <h2>📋 Data vừa lấy</h2>
+
+                <div id="resultOutput" class="output"></div>
+
+                <button class="btn btn-success full"
+                    style="margin-top:10px"
+                    onclick="copyResult()">
+                    📋 Sao chép
+                </button>
+
+            </div>
+
+
+            <!-- ACC USER -->
+
+            <div class="card">
+
+                <h2>🎁 Kho ACC</h2>
+
+                <div class="notice">
+                    Mỗi loại ACC có kho và giá riêng.
+                    Khi lấy ACC, tiền sẽ tự động trừ trong ví.
+                </div>
+
+                <div id="accGrid"
+                    class="acc-grid"
+                    style="margin-top:13px">
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+        ADMIN
+        ================================================= -->
+
+        <section id="adminSection" class="hidden">
+
+
+            <!-- ADMIN STATS -->
+
+            <div class="card">
+
+                <h2>📊 Tổng quan</h2>
+
+                <div class="stat-grid">
+
+                    <div class="stat">
+                        <span>Data còn</span>
+                        <b id="statBank">0</b>
+                    </div>
+
+                    <div class="stat">
+                        <span>Data đã lấy</span>
+                        <b id="statTaken">0</b>
+                    </div>
+
+                    <div class="stat">
+                        <span>ACC còn</span>
+                        <b id="statAcc">0</b>
+                    </div>
+
+                    <div class="stat">
+                        <span>User chờ duyệt</span>
+                        <b id="statPending">0</b>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- USERS -->
+
+            <div class="card">
+
+                <h2>👥 Người dùng</h2>
+
+                <div id="usersTable"></div>
+
+            </div>
+
+
+            <!-- BANK IMPORT -->
+
+            <div class="card">
+
+                <h2>📥 Nhập bank data</h2>
+
+                <div class="notice">
+                    Mỗi dòng:
+                    <code>stk|tên|ngân hàng</code>
+                </div>
+
+                <textarea id="bankImport"
+                    placeholder="0123456789|NGUYEN VAN A|MB Bank&#10;0987654321|TRAN VAN B|Vietcombank">
+                </textarea>
+
+                <button class="btn btn-primary"
+                    style="margin-top:10px"
+                    onclick="importBank()">
+                    📥 Thêm data
+                </button>
+
+                <div id="importBankMsg"></div>
+
+            </div>
+
+
+            <!-- ACC CATEGORY MANAGEMENT -->
+
+            <div class="card">
+
+                <h2>🎁 Quản lý loại ACC</h2>
+
+                <div class="notice">
+                    Tạo nhiều loại ACC riêng. Mỗi loại sẽ có popup/kho riêng
+                    để user mua.
+                </div>
+
+                <button class="btn btn-primary"
+                    style="margin-top:10px"
+                    onclick="openCreateAccType()">
+                    ➕ Tạo loại ACC mới
+                </button>
+
+                <div id="adminAccTypes"
+                    style="margin-top:15px">
+                </div>
+
+            </div>
+
+
+            <!-- MONEY MANAGEMENT -->
+
+            <div class="card">
+
+                <h2>💰 Quản lý tiền user</h2>
+
+                <div class="notice">
+                    Admin cấp tiền cho user tại đây.
+                    Số tiền sẽ được ghi vào lịch sử.
+                </div>
+
+                <div id="moneyUsers"
+                    style="margin-top:12px">
+                </div>
+
+            </div>
+
+
+            <!-- TRANSACTION HISTORY -->
+
+            <div class="card">
+
+                <h2>💳 Lịch sử giao dịch tiền</h2>
+
+                <div id="adminMoneyHistory"></div>
+
+            </div>
+
+
+            <!-- TELEGRAM -->
+
+            <div class="card">
+
+                <h2>📲 Telegram</h2>
+
+                <div class="field">
+
+                    <label>Bot Token</label>
+
+                    <input id="tgToken"
+                        placeholder="123456:ABC...">
+
+                </div>
+
+                <div class="field">
+
+                    <label>Chat ID</label>
+
+                    <input id="tgChat"
+                        placeholder="-100xxxxxxxx">
+
+                </div>
+
+                <div class="field">
+
+                    <label>Cảnh báo khi kho bank/acc còn ≤</label>
+
+                    <input id="tgThreshold"
+                        type="number"
+                        min="0"
+                        value="10">
+
+                </div>
+
+                <button class="btn btn-primary"
+                    onclick="saveTelegram()">
+                    💾 Lưu
+                </button>
+
+                <button class="btn btn-success"
+                    onclick="testTelegram()">
+                    📲 Test
+                </button>
+
+                <div id="telegramMsg"></div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>🧹 Dữ liệu test</h2>
+
+                <button class="btn btn-danger"
+                    onclick="resetAll()">
+                    Xóa toàn bộ dữ liệu LocalStorage
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
+
 </div>
 
 
-<!-- REGISTER MODAL -->
-<div id="registerModal" class="hidden" style="
-position:fixed;inset:0;background:rgba(0,0,0,.75);
-z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;
-">
-  <div class="login-box">
-    <h2>📝 Đăng ký</h2>
+<!-- =====================================================
+REGISTER MODAL
+===================================================== -->
 
-    <div class="field">
-      <label>Tài khoản</label>
-      <input id="regUsername">
+<div id="registerModal" class="modal hidden">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h2>📝 Đăng ký</h2>
+
+            <button class="btn"
+                onclick="closeRegister()">
+                ✕
+            </button>
+
+        </div>
+
+        <div class="field">
+
+            <label>Tài khoản</label>
+
+            <input id="regUser"
+                placeholder="Tên đăng nhập">
+
+        </div>
+
+        <div class="field">
+
+            <label>Mật khẩu</label>
+
+            <input id="regPass"
+                type="password"
+                placeholder="Mật khẩu">
+
+        </div>
+
+        <button class="btn btn-primary full"
+            onclick="register()">
+            Đăng ký
+        </button>
+
+        <div id="registerMsg"></div>
+
     </div>
 
-    <div class="field">
-      <label>Mật khẩu</label>
-      <input id="regPassword" type="password">
+</div>
+
+
+<!-- =====================================================
+CREATE ACC TYPE MODAL
+===================================================== -->
+
+<div id="accTypeModal" class="modal hidden">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h2>➕ Tạo loại ACC</h2>
+
+            <button class="btn"
+                onclick="closeAccTypeModal()">
+                ✕
+            </button>
+
+        </div>
+
+        <div class="field">
+
+            <label>Tên loại ACC</label>
+
+            <input id="newAccName"
+                placeholder="Ví dụ: ACC FC Online">
+
+        </div>
+
+        <div class="field">
+
+            <label>Icon</label>
+
+            <input id="newAccIcon"
+                value="🎮"
+                placeholder="🎮">
+
+        </div>
+
+        <div class="field">
+
+            <label>Mô tả</label>
+
+            <input id="newAccDesc"
+                placeholder="Mô tả loại acc">
+
+        </div>
+
+        <div class="field">
+
+            <label>Giá bán</label>
+
+            <input id="newAccPrice"
+                type="number"
+                min="0"
+                value="5000">
+
+        </div>
+
+        <button class="btn btn-primary full"
+            onclick="createAccType()">
+            Tạo loại ACC
+        </button>
+
+        <div id="accTypeMsg"></div>
+
     </div>
 
-    <button class="btn btn-primary full" onclick="registerUser()">
-      Đăng ký
-    </button>
+</div>
 
-    <button class="btn full" style="margin-top:8px" onclick="hideRegister()">
-      Đóng
-    </button>
 
-    <div id="regMsg"></div>
-  </div>
+<!-- =====================================================
+MANAGE ACC STOCK MODAL
+===================================================== -->
+
+<div id="manageAccModal" class="modal hidden">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <div>
+
+                <h2 id="manageAccTitle">
+                    Kho ACC
+                </h2>
+
+                <div id="manageAccInfo"
+                    style="color:#777;font-size:12px">
+                </div>
+
+            </div>
+
+            <button class="btn"
+                onclick="closeManageAcc()">
+                ✕
+            </button>
+
+        </div>
+
+        <div class="field">
+
+            <label>
+                Nhập ACC
+            </label>
+
+            <div class="notice">
+                Mỗi dòng:
+                <code>tk|mk</code>
+            </div>
+
+            <textarea id="accStockImport"
+                placeholder="account1|password1&#10;account2|password2">
+            </textarea>
+
+        </div>
+
+        <button class="btn btn-primary full"
+            onclick="importAccStock()">
+            📥 Thêm ACC vào kho
+        </button>
+
+        <hr>
+
+        <div id="manageAccStock"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+EDIT ACC TYPE MODAL
+===================================================== -->
+
+<div id="editAccModal" class="modal hidden">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h2>✏️ Sửa loại ACC</h2>
+
+            <button class="btn"
+                onclick="closeEditAcc()">
+                ✕
+            </button>
+
+        </div>
+
+        <input type="hidden" id="editAccId">
+
+        <div class="field">
+
+            <label>Tên</label>
+
+            <input id="editAccName">
+
+        </div>
+
+        <div class="field">
+
+            <label>Icon</label>
+
+            <input id="editAccIcon">
+
+        </div>
+
+        <div class="field">
+
+            <label>Mô tả</label>
+
+            <input id="editAccDesc">
+
+        </div>
+
+        <div class="field">
+
+            <label>Giá</label>
+
+            <input id="editAccPrice"
+                type="number"
+                min="0">
+
+        </div>
+
+        <button class="btn btn-primary full"
+            onclick="saveAccTypeEdit()">
+            💾 Lưu thay đổi
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+USER HISTORY MODAL
+===================================================== -->
+
+<div id="historyModal" class="modal hidden">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h2>📜 Lịch sử của tôi</h2>
+
+            <button class="btn"
+                onclick="closeHistory()">
+                ✕
+            </button>
+
+        </div>
+
+        <div id="userHistory"></div>
+
+    </div>
+
 </div>
 
 
 <script>
-/* =========================================================
-   DATABASE LOCAL
-========================================================= */
+
+/* =====================================================
+CONFIG
+===================================================== */
+
+const BANK_PRICE = 1000;
 
 const BANKS = [
-  "ABBank",
-  "ACB",
-  "Agribank",
-  "BaoViet Bank",
-  "Bac A Bank",
-  "BVBank",
-  "CBBank",
-  "CIMB",
-  "DBS Bank",
-  "Eximbank",
-  "GPBank",
-  "HDBank",
-  "Hong Leong Bank",
-  "HSBC",
-  "Indovina Bank",
-  "KienlongBank",
-  "LPBank",
-  "MB Bank",
-  "MSB",
-  "Nam A Bank",
-  "NCB",
-  "OCB",
-  "PGBank",
-  "Public Bank Vietnam",
-  "PVcomBank",
-  "Sacombank",
-  "Saigonbank",
-  "SCB",
-  "SeABank",
-  "Shinhan Bank",
-  "SHB",
-  "Standard Chartered",
-  "Techcombank",
-  "TPBank",
-  "UOB",
-  "VIB",
-  "VietABank",
-  "VietBank",
-  "Vietcombank",
-  "VietinBank",
-  "VPBank",
-  "Woori Bank"
+    "ABBank",
+    "ACB",
+    "Agribank",
+    "BaoViet Bank",
+    "Bac A Bank",
+    "BVBank",
+    "CBBank",
+    "CIMB",
+    "DBS Bank",
+    "Eximbank",
+    "GPBank",
+    "HDBank",
+    "Hong Leong Bank",
+    "HSBC",
+    "Indovina Bank",
+    "KienlongBank",
+    "KienlongBank",
+    "LPBank",
+    "MB Bank",
+    "MSB",
+    "Nam A Bank",
+    "NCB",
+    "OCB",
+    "PGBank",
+    "Public Bank Vietnam",
+    "PVcomBank",
+    "Sacombank",
+    "Saigonbank",
+    "SCB",
+    "SeABank",
+    "Shinhan Bank",
+    "SHB",
+    "Standard Chartered",
+    "Techcombank",
+    "TPBank",
+    "UOB",
+    "VIB",
+    "VietABank",
+    "VietBank",
+    "Vietcombank",
+    "VietinBank",
+    "VPBank",
+    "Woori Bank"
 ];
 
-const KEY_BANK = "bankData";
-const KEY_ACC = "accData";
-const KEY_USERS = "bankUsers";
-const KEY_CURRENT = "currentUser";
-const KEY_TG = "telegramSettings";
-const KEY_TAKEN = "takenBank";
 
-function getBankData(){
-  return JSON.parse(localStorage.getItem(KEY_BANK) || "[]");
+/* =====================================================
+LOCAL STORAGE KEYS
+===================================================== */
+
+const K = {
+
+    bank:"dm_bank_data",
+    users:"dm_users",
+    current:"dm_current",
+    accTypes:"dm_acc_types",
+    accStock:"dm_acc_stock",
+    moneyHistory:"dm_money_history",
+    userHistory:"dm_user_history",
+    taken:"dm_taken",
+    telegram:"dm_telegram"
+
+};
+
+
+/* =====================================================
+HELPERS
+===================================================== */
+
+function read(key, fallback){
+
+    try{
+
+        const value = localStorage.getItem(key);
+
+        return value
+            ? JSON.parse(value)
+            : fallback;
+
+    }catch(e){
+
+        return fallback;
+
+    }
+
 }
 
-function saveBankData(data){
-  localStorage.setItem(KEY_BANK,JSON.stringify(data));
+function write(key,value){
+
+    localStorage.setItem(
+        key,
+        JSON.stringify(value)
+    );
+
 }
 
-function getAccData(){
-  return JSON.parse(localStorage.getItem(KEY_ACC) || "[]");
+function money(value){
+
+    return Number(value||0).toLocaleString("vi-VN")+"đ";
+
 }
 
-function saveAccData(data){
-  localStorage.setItem(KEY_ACC,JSON.stringify(data));
+function uid(){
+
+    if(window.crypto && crypto.randomUUID){
+
+        return crypto.randomUUID();
+
+    }
+
+    return Date.now()+"_"+Math.random();
+
 }
 
-function getUsers(){
-  return JSON.parse(localStorage.getItem(KEY_USERS) || "[]");
-}
+function escapeHtml(value){
 
-function saveUsers(data){
-  localStorage.setItem(KEY_USERS,JSON.stringify(data));
-}
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 
-function getCurrentUser(){
-  return JSON.parse(localStorage.getItem(KEY_CURRENT) || "null");
-}
-
-function setCurrentUser(user){
-  localStorage.setItem(KEY_CURRENT,JSON.stringify(user));
-}
-
-function getTG(){
-  return JSON.parse(localStorage.getItem(KEY_TG) || '{"token":"","chatId":"","threshold":10}');
 }
 
 
-/* =========================================================
-   INIT
-========================================================= */
+/* =====================================================
+INIT DEFAULT ADMIN
+===================================================== */
 
 function init(){
 
-  let users = getUsers();
+    let users=read(K.users,[]);
 
-  if(!users.some(x=>x.username==="admin")){
+    if(!users.some(x=>x.username==="admin")){
+
+        users.push({
+
+            id:uid(),
+            username:"admin",
+            password:"123456",
+            role:"admin",
+            status:"approved",
+            balance:0,
+            createdAt:new Date().toISOString()
+
+        });
+
+        write(K.users,users);
+
+    }
+
+    if(!localStorage.getItem(K.taken)){
+
+        localStorage.setItem(K.taken,"0");
+
+    }
+
+    const current=read(K.current,null);
+
+    if(current){
+
+        const user=read(K.users,[])
+            .find(x=>x.id===current.id);
+
+        if(user && user.status==="approved"){
+
+            write(K.current,user);
+
+            openApp();
+
+            return;
+
+        }
+
+    }
+
+    document
+        .getElementById("loginPage")
+        .classList.remove("hidden");
+
+}
+
+
+/* =====================================================
+LOGIN
+===================================================== */
+
+function login(){
+
+    const username=
+        document.getElementById("loginUsername")
+        .value.trim();
+
+    const password=
+        document.getElementById("loginPassword")
+        .value;
+
+    const user=read(K.users,[])
+        .find(x=>
+            x.username===username &&
+            x.password===password
+        );
+
+    const msg=
+        document.getElementById("loginMsg");
+
+    if(!user){
+
+        msg.innerHTML=
+            `<div class="notice error">
+                Sai tài khoản hoặc mật khẩu.
+            </div>`;
+
+        return;
+
+    }
+
+    if(user.status==="pending"){
+
+        msg.innerHTML=
+            `<div class="notice warn">
+                Tài khoản đang chờ Admin duyệt.
+            </div>`;
+
+        return;
+
+    }
+
+    if(user.status==="disabled"){
+
+        msg.innerHTML=
+            `<div class="notice error">
+                Tài khoản đã bị khóa.
+            </div>`;
+
+        return;
+
+    }
+
+    write(K.current,user);
+
+    openApp();
+
+}
+
+
+/* =====================================================
+REGISTER
+===================================================== */
+
+function openRegister(){
+
+    document
+        .getElementById("registerModal")
+        .classList.remove("hidden");
+
+}
+
+function closeRegister(){
+
+    document
+        .getElementById("registerModal")
+        .classList.add("hidden");
+
+}
+
+function register(){
+
+    const username=
+        document.getElementById("regUser")
+        .value.trim();
+
+    const password=
+        document.getElementById("regPass")
+        .value;
+
+    const msg=
+        document.getElementById("registerMsg");
+
+    if(username.length<3){
+
+        msg.innerHTML=
+            `<div class="notice error">
+                Tài khoản tối thiểu 3 ký tự.
+            </div>`;
+
+        return;
+
+    }
+
+    if(password.length<4){
+
+        msg.innerHTML=
+            `<div class="notice error">
+                Mật khẩu tối thiểu 4 ký tự.
+            </div>`;
+
+        return;
+
+    }
+
+    const users=read(K.users,[]);
+
+    if(users.some(x=>
+        x.username.toLowerCase()===username.toLowerCase()
+    )){
+
+        msg.innerHTML=
+            `<div class="notice error">
+                Tài khoản đã tồn tại.
+            </div>`;
+
+        return;
+
+    }
 
     users.push({
-      id:Date.now(),
-      username:"admin",
-      password:"123456",
-      role:"admin",
-      status:"approved",
-      createdAt:new Date().toISOString()
+
+        id:uid(),
+        username,
+        password,
+        role:"user",
+        status:"pending",
+        balance:0,
+        createdAt:new Date().toISOString()
+
     });
 
-    saveUsers(users);
-  }
+    write(K.users,users);
 
-  const current = getCurrentUser();
+    msg.innerHTML=
+        `<div class="notice success">
+            Đăng ký thành công. Chờ Admin duyệt.
+        </div>`;
 
-  if(current){
-    const fresh = getUsers().find(x=>x.username===current.username);
+    document.getElementById("regUser").value="";
+    document.getElementById("regPass").value="";
 
-    if(fresh && fresh.status==="approved"){
-      setCurrentUser(fresh);
-      showApp();
-      return;
+}
+
+
+/* =====================================================
+APP
+===================================================== */
+
+function getCurrent(){
+
+    return read(K.current,null);
+
+}
+
+function refreshCurrent(){
+
+    const current=getCurrent();
+
+    if(!current) return null;
+
+    const user=read(K.users,[])
+        .find(x=>x.id===current.id);
+
+    if(user){
+
+        write(K.current,user);
+
     }
-  }
 
-  showLogin();
+    return user||null;
+
 }
 
-function showLogin(){
-  document.getElementById("loginPage").classList.remove("hidden");
-  document.getElementById("app").classList.add("hidden");
-}
+function openApp(){
 
-function showApp(){
+    document
+        .getElementById("loginPage")
+        .classList.add("hidden");
 
-  const user = getCurrentUser();
+    document
+        .getElementById("app")
+        .classList.remove("hidden");
 
-  if(!user){
-    showLogin();
-    return;
-  }
+    buildTabs();
+    renderEverything();
 
-  document.getElementById("loginPage").classList.add("hidden");
-  document.getElementById("app").classList.remove("hidden");
-
-  document.getElementById("userInfo").innerHTML =
-    user.username +
-    " · " +
-    (user.role==="admin"
-      ? '<span class="badge admin">ADMIN</span>'
-      : '<span class="badge approved">USER</span>');
-
-  buildTabs();
-
-  loadTelegramFields();
-
-  renderBankStats();
-  renderBankSelect();
-  updateAdmin();
-
-  showSection("data");
 }
 
 function buildTabs(){
 
-  const user = getCurrentUser();
-  const tabs = document.getElementById("mainTabs");
+    const user=refreshCurrent();
 
-  tabs.innerHTML = `
-    <button class="tab active" id="tabData" onclick="showSection('data')">
-      📦 Lấy data
-    </button>
-    ${user.role==="admin" ? `
-    <button class="tab" id="tabAdmin" onclick="showSection('admin')">
-      ⚙️ Admin
-    </button>
-    `:""}
-  `;
+    let html=`
+        <button class="tab active"
+            id="tabData"
+            onclick="showSection('data')">
+            📦 Data & ACC
+        </button>
+    `;
+
+    if(user && user.role==="admin"){
+
+        html+=`
+            <button class="tab"
+                id="tabAdmin"
+                onclick="showSection('admin')">
+                ⚙️ Admin
+            </button>
+        `;
+
+    }
+
+    document.getElementById("tabs").innerHTML=html;
+
+    document.getElementById("headerUser").innerHTML=
+        `${escapeHtml(user.username)}
+        ·
+        ${
+            user.role==="admin"
+            ? '<span class="badge badge-admin">ADMIN</span>'
+            : '<span class="badge badge-approved">USER</span>'
+        }`;
+
 }
 
 function showSection(section){
 
-  const data = document.getElementById("dataSection");
-  const admin = document.getElementById("adminSection");
+    document
+        .getElementById("dataSection")
+        .classList.toggle(
+            "hidden",
+            section!=="data"
+        );
 
-  data.classList.toggle("hidden",section!=="data");
-  admin.classList.toggle("hidden",section!=="admin");
+    document
+        .getElementById("adminSection")
+        .classList.toggle(
+            "hidden",
+            section!=="admin"
+        );
 
-  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+    document
+        .querySelectorAll(".tab")
+        .forEach(x=>x.classList.remove("active"));
 
-  if(section==="data"){
-    document.getElementById("tabData")?.classList.add("active");
-  }
+    if(section==="data"){
 
-  if(section==="admin"){
-    document.getElementById("tabAdmin")?.classList.add("active");
-    updateAdmin();
-  }
+        document
+            .getElementById("tabData")
+            ?.classList.add("active");
+
+    }
+
+    if(section==="admin"){
+
+        document
+            .getElementById("tabAdmin")
+            ?.classList.add("active");
+
+        renderAdmin();
+
+    }
+
 }
 
 
-/* =========================================================
-   LOGIN / REGISTER
-========================================================= */
+/* =====================================================
+BANK DISPLAY
+===================================================== */
 
-function login(){
+function bankCounts(){
 
-  const username = document.getElementById("loginUsername").value.trim();
-  const password = document.getElementById("loginPassword").value;
+    const data=read(K.bank,[]);
 
-  const user = getUsers().find(
-    x=>x.username===username && x.password===password
-  );
+    const counts={};
 
-  const msg = document.getElementById("loginMsg");
+    BANKS.forEach(bank=>{
+        counts[bank]=0;
+    });
 
-  if(!user){
-    msg.innerHTML='<div class="notice error">Sai tài khoản hoặc mật khẩu.</div>';
-    return;
-  }
+    data.forEach(item=>{
 
-  if(user.status==="pending"){
-    msg.innerHTML='<div class="notice warn">Tài khoản đang chờ Admin duyệt.</div>';
-    return;
-  }
+        if(!counts[item.bank]){
+            counts[item.bank]=0;
+        }
 
-  if(user.status==="disabled"){
-    msg.innerHTML='<div class="notice error">Tài khoản đã bị khóa.</div>';
-    return;
-  }
+        counts[item.bank]++;
 
-  setCurrentUser(user);
-  showApp();
+    });
+
+    return counts;
+
 }
 
-function showRegister(){
-  document.getElementById("registerModal").classList.remove("hidden");
-}
+function renderBanks(){
 
-function hideRegister(){
-  document.getElementById("registerModal").classList.add("hidden");
-}
+    const counts=bankCounts();
 
-function registerUser(){
+    const box=document.getElementById("bankGrid");
 
-  const username = document.getElementById("regUsername").value.trim();
-  const password = document.getElementById("regPassword").value;
+    box.innerHTML="";
 
-  const msg = document.getElementById("regMsg");
+    Object.keys(counts).forEach(bank=>{
 
-  if(username.length<3 || password.length<4){
-    msg.innerHTML='<div class="notice error">Tài khoản ≥ 3 ký tự, mật khẩu ≥ 4 ký tự.</div>';
-    return;
-  }
+        box.innerHTML+=`
+            <div class="bank-box">
 
-  const users = getUsers();
+                <div class="bank-name">
+                    ${escapeHtml(bank)}
+                </div>
 
-  if(users.some(x=>x.username.toLowerCase()===username.toLowerCase())){
-    msg.innerHTML='<div class="notice error">Tài khoản đã tồn tại.</div>';
-    return;
-  }
+                <div class="bank-count">
+                    ${counts[bank].toLocaleString("vi-VN")}
+                </div>
 
-  users.push({
-    id:Date.now(),
-    username,
-    password,
-    role:"user",
-    status:"pending",
-    createdAt:new Date().toISOString()
-  });
+                <div class="bank-price">
+                    1.000đ / data
+                </div>
 
-  saveUsers(users);
+            </div>
+        `;
 
-  msg.innerHTML='<div class="notice success">Đăng ký thành công. Chờ Admin duyệt.</div>';
+    });
 
-  document.getElementById("regUsername").value="";
-  document.getElementById("regPassword").value="";
-}
-
-function logout(){
-  localStorage.removeItem(KEY_CURRENT);
-  location.reload();
-}
-
-
-/* =========================================================
-   BANK STATS
-========================================================= */
-
-function getBankCounts(){
-
-  const data = getBankData();
-  const counts = {};
-
-  BANKS.forEach(bank=>counts[bank]=0);
-
-  data.forEach(item=>{
-    if(!counts[item.bank]) counts[item.bank]=0;
-    counts[item.bank]++;
-  });
-
-  return counts;
-}
-
-function renderBankStats(){
-
-  const box = document.getElementById("bankStats");
-  const counts = getBankCounts();
-
-  box.innerHTML="";
-
-  BANKS.forEach(bank=>{
-
-    const count = counts[bank] || 0;
-
-    box.innerHTML += `
-      <div class="bank-box">
-        <div class="bank-name">${escapeHtml(bank)}</div>
-        <div class="bank-count">${count.toLocaleString("vi-VN")}</div>
-        <small>data còn lại</small>
-      </div>
-    `;
-  });
-
-  const unknownBanks = Object.keys(counts).filter(
-    x=>!BANKS.includes(x)
-  );
-
-  unknownBanks.forEach(bank=>{
-    box.innerHTML += `
-      <div class="bank-box">
-        <div class="bank-name">${escapeHtml(bank)}</div>
-        <div class="bank-count">${counts[bank]}</div>
-        <small>data còn lại</small>
-      </div>
-    `;
-  });
 }
 
 function renderBankSelect(){
 
-  const select = document.getElementById("takeBank");
-  const counts = getBankCounts();
+    const counts=bankCounts();
 
-  select.innerHTML='<option value="">-- Chọn ngân hàng --</option>';
+    const select=document.getElementById("takeBank");
 
-  Object.keys(counts).forEach(bank=>{
+    select.innerHTML=
+        `<option value="">-- Chọn ngân hàng --</option>`;
 
-    select.innerHTML += `
-      <option value="${escapeAttr(bank)}">
-        ${bank} — còn ${counts[bank]}
-      </option>
-    `;
-  });
+    Object.keys(counts).forEach(bank=>{
+
+        select.innerHTML+=`
+            <option value="${escapeHtml(bank)}">
+                ${escapeHtml(bank)} — còn ${counts[bank]}
+            </option>
+        `;
+
+    });
+
 }
 
 
-/* =========================================================
-   TAKE MODES
-========================================================= */
+/* =====================================================
+BALANCE
+===================================================== */
+
+function renderBalance(){
+
+    const user=refreshCurrent();
+
+    if(!user) return;
+
+    document.getElementById("userBalance").textContent=
+        money(user.balance);
+
+}
+
+function userById(id){
+
+    return read(K.users,[])
+        .find(x=>x.id===id);
+
+}
+
+function saveUser(user){
+
+    const users=read(K.users,[]);
+
+    const index=users.findIndex(
+        x=>x.id===user.id
+    );
+
+    if(index>=0){
+
+        users[index]=user;
+
+        write(K.users,users);
+
+    }
+
+    const current=getCurrent();
+
+    if(current && current.id===user.id){
+
+        write(K.current,user);
+
+    }
+
+}
+
+
+/* =====================================================
+MONEY TRANSACTIONS
+===================================================== */
+
+function addMoney(userId,amount,note){
+
+    amount=Number(amount);
+
+    if(!amount || amount===0){
+
+        return false;
+
+    }
+
+    const user=userById(userId);
+
+    if(!user) return false;
+
+    if(typeof user.balance!=="number"){
+        user.balance=Number(user.balance)||0;
+    }
+
+    user.balance+=amount;
+
+    if(user.balance<0){
+
+        user.balance-=amount;
+
+        return false;
+
+    }
+
+    saveUser(user);
+
+    const history=read(K.moneyHistory,[]);
+
+    history.unshift({
+
+        id:uid(),
+        userId:user.id,
+        username:user.username,
+        amount,
+        note:note||"",
+        admin:getCurrent()?.username||"admin",
+        time:new Date().toISOString()
+
+    });
+
+    write(K.moneyHistory,history);
+
+    return true;
+
+}
+
+function chargeUser(userId,amount,note){
+
+    amount=Number(amount);
+
+    const user=userById(userId);
+
+    if(!user) return false;
+
+    const balance=Number(user.balance)||0;
+
+    if(balance<amount){
+
+        return false;
+
+    }
+
+    user.balance=balance-amount;
+
+    saveUser(user);
+
+    const history=read(K.moneyHistory,[]);
+
+    history.unshift({
+
+        id:uid(),
+        userId:user.id,
+        username:user.username,
+        amount:-amount,
+        note:note||"",
+        admin:"SYSTEM",
+        time:new Date().toISOString()
+
+    });
+
+    write(K.moneyHistory,history);
+
+    return true;
+
+}
+
+
+/* =====================================================
+USER HISTORY
+===================================================== */
+
+function addUserHistory(type,title,amount,detail){
+
+    const user=refreshCurrent();
+
+    if(!user) return;
+
+    const history=read(K.userHistory,[]);
+
+    history.unshift({
+
+        id:uid(),
+        userId:user.id,
+        username:user.username,
+        type,
+        title,
+        amount,
+        detail,
+        time:new Date().toISOString()
+
+    });
+
+    write(K.userHistory,history);
+
+}
+
+
+/* =====================================================
+TAKE MODES
+===================================================== */
 
 let takeMode="bank";
 let selectedName=null;
 
-function setTakeMode(mode){
+function setMode(mode){
 
-  takeMode=mode;
+    takeMode=mode;
 
-  document.getElementById("bankMode").classList.toggle("hidden",mode!=="bank");
-  document.getElementById("nameMode").classList.toggle("hidden",mode!=="name");
-  document.getElementById("randomMode").classList.toggle("hidden",mode!=="random");
+    document
+        .getElementById("bankMode")
+        .classList.toggle("hidden",mode!=="bank");
 
-  document.getElementById("modeBankBtn").classList.toggle("active",mode==="bank");
-  document.getElementById("modeNameBtn").classList.toggle("active",mode==="name");
-  document.getElementById("modeRandomBtn").classList.toggle("active",mode==="random");
+    document
+        .getElementById("nameMode")
+        .classList.toggle("hidden",mode!=="name");
 
-  clearTakeMsg();
+    document
+        .getElementById("randomMode")
+        .classList.toggle("hidden",mode!=="random");
+
+    document
+        .getElementById("modeBank")
+        .classList.toggle("active",mode==="bank");
+
+    document
+        .getElementById("modeName")
+        .classList.toggle("active",mode==="name");
+
+    document
+        .getElementById("modeRandom")
+        .classList.toggle("active",mode==="random");
+
 }
 
 
-/* =========================================================
-   NAME SEARCH
-========================================================= */
+/* =====================================================
+RANDOM
+===================================================== */
+
+function randomItems(array,count){
+
+    const arr=[...array];
+
+    for(let i=arr.length-1;i>0;i--){
+
+        const j=Math.floor(Math.random()*(i+1));
+
+        [arr[i],arr[j]]=
+            [arr[j],arr[i]];
+
+    }
+
+    return arr.slice(0,count);
+
+}
+
+
+/* =====================================================
+REMOVE BANK
+===================================================== */
+
+function removeBankItems(items){
+
+    const all=read(K.bank,[]);
+
+    const ids=new Set(
+        items.map(x=>x.id)
+    );
+
+    const remaining=
+        all.filter(x=>!ids.has(x.id));
+
+    write(K.bank,remaining);
+
+    localStorage.setItem(
+        K.taken,
+        String(
+            Number(localStorage.getItem(K.taken)||0)
+            +items.length
+        )
+    );
+
+}
+
+
+/* =====================================================
+CHECK BALANCE
+===================================================== */
+
+function enoughMoney(quantity){
+
+    const user=refreshCurrent();
+
+    const total=quantity*BANK_PRICE;
+
+    if((Number(user.balance)||0)<total){
+
+        showTakeMsg(
+            `Không đủ tiền. Cần ${money(total)}, bạn đang có ${money(user.balance)}.`,
+            "error"
+        );
+
+        return false;
+
+    }
+
+    return true;
+
+}
+
+
+/* =====================================================
+TAKE BANK
+===================================================== */
+
+function takeBankData(){
+
+    const bank=
+        document.getElementById("takeBank").value;
+
+    const qty=
+        Number(document.getElementById("bankQty").value);
+
+    if(!bank){
+
+        showTakeMsg(
+            "Hãy chọn ngân hàng.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    if(!qty || qty<1){
+
+        showTakeMsg(
+            "Số lượng không hợp lệ.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    const all=read(K.bank,[]);
+
+    const available=
+        all.filter(x=>x.bank===bank);
+
+    if(available.length<qty){
+
+        showTakeMsg(
+            `${bank} chỉ còn ${available.length} data.`,
+            "error"
+        );
+
+        return;
+
+    }
+
+    if(!enoughMoney(qty)) return;
+
+    const picked=
+        randomItems(available,qty);
+
+    const cost=qty*BANK_PRICE;
+
+    if(!chargeUser(
+        refreshCurrent().id,
+        cost,
+        `Lấy ${qty} data ${bank}`
+    )){
+
+        showTakeMsg(
+            "Không thể trừ tiền.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    removeBankItems(picked);
+
+    const text=
+        picked
+        .map(x=>`${x.stk}|${x.name}|${x.bank}`)
+        .join("\n");
+
+    addUserHistory(
+        "bank",
+        `Lấy ${qty} data ${bank}`,
+        cost,
+        text
+    );
+
+    showResult(
+        text,
+        `Đã lấy ${qty} data ${bank}. Trừ ${money(cost)}.`
+    );
+
+    sendTelegramTake(
+        `🏦 LẤY DATA BANK\nNgười: ${refreshCurrent().username}\nBank: ${bank}\nSố lượng: ${qty}\nTiền: ${money(cost)}`
+    );
+
+}
+
+
+/* =====================================================
+SEARCH NAME
+===================================================== */
 
 function searchNames(){
 
-  selectedName=null;
-  document.getElementById("selectedNameBox").classList.add("hidden");
+    selectedName=null;
 
-  const q=document.getElementById("nameSearch").value.trim();
+    document
+        .getElementById("selectedNameArea")
+        .classList.add("hidden");
 
-  const box=document.getElementById("nameResults");
+    const q=
+        document
+        .getElementById("nameSearch")
+        .value
+        .trim()
+        .toLowerCase();
 
-  if(q.length<4){
-    box.innerHTML=`
-      <div class="notice">
-        Nhập ít nhất 4 ký tự để tìm tên.
-      </div>
-    `;
-    return;
-  }
+    const box=
+        document.getElementById("nameResults");
 
-  const data=getBankData();
+    if(q.length<4){
 
-  const lower=q.toLowerCase();
+        box.innerHTML=
+            `<div class="notice">
+                Nhập tối thiểu 4 ký tự.
+            </div>`;
 
-  const matches=data.filter(item=>
-    String(item.name).toLowerCase().includes(lower)
-  );
+        return;
 
-  /*
-    Gom tên trùng nhau.
-    Một tên có thể nằm ở nhiều ngân hàng.
-  */
-
-  const unique={};
-
-  matches.forEach(item=>{
-
-    const key=item.name.trim().toLowerCase();
-
-    if(!unique[key]){
-      unique[key]={
-        name:item.name,
-        banks:new Set(),
-        count:0
-      };
     }
 
-    unique[key].banks.add(item.bank);
-    unique[key].count++;
-  });
+    const data=read(K.bank,[]);
 
-  const arr=Object.values(unique);
+    const matches=
+        data.filter(x=>
+            x.name
+            .toLowerCase()
+            .includes(q)
+        );
 
-  if(!arr.length){
-    box.innerHTML='<div class="empty">Không tìm thấy tên phù hợp.</div>';
-    return;
-  }
+    const unique={};
 
-  box.innerHTML="";
+    matches.forEach(item=>{
 
-  arr.slice(0,100).forEach(item=>{
+        const key=item.name
+            .trim()
+            .toLowerCase();
 
-    const banks=[...item.banks].join(", ");
+        if(!unique[key]){
 
-    const div=document.createElement("div");
-    div.className="name-result";
+            unique[key]={
+                name:item.name,
+                banks:new Set(),
+                count:0
+            };
 
-    div.innerHTML=`
-      <b>${escapeHtml(item.name)}</b>
-      <span>${escapeHtml(banks)} · ${item.count} data</span>
-    `;
+        }
 
-    div.onclick=()=>selectName(item.name,div);
+        unique[key].banks.add(item.bank);
+        unique[key].count++;
 
-    box.appendChild(div);
-  });
+    });
+
+    const arr=
+        Object.values(unique);
+
+    if(!arr.length){
+
+        box.innerHTML=
+            `<div class="empty">
+                Không tìm thấy tên.
+            </div>`;
+
+        return;
+
+    }
+
+    box.innerHTML="";
+
+    arr.slice(0,100)
+        .forEach(item=>{
+
+            const div=
+                document.createElement("div");
+
+            div.className="name-result";
+
+            div.innerHTML=`
+                <b>${escapeHtml(item.name)}</b>
+                <small>
+                    ${escapeHtml([...item.banks].join(", "))}
+                    · ${item.count} data
+                </small>
+            `;
+
+            div.onclick=()=>{
+                selectName(item.name,div);
+            };
+
+            box.appendChild(div);
+
+        });
+
 }
 
 function selectName(name,element){
 
-  selectedName=name;
+    selectedName=name;
 
-  document.querySelectorAll(".name-result")
-    .forEach(x=>x.classList.remove("selected"));
+    document
+        .querySelectorAll(".name-result")
+        .forEach(x=>
+            x.classList.remove("selected")
+        );
 
-  element.classList.add("selected");
+    element.classList.add("selected");
 
-  document.getElementById("selectedNameText").textContent=name;
+    document
+        .getElementById("selectedNameText")
+        .textContent=name;
 
-  document.getElementById("selectedNameBox").classList.remove("hidden");
+    document
+        .getElementById("selectedNameArea")
+        .classList.remove("hidden");
+
 }
 
 
-/* =========================================================
-   TAKE DATA
-========================================================= */
+/* =====================================================
+TAKE NAME
+===================================================== */
 
-function takeByBank(){
+function takeNameData(){
 
-  const bank=document.getElementById("takeBank").value;
-  const qty=parseInt(document.getElementById("bankQty").value);
+    if(!selectedName){
 
-  if(!bank){
-    showTakeMsg("Hãy chọn ngân hàng.","error");
-    return;
-  }
+        showTakeMsg(
+            "Hãy chọn tên.",
+            "error"
+        );
 
-  if(!qty || qty<1){
-    showTakeMsg("Số lượng không hợp lệ.","error");
-    return;
-  }
+        return;
 
-  const all=getBankData();
+    }
 
-  const available=all.filter(x=>x.bank===bank);
+    const qty=
+        Number(
+            document.getElementById("nameQty").value
+        );
 
-  if(available.length<qty){
-    showTakeMsg(
-      `Ngân hàng ${bank} chỉ còn ${available.length} data.`,
-      "error"
+    if(!qty || qty<1){
+
+        showTakeMsg(
+            "Số lượng không hợp lệ.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    const all=read(K.bank,[]);
+
+    const available=
+        all.filter(x=>
+            x.name.trim().toLowerCase()===
+            selectedName.trim().toLowerCase()
+        );
+
+    if(available.length<qty){
+
+        showTakeMsg(
+            `Tên này chỉ còn ${available.length} data.`,
+            "error"
+        );
+
+        return;
+
+    }
+
+    if(!enoughMoney(qty)) return;
+
+    const picked=
+        randomItems(available,qty);
+
+    const cost=qty*BANK_PRICE;
+
+    if(!chargeUser(
+        refreshCurrent().id,
+        cost,
+        `Lấy ${qty} data tên ${selectedName}`
+    )) return;
+
+    removeBankItems(picked);
+
+    const text=
+        picked
+        .map(x=>`${x.stk}|${x.name}|${x.bank}`)
+        .join("\n");
+
+    addUserHistory(
+        "bank",
+        `Lấy ${qty} data tên ${selectedName}`,
+        cost,
+        text
     );
-    return;
-  }
 
-  const picked=randomItems(available,qty);
-
-  removePicked(picked);
-
-  finishTake(picked,`Theo ngân hàng: ${bank}`);
-}
-
-function takeByName(){
-
-  if(!selectedName){
-    showTakeMsg("Hãy chọn một tên.","error");
-    return;
-  }
-
-  const qty=parseInt(document.getElementById("nameQty").value);
-
-  if(!qty || qty<1){
-    showTakeMsg("Số lượng không hợp lệ.","error");
-    return;
-  }
-
-  const all=getBankData();
-
-  const available=all.filter(
-    x=>x.name.trim().toLowerCase()===selectedName.trim().toLowerCase()
-  );
-
-  if(available.length<qty){
-    showTakeMsg(
-      `Tên này chỉ còn ${available.length} data.`,
-      "error"
+    showResult(
+        text,
+        `Đã lấy ${qty} data tên ${selectedName}. Trừ ${money(cost)}.`
     );
-    return;
-  }
 
-  const picked=randomItems(available,qty);
-
-  removePicked(picked);
-
-  finishTake(picked,`Theo tên: ${selectedName}`);
-}
-
-function takeRandom(){
-
-  const qty=parseInt(document.getElementById("randomQty").value);
-
-  if(!qty || qty<1){
-    showTakeMsg("Số lượng không hợp lệ.","error");
-    return;
-  }
-
-  const all=getBankData();
-
-  if(all.length<qty){
-    showTakeMsg(
-      `Toàn kho chỉ còn ${all.length} data.`,
-      "error"
+    sendTelegramTake(
+        `🏦 LẤY DATA THEO TÊN\nNgười: ${refreshCurrent().username}\nTên: ${selectedName}\nSố lượng: ${qty}\nTiền: ${money(cost)}`
     );
-    return;
-  }
 
-  const picked=randomItems(all,qty);
-
-  removePicked(picked);
-
-  finishTake(picked,"Ngẫu nhiên toàn kho");
-}
-
-function randomItems(arr,count){
-
-  const copy=[...arr];
-
-  for(let i=copy.length-1;i>0;i--){
-
-    const j=Math.floor(Math.random()*(i+1));
-
-    [copy[i],copy[j]]=[copy[j],copy[i]];
-  }
-
-  return copy.slice(0,count);
-}
-
-function removePicked(picked){
-
-  const all=getBankData();
-
-  const ids=new Set(picked.map(x=>x.id));
-
-  const remaining=all.filter(x=>!ids.has(x.id));
-
-  saveBankData(remaining);
-
-  const old=parseInt(localStorage.getItem(KEY_TAKEN)||"0");
-
-  localStorage.setItem(KEY_TAKEN,String(old+picked.length));
-}
-
-async function finishTake(picked,mode){
-
-  const result=picked
-    .map(x=>`${x.stk}|${x.name}|${x.bank}`)
-    .join("\n");
-
-  document.getElementById("resultCard").classList.remove("hidden");
-  document.getElementById("resultOutput").textContent=result;
-
-  showTakeMsg(
-    `Đã xuất ${picked.length} data thành công · ${mode}`,
-    "success"
-  );
-
-  await copyText(result);
-
-  renderBankStats();
-  renderBankSelect();
-  updateAdmin();
-
-  sendTakeTelegram(picked,mode);
 }
 
 
-/* =========================================================
-   COPY
-========================================================= */
+/* =====================================================
+TAKE RANDOM
+===================================================== */
 
-let lastResult="";
+function takeRandomData(){
+
+    const qty=
+        Number(
+            document.getElementById("randomQty").value
+        );
+
+    if(!qty || qty<1){
+
+        showTakeMsg(
+            "Số lượng không hợp lệ.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    const all=read(K.bank,[]);
+
+    if(all.length<qty){
+
+        showTakeMsg(
+            `Toàn kho chỉ còn ${all.length} data.`,
+            "error"
+        );
+
+        return;
+
+    }
+
+    if(!enoughMoney(qty)) return;
+
+    const picked=
+        randomItems(all,qty);
+
+    const cost=qty*BANK_PRICE;
+
+    if(!chargeUser(
+        refreshCurrent().id,
+        cost,
+        `Lấy ${qty} data ngẫu nhiên toàn kho`
+    )) return;
+
+    removeBankItems(picked);
+
+    const text=
+        picked
+        .map(x=>`${x.stk}|${x.name}|${x.bank}`)
+        .join("\n");
+
+    addUserHistory(
+        "bank",
+        `Lấy ${qty} data ngẫu nhiên`,
+        cost,
+        text
+    );
+
+    showResult(
+        text,
+        `Đã lấy ${qty} data ngẫu nhiên. Trừ ${money(cost)}.`
+    );
+
+    sendTelegramTake(
+        `🎲 LẤY DATA NGẪU NHIÊN\nNgười: ${refreshCurrent().username}\nSố lượng: ${qty}\nTiền: ${money(cost)}`
+    );
+
+}
+
+
+/* =====================================================
+RESULT
+===================================================== */
+
+function showResult(text,message){
+
+    document
+        .getElementById("resultCard")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("resultOutput")
+        .textContent=text;
+
+    showTakeMsg(
+        message,
+        "success"
+    );
+
+    navigator.clipboard
+        ?.writeText(text)
+        .catch(()=>{});
+
+    renderEverything();
+
+}
 
 function copyResult(){
 
-  const text=document.getElementById("resultOutput").textContent;
+    const text=
+        document
+        .getElementById("resultOutput")
+        .textContent;
 
-  copyText(text).then(()=>{
-    showTakeMsg("Đã sao chép data.","success");
-  });
-}
+    navigator.clipboard
+        ?.writeText(text);
 
-async function copyText(text){
+    showTakeMsg(
+        "Đã sao chép.",
+        "success"
+    );
 
-  lastResult=text;
-
-  try{
-    await navigator.clipboard.writeText(text);
-  }catch(e){
-
-    const ta=document.createElement("textarea");
-    ta.value=text;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand("copy");
-    ta.remove();
-  }
 }
 
 
-/* =========================================================
-   ADMIN
-========================================================= */
+/* =====================================================
+ACC TYPES
+===================================================== */
 
-function updateAdmin(){
+function getAccTypes(){
 
-  const user=getCurrentUser();
+    return read(K.accTypes,[]);
 
-  if(!user || user.role!=="admin") return;
+}
 
-  const bankData=getBankData();
-  const accData=getAccData();
-  const users=getUsers();
+function getAccStock(){
 
-  document.getElementById("totalBankStat").textContent=
-    bankData.length.toLocaleString("vi-VN");
+    return read(K.accStock,[]);
 
-  document.getElementById("takenBankStat").textContent=
-    (parseInt(localStorage.getItem(KEY_TAKEN)||"0")).toLocaleString("vi-VN");
+}
 
-  document.getElementById("totalAccStat").textContent=
-    accData.length.toLocaleString("vi-VN");
+function renderAccUser(){
 
-  document.getElementById("pendingUserStat").textContent=
-    users.filter(x=>x.status==="pending").length;
+    const types=getAccTypes();
 
-  renderUsers();
-  renderAccs();
+    const stock=getAccStock();
+
+    const box=
+        document.getElementById("accGrid");
+
+    if(!types.length){
+
+        box.innerHTML=
+            `<div class="empty">
+                Chưa có loại ACC nào.
+            </div>`;
+
+        return;
+
+    }
+
+    box.innerHTML="";
+
+    types.forEach(type=>{
+
+        const count=
+            stock.filter(x=>x.typeId===type.id).length;
+
+        box.innerHTML+=`
+
+            <div class="acc-card">
+
+                <div class="acc-icon">
+                    ${escapeHtml(type.icon||"🎮")}
+                </div>
+
+                <div class="acc-title">
+                    ${escapeHtml(type.name)}
+                </div>
+
+                <div class="acc-desc">
+                    ${escapeHtml(type.desc||"")}
+                </div>
+
+                <div class="acc-price">
+                    ${money(type.price)}
+                </div>
+
+                <div class="acc-stock">
+                    Còn ${count} acc
+                </div>
+
+                <button
+                    class="btn btn-primary full"
+                    onclick="takeAcc('${type.id}')"
+                    ${count<1?"disabled":""}>
+                    🎁 Lấy ACC
+                </button>
+
+            </div>
+        `;
+
+    });
+
 }
 
 
-/* =========================================================
-   USERS
-========================================================= */
+/* =====================================================
+TAKE ACC
+===================================================== */
 
-function renderUsers(){
+function takeAcc(typeId){
 
-  const users=getUsers();
+    const type=
+        getAccTypes()
+        .find(x=>x.id===typeId);
 
-  const box=document.getElementById("usersTable");
+    if(!type) return;
 
-  if(!users.length){
-    box.innerHTML='<div class="empty">Chưa có user.</div>';
-    return;
-  }
+    const stock=
+        getAccStock()
+        .filter(x=>x.typeId===typeId);
 
-  let html=`
-  <div class="table-wrap">
-  <table>
-  <thead>
-  <tr>
-    <th>Tài khoản</th>
-    <th>Quyền</th>
-    <th>Trạng thái</th>
-    <th>Thao tác</th>
-  </tr>
-  </thead>
-  <tbody>
-  `;
+    if(!stock.length){
 
-  users.forEach(user=>{
+        alert("Loại ACC này đã hết.");
 
-    let badge="";
+        return;
 
-    if(user.status==="approved")
-      badge='<span class="badge approved">Đã duyệt</span>';
+    }
 
-    if(user.status==="pending")
-      badge='<span class="badge pending">Chờ duyệt</span>';
+    const price=
+        Number(type.price)||0;
 
-    if(user.status==="disabled")
-      badge='<span class="badge disabled">Đã khóa</span>';
+    const user=refreshCurrent();
+
+    if((Number(user.balance)||0)<price){
+
+        alert(
+            `Không đủ tiền.\n\nGiá: ${money(price)}\nSố dư: ${money(user.balance)}`
+        );
+
+        return;
+
+    }
+
+    const picked=
+        randomItems(stock,1)[0];
+
+    if(!chargeUser(
+        user.id,
+        price,
+        `Mua ${type.name}`
+    )){
+
+        alert("Không thể trừ tiền.");
+
+        return;
+
+    }
+
+    const all=getAccStock();
+
+    const remaining=
+        all.filter(x=>x.id!==picked.id);
+
+    write(K.accStock,remaining);
+
+    const result=
+        `${picked.tk}|${picked.mk}`;
+
+    addUserHistory(
+        "acc",
+        `Mua ${type.name}`,
+        price,
+        result
+    );
+
+    document
+        .getElementById("resultCard")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("resultOutput")
+        .textContent=result;
+
+    navigator.clipboard
+        ?.writeText(result)
+        .catch(()=>{});
+
+    showTakeMsg(
+        `Đã lấy ${type.name}. Trừ ${money(price)}.`,
+        "success"
+    );
+
+    sendTelegramTake(
+        `🎁 LẤY ACC\nNgười: ${user.username}\nLoại: ${type.name}\nGiá: ${money(price)}\nKho còn: ${remaining.filter(x=>x.typeId===typeId).length}`
+    );
+
+    renderEverything();
+
+}
+
+
+/* =====================================================
+ADMIN RENDER
+===================================================== */
+
+function renderAdmin(){
+
+    const user=refreshCurrent();
+
+    if(!user || user.role!=="admin") return;
+
+    const bank=read(K.bank,[]);
+    const stock=getAccStock();
+    const users=read(K.users,[]);
+
+    document.getElementById("statBank").textContent=
+        bank.length.toLocaleString("vi-VN");
+
+    document.getElementById("statTaken").textContent=
+        Number(
+            localStorage.getItem(K.taken)||0
+        ).toLocaleString("vi-VN");
+
+    document.getElementById("statAcc").textContent=
+        stock.length.toLocaleString("vi-VN");
+
+    document.getElementById("statPending").textContent=
+        users.filter(x=>x.status==="pending").length;
+
+    renderUsersAdmin();
+    renderAdminAccTypes();
+    renderMoneyUsers();
+    renderMoneyHistory();
+    loadTelegram();
+
+}
+
+
+/* =====================================================
+ADMIN USERS
+===================================================== */
+
+function renderUsersAdmin(){
+
+    const users=read(K.users,[]);
+
+    let html=`
+        <div class="table-wrap">
+
+        <table>
+
+        <thead>
+
+        <tr>
+            <th>User</th>
+            <th>Quyền</th>
+            <th>Số dư</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+        </tr>
+
+        </thead>
+
+        <tbody>
+    `;
+
+    users.forEach(user=>{
+
+        let status="";
+
+        if(user.status==="approved")
+            status=
+                `<span class="badge badge-approved">ĐÃ DUYỆT</span>`;
+
+        if(user.status==="pending")
+            status=
+                `<span class="badge badge-pending">CHỜ DUYỆT</span>`;
+
+        if(user.status==="disabled")
+            status=
+                `<span class="badge badge-disabled">KHÓA</span>`;
+
+        html+=`
+
+            <tr>
+
+                <td>
+                    <b>${escapeHtml(user.username)}</b>
+                </td>
+
+                <td>
+                    ${
+                        user.role==="admin"
+                        ? '<span class="badge badge-admin">ADMIN</span>'
+                        : 'USER'
+                    }
+                </td>
+
+                <td>
+                    ${money(user.balance)}
+                </td>
+
+                <td>
+                    ${status}
+                </td>
+
+                <td>
+
+                    ${
+                        user.username!=="admin"
+                        ? `
+
+                            ${
+                                user.status==="pending"
+                                ? `
+                                    <button
+                                        class="btn btn-success btn-small"
+                                        onclick="approveUser('${user.id}')">
+                                        Duyệt
+                                    </button>
+                                `
+                                :""
+                            }
+
+                            ${
+                                user.status==="approved"
+                                ? `
+                                    <button
+                                        class="btn btn-small"
+                                        onclick="disableUser('${user.id}')">
+                                        Khóa
+                                    </button>
+                                `
+                                :""
+                            }
+
+                            ${
+                                user.status==="disabled"
+                                ? `
+                                    <button
+                                        class="btn btn-success btn-small"
+                                        onclick="approveUser('${user.id}')">
+                                        Mở
+                                    </button>
+                                `
+                                :""
+                            }
+
+                            <button
+                                class="btn btn-danger btn-small"
+                                onclick="deleteUser('${user.id}')">
+                                Xóa
+                            </button>
+
+                        `
+                        : "Admin tổng"
+                    }
+
+                </td>
+
+            </tr>
+        `;
+
+    });
 
     html+=`
-      <tr>
-        <td>${escapeHtml(user.username)}</td>
-        <td>${user.role==="admin"
-          ? '<span class="badge admin">ADMIN</span>'
-          : 'USER'}</td>
-        <td>${badge}</td>
-        <td>
-          ${
-            user.username!=="admin"
-            ? `
-              ${
-                user.status==="pending"
-                ? `<button class="btn btn-success" onclick="approveUser(${user.id})">Duyệt</button>`
-                : ""
-              }
-
-              ${
-                user.status==="approved"
-                ? `<button class="btn" onclick="disableUser(${user.id})">Khóa</button>`
-                : ""
-              }
-
-              ${
-                user.status==="disabled"
-                ? `<button class="btn btn-success" onclick="approveUser(${user.id})">Mở khóa</button>`
-                : ""
-              }
-
-              <button class="btn btn-danger" onclick="deleteUser(${user.id})">
-                Xóa
-              </button>
-            `
-            : "Admin tổng"
-          }
-        </td>
-      </tr>
+        </tbody>
+        </table>
+        </div>
     `;
-  });
 
-  html+="</tbody></table></div>";
+    document.getElementById("usersTable").innerHTML=html;
 
-  box.innerHTML=html;
 }
 
 function approveUser(id){
 
-  const users=getUsers();
+    const users=read(K.users,[]);
 
-  const user=users.find(x=>x.id===id);
+    const user=
+        users.find(x=>x.id===id);
 
-  if(user){
-    user.status="approved";
-    saveUsers(users);
-    updateAdmin();
-  }
+    if(user){
+
+        user.status="approved";
+
+        write(K.users,users);
+
+        renderAdmin();
+
+    }
+
 }
 
 function disableUser(id){
 
-  const users=getUsers();
+    const users=read(K.users,[]);
 
-  const user=users.find(x=>x.id===id);
+    const user=
+        users.find(x=>x.id===id);
 
-  if(user){
-    user.status="disabled";
-    saveUsers(users);
-    updateAdmin();
-  }
+    if(user){
+
+        user.status="disabled";
+
+        write(K.users,users);
+
+        renderAdmin();
+
+    }
+
 }
 
 function deleteUser(id){
 
-  if(!confirm("Xóa user này?")) return;
+    if(!confirm("Xóa user này?")) return;
 
-  const users=getUsers().filter(x=>x.id!==id);
+    const users=
+        read(K.users,[])
+        .filter(x=>x.id!==id);
 
-  saveUsers(users);
-  updateAdmin();
+    write(K.users,users);
+
+    renderAdmin();
+
 }
 
 
-/* =========================================================
-   IMPORT BANK
-========================================================= */
+/* =====================================================
+BANK IMPORT
+===================================================== */
 
-function importBankData(){
+function importBank(){
 
-  const text=document.getElementById("bankImport").value.trim();
+    const text=
+        document
+        .getElementById("bankImport")
+        .value
+        .trim();
 
-  if(!text){
-    showImportMsg("Chưa nhập data.","error");
-    return;
-  }
+    if(!text){
 
-  const lines=text.split(/\r?\n/);
+        showAdminMsg(
+            "importBankMsg",
+            "Chưa nhập data.",
+            "error"
+        );
 
-  const data=getBankData();
+        return;
 
-  let added=0;
-  let skipped=0;
-
-  lines.forEach(line=>{
-
-    const parts=line.split("|");
-
-    if(parts.length<3){
-      skipped++;
-      return;
     }
 
-    const stk=parts[0].trim();
-    const name=parts[1].trim();
-    const bank=parts.slice(2).join("|").trim();
+    const data=read(K.bank,[]);
 
-    if(!stk || !name || !bank){
-      skipped++;
-      return;
+    const lines=
+        text.split(/\r?\n/);
+
+    let added=0;
+    let skipped=0;
+
+    lines.forEach(line=>{
+
+        const p=line.split("|");
+
+        if(p.length<3){
+
+            skipped++;
+
+            return;
+
+        }
+
+        const stk=p[0].trim();
+        const name=p[1].trim();
+        const bank=p.slice(2).join("|").trim();
+
+        if(!stk || !name || !bank){
+
+            skipped++;
+
+            return;
+
+        }
+
+        data.push({
+
+            id:uid(),
+            stk,
+            name,
+            bank,
+            createdAt:new Date().toISOString()
+
+        });
+
+        added++;
+
+    });
+
+    write(K.bank,data);
+
+    document
+        .getElementById("bankImport")
+        .value="";
+
+    showAdminMsg(
+        "importBankMsg",
+        `Đã thêm ${added} data${skipped?` · bỏ qua ${skipped} dòng`:""}.`,
+        "success"
+    );
+
+    renderEverything();
+
+}
+
+
+/* =====================================================
+CREATE ACC TYPE
+===================================================== */
+
+function openCreateAccType(){
+
+    document
+        .getElementById("accTypeModal")
+        .classList.remove("hidden");
+
+}
+
+function closeAccTypeModal(){
+
+    document
+        .getElementById("accTypeModal")
+        .classList.add("hidden");
+
+}
+
+function createAccType(){
+
+    const name=
+        document
+        .getElementById("newAccName")
+        .value
+        .trim();
+
+    const icon=
+        document
+        .getElementById("newAccIcon")
+        .value
+        .trim()||"🎮";
+
+    const desc=
+        document
+        .getElementById("newAccDesc")
+        .value
+        .trim();
+
+    const price=
+        Number(
+            document
+            .getElementById("newAccPrice")
+            .value
+        );
+
+    const msg=
+        document.getElementById("accTypeMsg");
+
+    if(!name){
+
+        msg.innerHTML=
+            `<div class="notice error">
+                Chưa nhập tên loại ACC.
+            </div>`;
+
+        return;
+
     }
 
-    data.push({
-      id:crypto.randomUUID
-        ? crypto.randomUUID()
-        : Date.now()+"_"+Math.random(),
-      stk,
-      name,
-      bank,
-      createdAt:new Date().toISOString()
+    if(price<0){
+
+        msg.innerHTML=
+            `<div class="notice error">
+                Giá không hợp lệ.
+            </div>`;
+
+        return;
+
+    }
+
+    const types=getAccTypes();
+
+    types.push({
+
+        id:uid(),
+        name,
+        icon,
+        desc,
+        price,
+        createdAt:new Date().toISOString()
+
     });
 
-    added++;
-  });
+    write(K.accTypes,types);
 
-  saveBankData(data);
+    msg.innerHTML=
+        `<div class="notice success">
+            Đã tạo loại ACC.
+        </div>`;
 
-  document.getElementById("bankImport").value="";
+    document.getElementById("newAccName").value="";
+    document.getElementById("newAccDesc").value="";
+    document.getElementById("newAccPrice").value="5000";
 
-  showImportMsg(
-    `Đã thêm ${added} data${skipped?`, bỏ qua ${skipped} dòng`:""}.`,
-    "success"
-  );
+    renderEverything();
 
-  renderBankStats();
-  renderBankSelect();
-  updateAdmin();
+    setTimeout(()=>{
+        closeAccTypeModal();
+    },500);
+
 }
 
 
-/* =========================================================
-   ACC INVENTORY
-========================================================= */
+/* =====================================================
+ADMIN ACC TYPE LIST
+===================================================== */
 
-function importAccData(){
+function renderAdminAccTypes(){
 
-  const text=document.getElementById("accImport").value.trim();
+    const types=getAccTypes();
+    const stock=getAccStock();
 
-  if(!text){
-    showImportMsg("Chưa nhập acc.","error");
-    return;
-  }
+    const box=
+        document.getElementById("adminAccTypes");
 
-  const lines=text.split(/\r?\n/);
-  const data=getAccData();
+    if(!types.length){
 
-  let added=0;
+        box.innerHTML=
+            `<div class="empty">
+                Chưa có loại ACC.
+            </div>`;
 
-  lines.forEach(line=>{
+        return;
 
-    const parts=line.split("|");
+    }
 
-    if(parts.length<4) return;
+    let html=`
+        <div class="acc-grid">
+    `;
 
-    const tk=parts[0].trim();
-    const mk=parts[1].trim();
-    const promo=parts[2].trim();
-    const price=Number(parts[3].trim())||0;
+    types.forEach(type=>{
 
-    if(!tk || !mk) return;
+        const count=
+            stock.filter(
+                x=>x.typeId===type.id
+            ).length;
 
-    data.push({
-      id:crypto.randomUUID
-        ? crypto.randomUUID()
-        : Date.now()+"_"+Math.random(),
-      tk,
-      mk,
-      promo,
-      price
+        html+=`
+
+            <div class="acc-card">
+
+                <div class="acc-icon">
+                    ${escapeHtml(type.icon||"🎮")}
+                </div>
+
+                <div class="acc-title">
+                    ${escapeHtml(type.name)}
+                </div>
+
+                <div class="acc-desc">
+                    ${escapeHtml(type.desc||"")}
+                </div>
+
+                <div class="acc-price">
+                    ${money(type.price)}
+                </div>
+
+                <div class="acc-stock">
+                    Kho: ${count} acc
+                </div>
+
+                <button
+                    class="btn btn-primary full"
+                    onclick="openManageAcc('${type.id}')">
+                    📦 Quản lý kho
+                </button>
+
+                <div style="display:flex;gap:6px;margin-top:7px">
+
+                    <button
+                        class="btn btn-blue"
+                        style="flex:1"
+                        onclick="openEditAcc('${type.id}')">
+                        ✏️ Sửa
+                    </button>
+
+                    <button
+                        class="btn btn-danger"
+                        style="flex:1"
+                        onclick="deleteAccType('${type.id}')">
+                        🗑️ Xóa
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
     });
 
-    added++;
-  });
+    html+=`</div>`;
 
-  saveAccData(data);
+    box.innerHTML=html;
 
-  document.getElementById("accImport").value="";
-
-  showImportMsg(`Đã thêm ${added} acc.`,"success");
-
-  updateAdmin();
 }
 
-function renderAccs(){
 
-  const data=getAccData();
+/* =====================================================
+EDIT ACC TYPE
+===================================================== */
 
-  const box=document.getElementById("accTable");
+function openEditAcc(id){
 
-  if(!data.length){
-    box.innerHTML='<div class="empty">Kho acc đang trống.</div>';
-    return;
-  }
+    const type=
+        getAccTypes()
+        .find(x=>x.id===id);
 
-  let html=`
-  <div class="table-wrap">
-  <table>
-  <thead>
-  <tr>
-    <th>TK</th>
-    <th>Khuyến mãi</th>
-    <th>Giá</th>
-    <th>Thao tác</th>
-  </tr>
-  </thead>
-  <tbody>
-  `;
+    if(!type) return;
 
-  data.forEach(item=>{
+    document.getElementById("editAccId").value=id;
+    document.getElementById("editAccName").value=type.name;
+    document.getElementById("editAccIcon").value=type.icon;
+    document.getElementById("editAccDesc").value=type.desc;
+    document.getElementById("editAccPrice").value=type.price;
+
+    document
+        .getElementById("editAccModal")
+        .classList.remove("hidden");
+
+}
+
+function closeEditAcc(){
+
+    document
+        .getElementById("editAccModal")
+        .classList.add("hidden");
+
+}
+
+function saveAccTypeEdit(){
+
+    const id=
+        document.getElementById("editAccId").value;
+
+    const types=getAccTypes();
+
+    const type=
+        types.find(x=>x.id===id);
+
+    if(!type) return;
+
+    type.name=
+        document.getElementById("editAccName").value.trim();
+
+    type.icon=
+        document.getElementById("editAccIcon").value.trim()||"🎮";
+
+    type.desc=
+        document.getElementById("editAccDesc").value.trim();
+
+    type.price=
+        Number(
+            document.getElementById("editAccPrice").value
+        )||0;
+
+    write(K.accTypes,types);
+
+    closeEditAcc();
+
+    renderEverything();
+
+}
+
+function deleteAccType(id){
+
+    const type=
+        getAccTypes()
+        .find(x=>x.id===id);
+
+    if(!type) return;
+
+    const count=
+        getAccStock()
+        .filter(x=>x.typeId===id)
+        .length;
+
+    if(!confirm(
+        `Xóa "${type.name}"?\n\nKho hiện có ${count} acc.`
+    )) return;
+
+    write(
+        K.accTypes,
+        getAccTypes().filter(x=>x.id!==id)
+    );
+
+    write(
+        K.accStock,
+        getAccStock().filter(x=>x.typeId!==id)
+    );
+
+    renderEverything();
+
+}
+
+
+/* =====================================================
+MANAGE ACC STOCK
+===================================================== */
+
+let manageTypeId=null;
+
+function openManageAcc(id){
+
+    manageTypeId=id;
+
+    const type=
+        getAccTypes()
+        .find(x=>x.id===id);
+
+    if(!type) return;
+
+    document
+        .getElementById("manageAccTitle")
+        .textContent=
+            `${type.icon} ${type.name}`;
+
+    document
+        .getElementById("manageAccInfo")
+        .textContent=
+            `Giá bán: ${money(type.price)}`;
+
+    document
+        .getElementById("manageAccModal")
+        .classList.remove("hidden");
+
+    renderManageAccStock();
+
+}
+
+function closeManageAcc(){
+
+    manageTypeId=null;
+
+    document
+        .getElementById("manageAccModal")
+        .classList.add("hidden");
+
+}
+
+function importAccStock(){
+
+    if(!manageTypeId) return;
+
+    const text=
+        document
+        .getElementById("accStockImport")
+        .value
+        .trim();
+
+    if(!text) return;
+
+    const stock=getAccStock();
+
+    const lines=
+        text.split(/\r?\n/);
+
+    let added=0;
+
+    lines.forEach(line=>{
+
+        const p=line.split("|");
+
+        if(p.length<2) return;
+
+        const tk=p[0].trim();
+        const mk=p.slice(1).join("|").trim();
+
+        if(!tk || !mk) return;
+
+        stock.push({
+
+            id:uid(),
+            typeId:manageTypeId,
+            tk,
+            mk,
+            createdAt:new Date().toISOString()
+
+        });
+
+        added++;
+
+    });
+
+    write(K.accStock,stock);
+
+    document
+        .getElementById("accStockImport")
+        .value="";
+
+    renderManageAccStock();
+    renderEverything();
+
+    alert(`Đã thêm ${added} acc.`);
+
+}
+
+function renderManageAccStock(){
+
+    if(!manageTypeId) return;
+
+    const stock=
+        getAccStock()
+        .filter(x=>x.typeId===manageTypeId);
+
+    const box=
+        document.getElementById("manageAccStock");
+
+    if(!stock.length){
+
+        box.innerHTML=
+            `<div class="empty">
+                Kho đang trống.
+            </div>`;
+
+        return;
+
+    }
+
+    let html=`
+
+        <div class="table-wrap">
+
+        <table>
+
+        <thead>
+            <tr>
+                <th>TK</th>
+                <th>MK</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+    `;
+
+    stock.forEach(item=>{
+
+        html+=`
+
+            <tr>
+
+                <td>
+                    ${escapeHtml(item.tk)}
+                </td>
+
+                <td>
+                    ********
+                </td>
+
+                <td>
+
+                    <button
+                        class="btn btn-danger btn-small"
+                        onclick="deleteAccStock('${item.id}')">
+                        Xóa
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
 
     html+=`
-      <tr>
-        <td>${escapeHtml(item.tk)}</td>
-        <td>${escapeHtml(item.promo)}</td>
-        <td>
-          <input
-            type="number"
-            value="${item.price}"
-            onchange="changeAccPrice('${escapeAttr(item.id)}',this.value)"
-            style="width:130px"
-          >
-        </td>
-        <td>
-          <button class="btn btn-danger"
-            onclick="deleteAcc('${escapeAttr(item.id)}')">
-            Xóa
-          </button>
-        </td>
-      </tr>
+
+        </tbody>
+        </table>
+        </div>
+
     `;
-  });
 
-  html+="</tbody></table></div>";
+    box.innerHTML=html;
 
-  box.innerHTML=html;
 }
 
-function changeAccPrice(id,value){
+function deleteAccStock(id){
 
-  const data=getAccData();
+    if(!confirm("Xóa ACC này khỏi kho?"))
+        return;
 
-  const item=data.find(x=>String(x.id)===String(id));
+    write(
+        K.accStock,
+        getAccStock()
+            .filter(x=>x.id!==id)
+    );
 
-  if(item){
-    item.price=Number(value)||0;
-    saveAccData(data);
-  }
-}
+    renderManageAccStock();
+    renderEverything();
 
-function deleteAcc(id){
-
-  if(!confirm("Xóa acc này?")) return;
-
-  const data=getAccData().filter(
-    x=>String(x.id)!==String(id)
-  );
-
-  saveAccData(data);
-  updateAdmin();
 }
 
 
-/* =========================================================
-   TELEGRAM
-========================================================= */
+/* =====================================================
+MONEY ADMIN
+===================================================== */
 
-function loadTelegramFields(){
+function renderMoneyUsers(){
 
-  const tg=getTG();
+    const users=
+        read(K.users,[])
+        .filter(x=>x.role!=="admin");
 
-  document.getElementById("tgToken").value=tg.token||"";
-  document.getElementById("tgChatId").value=tg.chatId||"";
-  document.getElementById("tgThreshold").value=
-    tg.threshold ?? 10;
+    const box=
+        document.getElementById("moneyUsers");
+
+    if(!users.length){
+
+        box.innerHTML=
+            `<div class="empty">
+                Chưa có user.
+            </div>`;
+
+        return;
+
+    }
+
+    let html="";
+
+    users.forEach(user=>{
+
+        html+=`
+
+            <div class="history-item">
+
+                <div class="history-top">
+
+                    <div>
+
+                        <b>
+                            ${escapeHtml(user.username)}
+                        </b>
+
+                        <div style="color:#777;font-size:12px">
+                            Số dư:
+                            <strong style="color:#ffd13b">
+                                ${money(user.balance)}
+                            </strong>
+                        </div>
+
+                    </div>
+
+                    <span class="badge ${
+                        user.status==="approved"
+                        ?"badge-approved"
+                        :"badge-pending"
+                    }">
+                        ${user.status}
+                    </span>
+
+                </div>
+
+                <div class="row"
+                    style="margin-top:10px">
+
+                    <div>
+
+                        <label>
+                            Số tiền
+                        </label>
+
+                        <input
+                            id="money_${user.id}"
+                            type="number"
+                            min="0"
+                            placeholder="Ví dụ 50000">
+
+                    </div>
+
+                    <div
+                        style="display:flex;align-items:end;gap:6px">
+
+                        <button
+                            class="btn btn-success"
+                            style="flex:1"
+                            onclick="adminAddMoney('${user.id}')">
+                            + Cộng
+                        </button>
+
+                        <button
+                            class="btn btn-danger"
+                            style="flex:1"
+                            onclick="adminSubMoney('${user.id}')">
+                            − Trừ
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+    box.innerHTML=html;
+
+}
+
+function adminAddMoney(id){
+
+    const input=
+        document.getElementById("money_"+id);
+
+    const amount=
+        Number(input.value);
+
+    if(!amount || amount<=0){
+
+        alert("Nhập số tiền hợp lệ.");
+
+        return;
+
+    }
+
+    const user=userById(id);
+
+    if(!user) return;
+
+    if(!addMoney(
+        id,
+        amount,
+        "Admin cấp tiền"
+    )){
+
+        alert("Không thể cộng tiền.");
+
+        return;
+
+    }
+
+    sendTelegramTake(
+        `💰 CẤP TIỀN\nAdmin: ${getCurrent().username}\nUser: ${user.username}\nSố tiền: +${money(amount)}\nSố dư mới: ${money(user.balance)}`
+    );
+
+    input.value="";
+
+    renderEverything();
+
+}
+
+function adminSubMoney(id){
+
+    const input=
+        document.getElementById("money_"+id);
+
+    const amount=
+        Number(input.value);
+
+    if(!amount || amount<=0){
+
+        alert("Nhập số tiền hợp lệ.");
+
+        return;
+
+    }
+
+    const user=userById(id);
+
+    if(!user) return;
+
+    if((Number(user.balance)||0)<amount){
+
+        alert("User không đủ số dư.");
+
+        return;
+
+    }
+
+    if(!addMoney(
+        id,
+        -amount,
+        "Admin trừ tiền"
+    )){
+
+        alert("Không thể trừ tiền.");
+
+        return;
+
+    }
+
+    input.value="";
+
+    renderEverything();
+
+}
+
+
+/* =====================================================
+MONEY HISTORY ADMIN
+===================================================== */
+
+function renderMoneyHistory(){
+
+    const history=
+        read(K.moneyHistory,[]);
+
+    const box=
+        document.getElementById("adminMoneyHistory");
+
+    if(!history.length){
+
+        box.innerHTML=
+            `<div class="empty">
+                Chưa có giao dịch.
+            </div>`;
+
+        return;
+
+    }
+
+    box.innerHTML=
+        history.slice(0,100)
+        .map(item=>`
+
+            <div class="history-item">
+
+                <div class="history-top">
+
+                    <b>
+                        ${escapeHtml(item.username)}
+                    </b>
+
+                    <strong class="${
+                        item.amount>=0
+                        ?"money-plus"
+                        :"money-minus"
+                    }">
+                        ${
+                            item.amount>=0
+                            ?"+"
+                            :""
+                        }${money(item.amount)}
+                    </strong>
+
+                </div>
+
+                <div style="color:#888;font-size:12px;margin-top:5px">
+                    ${escapeHtml(item.note)}
+                </div>
+
+                <div style="color:#666;font-size:11px;margin-top:4px">
+                    ${new Date(item.time).toLocaleString("vi-VN")}
+                </div>
+
+            </div>
+
+        `)
+        .join("");
+
+}
+
+
+/* =====================================================
+USER HISTORY
+===================================================== */
+
+function openHistory(){
+
+    const user=refreshCurrent();
+
+    if(!user) return;
+
+    const history=
+        read(K.userHistory,[])
+        .filter(x=>x.userId===user.id);
+
+    const box=
+        document.getElementById("userHistory");
+
+    if(!history.length){
+
+        box.innerHTML=
+            `<div class="empty">
+                Chưa có lịch sử.
+            </div>`;
+
+    }else{
+
+        box.innerHTML=
+            history.slice(0,100)
+            .map(item=>`
+
+                <div class="history-item">
+
+                    <div class="history-top">
+
+                        <b>
+                            ${escapeHtml(item.title)}
+                        </b>
+
+                        <strong class="money-minus">
+                            -${money(item.amount)}
+                        </strong>
+
+                    </div>
+
+                    <div style="color:#666;font-size:11px;margin-top:4px">
+                        ${new Date(item.time).toLocaleString("vi-VN")}
+                    </div>
+
+                    <button
+                        class="btn btn-small"
+                        style="margin-top:8px"
+                        onclick="copyHistory('${item.id}')">
+                        📋 Copy
+                    </button>
+
+                </div>
+
+            `)
+            .join("");
+
+    }
+
+    document
+        .getElementById("historyModal")
+        .classList.remove("hidden");
+
+}
+
+function copyHistory(id){
+
+    const item=
+        read(K.userHistory,[])
+        .find(x=>x.id===id);
+
+    if(!item) return;
+
+    navigator.clipboard
+        ?.writeText(item.detail||"");
+
+    alert("Đã copy.");
+
+}
+
+function closeHistory(){
+
+    document
+        .getElementById("historyModal")
+        .classList.add("hidden");
+
+}
+
+
+/* =====================================================
+TELEGRAM
+===================================================== */
+
+function getTelegram(){
+
+    return read(
+        K.telegram,
+        {
+            token:"",
+            chat:"",
+            threshold:10
+        }
+    );
+
+}
+
+function loadTelegram(){
+
+    const tg=getTelegram();
+
+    document.getElementById("tgToken").value=
+        tg.token||"";
+
+    document.getElementById("tgChat").value=
+        tg.chat||"";
+
+    document.getElementById("tgThreshold").value=
+        tg.threshold??10;
+
 }
 
 function saveTelegram(){
 
-  const token=document.getElementById("tgToken").value.trim();
-  const chatId=document.getElementById("tgChatId").value.trim();
-  const threshold=parseInt(document.getElementById("tgThreshold").value)||0;
+    const tg={
 
-  localStorage.setItem(KEY_TG,JSON.stringify({
-    token,
-    chatId,
-    threshold
-  }));
+        token:
+            document.getElementById("tgToken")
+            .value.trim(),
 
-  showTGMsg("Đã lưu cài đặt Telegram.","success");
+        chat:
+            document.getElementById("tgChat")
+            .value.trim(),
+
+        threshold:
+            Number(
+                document.getElementById("tgThreshold")
+                .value
+            )||0
+
+    };
+
+    write(K.telegram,tg);
+
+    showAdminMsg(
+        "telegramMsg",
+        "Đã lưu Telegram.",
+        "success"
+    );
+
 }
 
 async function testTelegram(){
 
-  saveTelegram();
+    saveTelegram();
 
-  const tg=getTG();
+    const tg=getTelegram();
 
-  if(!tg.token || !tg.chatId){
-    showTGMsg("Chưa nhập Bot Token hoặc Chat ID.","error");
-    return;
-  }
+    if(!tg.token || !tg.chat){
 
-  try{
+        showAdminMsg(
+            "telegramMsg",
+            "Chưa nhập Token hoặc Chat ID.",
+            "error"
+        );
 
-    const res=await fetch(
-      `https://api.telegram.org/bot${encodeURIComponent(tg.token)}/sendMessage`,
-      {
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-          chat_id:tg.chatId,
-          text:"✅ TEST Bank Data Manager\nTelegram đã kết nối thành công."
-        })
-      }
-    );
+        return;
 
-    const json=await res.json();
-
-    if(!json.ok){
-      throw new Error(json.description||"Telegram error");
     }
 
-    showTGMsg("Đã gửi tin nhắn test thành công.","success");
+    try{
 
-  }catch(e){
+        const res=
+            await fetch(
+                `https://api.telegram.org/bot${encodeURIComponent(tg.token)}/sendMessage`,
+                {
+                    method:"POST",
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+                    body:JSON.stringify({
 
-    showTGMsg(
-      "Không gửi được Telegram: "+e.message,
-      "error"
-    );
-  }
+                        chat_id:tg.chat,
+
+                        text:
+                            "✅ TEST DATA MANAGER\nTelegram đã kết nối."
+
+                    })
+                }
+            );
+
+        const json=await res.json();
+
+        if(!json.ok){
+
+            throw new Error(
+                json.description||"Telegram error"
+            );
+
+        }
+
+        showAdminMsg(
+            "telegramMsg",
+            "Gửi test thành công.",
+            "success"
+        );
+
+    }catch(e){
+
+        showAdminMsg(
+            "telegramMsg",
+            "Telegram lỗi: "+e.message,
+            "error"
+        );
+
+    }
+
 }
 
-async function sendTelegram(text){
+async function sendTelegramTake(text){
 
-  const tg=getTG();
+    const tg=getTelegram();
 
-  if(!tg.token || !tg.chatId) return;
+    if(!tg.token || !tg.chat)
+        return;
 
-  try{
+    try{
 
-    await fetch(
-      `https://api.telegram.org/bot${encodeURIComponent(tg.token)}/sendMessage`,
-      {
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-          chat_id:tg.chatId,
-          text
-        })
-      }
-    );
+        const remainingBank=
+            read(K.bank,[]).length;
 
-  }catch(e){
-    console.log("Telegram:",e);
-  }
+        const remainingAcc=
+            getAccStock().length;
+
+        let message=text;
+
+        message+=
+            `\n\n📦 Bank còn: ${remainingBank}`+
+            `\n🎁 Acc còn: ${remainingAcc}`;
+
+        if(
+            remainingBank<=Number(tg.threshold||0) ||
+            remainingAcc<=Number(tg.threshold||0)
+        ){
+
+            message+=
+                `\n⚠️ CẢNH BÁO: KHO ĐANG THẤP`;
+
+        }
+
+        if(
+            remainingBank===0 ||
+            remainingAcc===0
+        ){
+
+            message+=
+                `\n🚨 CÓ KHO ĐÃ HẾT`;
+
+        }
+
+        await fetch(
+            `https://api.telegram.org/bot${encodeURIComponent(tg.token)}/sendMessage`,
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":
+                        "application/json"
+                },
+                body:JSON.stringify({
+                    chat_id:tg.chat,
+                    text:message
+                })
+            }
+        );
+
+    }catch(e){
+
+        console.log("Telegram:",e);
+
+    }
+
 }
 
-async function sendTakeTelegram(picked,mode){
 
-  const tg=getTG();
-
-  if(!tg.token || !tg.chatId) return;
-
-  const user=getCurrentUser();
-
-  const remaining=getBankData().length;
-
-  let text=
-`📦 BANK DATA ĐÃ XUẤT
-
-👤 Người lấy: ${user?.username||"Unknown"}
-🔹 Cách lấy: ${mode}
-📊 Số lượng: ${picked.length}
-📦 Kho còn: ${remaining}`;
-
-  if(remaining<=Number(tg.threshold||0)){
-    text+=`
-
-⚠️ CẢNH BÁO KHO THẤP
-Kho đã xuống dưới mức ${tg.threshold}.`;
-  }
-
-  if(remaining===0){
-    text+=`
-
-🚨 KHO ĐÃ HẾT DATA`;
-  }
-
-  await sendTelegram(text);
-}
-
-
-/* =========================================================
-   MESSAGES
-========================================================= */
+/* =====================================================
+MESSAGES
+===================================================== */
 
 function showTakeMsg(text,type){
 
-  document.getElementById("takeMsg").innerHTML=
-    `<div class="notice ${type||""}">${escapeHtml(text)}</div>`;
+    document.getElementById("takeMsg").innerHTML=
+        `<div class="notice ${type||""}">
+            ${escapeHtml(text)}
+        </div>`;
+
 }
 
-function clearTakeMsg(){
-  document.getElementById("takeMsg").innerHTML="";
-}
+function showAdminMsg(id,text,type){
 
-function showImportMsg(text,type){
+    document.getElementById(id).innerHTML=
+        `<div class="notice ${type||""}">
+            ${escapeHtml(text)}
+        </div>`;
 
-  document.getElementById("importMsg").innerHTML=
-    `<div class="notice ${type||""}">${escapeHtml(text)}</div>`;
-
-  setTimeout(()=>{
-    document.getElementById("importMsg").innerHTML="";
-  },5000);
-}
-
-function showTGMsg(text,type){
-
-  document.getElementById("tgMsg").innerHTML=
-    `<div class="notice ${type||""}">${escapeHtml(text)}</div>`;
 }
 
 
-/* =========================================================
-   RESET
-========================================================= */
+/* =====================================================
+RENDER EVERYTHING
+===================================================== */
 
-function resetTestData(){
+function renderEverything(){
 
-  const ok=confirm(
-    "Xóa toàn bộ user, bank data, acc, Telegram và lịch sử xuất?"
-  );
+    const user=refreshCurrent();
 
-  if(!ok) return;
+    if(!user) return;
 
-  [
-    KEY_BANK,
-    KEY_ACC,
-    KEY_USERS,
-    KEY_CURRENT,
-    KEY_TG,
-    KEY_TAKEN
-  ].forEach(key=>localStorage.removeItem(key));
+    renderBalance();
+    renderBanks();
+    renderBankSelect();
+    renderAccUser();
 
-  location.reload();
+    if(user.role==="admin"){
+
+        renderAdmin();
+
+    }
+
 }
 
 
-/* =========================================================
-   ESCAPE
-========================================================= */
+/* =====================================================
+LOGOUT
+===================================================== */
 
-function escapeHtml(value){
+function logout(){
 
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
+    localStorage.removeItem(K.current);
 
-function escapeAttr(value){
-  return escapeHtml(value);
+    location.reload();
+
 }
 
 
-/* =========================================================
-   START
-========================================================= */
+/* =====================================================
+RESET
+===================================================== */
+
+function resetAll(){
+
+    if(!confirm(
+        "Xóa toàn bộ dữ liệu test?\n\nKhông thể hoàn tác."
+    )) return;
+
+    Object.values(K)
+        .forEach(key=>{
+            localStorage.removeItem(key);
+        });
+
+    location.reload();
+
+}
+
+
+/* =====================================================
+START
+===================================================== */
 
 init();
+
 </script>
 
 </body>
