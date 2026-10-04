@@ -49,6 +49,11 @@ button{
     display:none!important;
 }
 
+/* KhÃ³a giao diá»‡n á»©ng dá»¥ng cho Ä‘áº¿n khi phiÃªn Ä‘Æ°á»£c xÃ¡c thá»±c */
+#app:not(.authenticated){
+    display:none!important;
+}
+
 .app{
     min-height:100vh;
 }
@@ -681,32 +686,32 @@ tr:last-child td{
         </div>
 
         <div class="auth-sub">
-            Kho dữ liệu • ACC • REG ACC
+            Kho dá»¯ liá»‡u â€¢ ACC â€¢ REG ACC
         </div>
 
         <div class="auth-tabs">
             <button id="loginTab" class="active" onclick="showAuth('login')">
-                Đăng nhập
+                ÄÄƒng nháº­p
             </button>
             <button id="registerTab" onclick="showAuth('register')">
-                Tạo tài khoản
+                Táº¡o tÃ i khoáº£n
             </button>
         </div>
 
         <div id="loginForm" class="form">
 
             <div class="field">
-                <label>Tài khoản</label>
-                <input id="loginUsername" autocomplete="username" placeholder="Nhập tài khoản">
+                <label>TÃ i khoáº£n</label>
+                <input id="loginUsername" autocomplete="username" placeholder="Nháº­p tÃ i khoáº£n">
             </div>
 
             <div class="field">
-                <label>Mật khẩu</label>
-                <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Nhập mật khẩu">
+                <label>Máº­t kháº©u</label>
+                <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Nháº­p máº­t kháº©u">
             </div>
 
             <button class="btn primary" onclick="login()">
-                Đăng nhập
+                ÄÄƒng nháº­p
             </button>
 
         </div>
@@ -714,22 +719,22 @@ tr:last-child td{
         <div id="registerForm" class="form hidden">
 
             <div class="field">
-                <label>Tài khoản</label>
-                <input id="regUsername" placeholder="Tài khoản mới">
+                <label>TÃ i khoáº£n</label>
+                <input id="regUsername" placeholder="TÃ i khoáº£n má»›i">
             </div>
 
             <div class="field">
-                <label>Mật khẩu</label>
-                <input id="regPassword" type="password" placeholder="Mật khẩu">
+                <label>Máº­t kháº©u</label>
+                <input id="regPassword" type="password" placeholder="Máº­t kháº©u">
             </div>
 
             <div class="field">
-                <label>Nhập lại mật khẩu</label>
-                <input id="regPassword2" type="password" placeholder="Nhập lại mật khẩu">
+                <label>Nháº­p láº¡i máº­t kháº©u</label>
+                <input id="regPassword2" type="password" placeholder="Nháº­p láº¡i máº­t kháº©u">
             </div>
 
             <button class="btn success" onclick="registerUser()">
-                Tạo tài khoản
+                Táº¡o tÃ i khoáº£n
             </button>
 
         </div>
@@ -751,11 +756,11 @@ tr:last-child td{
 
         <div class="top-user">
             <div id="topBalance" class="balance">
-                0đ
+                0Ä‘
             </div>
 
             <button class="menu-btn" onclick="logout()">
-                ⎋
+                âŽ‹
             </button>
         </div>
 
@@ -767,28 +772,28 @@ tr:last-child td{
         <!-- SIDEBAR -->
         <aside class="sidebar">
 
-            <div class="nav-title">Tài khoản</div>
+            <div class="nav-title">TÃ i khoáº£n</div>
 
             <div class="nav">
 
                 <button data-page="dashboard" onclick="openPage('dashboard')">
-                    📊 Tổng quan
+                    ðŸ“Š Tá»•ng quan
                 </button>
 
                 <button data-page="bank" onclick="openPage('bank')">
-                    🏦 Bank
+                    ðŸ¦ Bank
                 </button>
 
                 <button data-page="acc" onclick="openPage('acc')">
-                    🎮 ACC
+                    ðŸŽ® ACC
                 </button>
 
                 <button data-page="reg" onclick="openPage('reg')">
-                    📝 REG ACC
+                    ðŸ“ REG ACC
                 </button>
 
                 <button data-page="history" onclick="openPage('history')">
-                    🧾 Lịch sử
+                    ðŸ§¾ Lá»‹ch sá»­
                 </button>
 
             </div>
@@ -802,23 +807,23 @@ tr:last-child td{
                 <div class="nav">
 
                     <button data-page="admin-products" onclick="openPage('admin-products')">
-                        📦 ACC Products
+                        ðŸ“¦ ACC Products
                     </button>
 
                     <button data-page="admin-bank" onclick="openPage('admin-bank')">
-                        🏦 Kho Bank
+                        ðŸ¦ Kho Bank
                     </button>
 
                     <button data-page="admin-users" onclick="openPage('admin-users')">
-                        👥 Users
+                        ðŸ‘¥ Users
                     </button>
 
                     <button data-page="admin-reg" onclick="openPage('admin-reg')">
-                        📝 REG Orders
+                        ðŸ“ REG Orders
                     </button>
 
                     <button data-page="admin-settings" onclick="openPage('admin-settings')">
-                        ⚙️ Cài đặt
+                        âš™ï¸ CÃ i Ä‘áº·t
                     </button>
 
                 </div>
@@ -835,9 +840,9 @@ tr:last-child td{
 
                 <div class="page-head">
                     <div>
-                        <h1 class="page-title">Tổng quan</h1>
+                        <h1 class="page-title">Tá»•ng quan</h1>
                         <div class="page-sub">
-                            Xin chào <b id="helloName"></b>
+                            Xin chÃ o <b id="helloName"></b>
                         </div>
                     </div>
                 </div>
@@ -845,22 +850,22 @@ tr:last-child td{
                 <div class="grid stats">
 
                     <div class="stat">
-                        <div class="stat-label">Số dư</div>
-                        <div id="statBalance" class="stat-value">0đ</div>
+                        <div class="stat-label">Sá»‘ dÆ°</div>
+                        <div id="statBalance" class="stat-value">0Ä‘</div>
                     </div>
 
                     <div class="stat">
-                        <div class="stat-label">Bank đang có</div>
+                        <div class="stat-label">Bank Ä‘ang cÃ³</div>
                         <div id="statBank" class="stat-value">0</div>
                     </div>
 
                     <div class="stat">
-                        <div class="stat-label">ACC tồn</div>
+                        <div class="stat-label">ACC tá»“n</div>
                         <div id="statAcc" class="stat-value">0</div>
                     </div>
 
                     <div class="stat">
-                        <div class="stat-label">REG của tôi</div>
+                        <div class="stat-label">REG cá»§a tÃ´i</div>
                         <div id="statReg" class="stat-value">0</div>
                     </div>
 
@@ -869,20 +874,20 @@ tr:last-child td{
                 <div class="grid two" style="margin-top:15px">
 
                     <div class="card">
-                        <div class="card-title">Tài khoản</div>
+                        <div class="card-title">TÃ i khoáº£n</div>
 
                         <div id="profileInfo" class="notice">
-                            Đang tải...
+                            Äang táº£i...
                         </div>
                     </div>
 
                     <div class="card">
-                        <div class="card-title">Thông tin</div>
+                        <div class="card-title">ThÃ´ng tin</div>
 
                         <div class="notice">
-                            Dữ liệu được lưu trên Supabase.
-                            Bạn có thể đăng nhập trên thiết bị khác
-                            bằng cùng tài khoản.
+                            Dá»¯ liá»‡u Ä‘Æ°á»£c lÆ°u trÃªn Supabase.
+                            Báº¡n cÃ³ thá»ƒ Ä‘Äƒng nháº­p trÃªn thiáº¿t bá»‹ khÃ¡c
+                            báº±ng cÃ¹ng tÃ i khoáº£n.
                         </div>
                     </div>
 
@@ -898,14 +903,14 @@ tr:last-child td{
                     <div>
                         <h1 class="page-title">Bank Data</h1>
                         <div class="page-sub">
-                            Mua dữ liệu ngân hàng
+                            Mua dá»¯ liá»‡u ngÃ¢n hÃ ng
                         </div>
                     </div>
 
                     <input
                         id="bankSearch"
                         class="search"
-                        placeholder="Tìm tên từ 4 ký tự..."
+                        placeholder="TÃ¬m tÃªn tá»« 4 kÃ½ tá»±..."
                         oninput="searchBank()"
                     >
                 </div>
@@ -915,12 +920,12 @@ tr:last-child td{
                     <div class="card">
 
                         <div class="card-title">
-                            Mua ngẫu nhiên
+                            Mua ngáº«u nhiÃªn
                         </div>
 
                         <div class="notice">
-                            Giá hiện tại:
-                            <b id="bankPriceText">1.000đ</b>/data
+                            GiÃ¡ hiá»‡n táº¡i:
+                            <b id="bankPriceText">1.000Ä‘</b>/data
                         </div>
 
                         <button
@@ -928,7 +933,7 @@ tr:last-child td{
                             style="margin-top:12px"
                             onclick="buyRandomBank()"
                         >
-                            Mua ngẫu nhiên
+                            Mua ngáº«u nhiÃªn
                         </button>
 
                     </div>
@@ -936,11 +941,11 @@ tr:last-child td{
                     <div class="card">
 
                         <div class="card-title">
-                            Tìm theo ngân hàng
+                            TÃ¬m theo ngÃ¢n hÃ ng
                         </div>
 
                         <select id="bankFilter" onchange="loadBank()">
-                            <option value="">Tất cả ngân hàng</option>
+                            <option value="">Táº¥t cáº£ ngÃ¢n hÃ ng</option>
                         </select>
 
                     </div>
@@ -950,7 +955,7 @@ tr:last-child td{
                 <div class="card" style="margin-top:15px">
 
                     <div class="card-title">
-                        Dữ liệu khả dụng
+                        Dá»¯ liá»‡u kháº£ dá»¥ng
                     </div>
 
                     <div id="bankList"></div>
@@ -967,7 +972,7 @@ tr:last-child td{
                     <div>
                         <h1 class="page-title">ACC</h1>
                         <div class="page-sub">
-                            Chọn sản phẩm ACC
+                            Chá»n sáº£n pháº©m ACC
                         </div>
                     </div>
                 </div>
@@ -984,7 +989,7 @@ tr:last-child td{
                     <div>
                         <h1 class="page-title">REG ACC</h1>
                         <div class="page-sub">
-                            Gửi yêu cầu REG tài khoản
+                            Gá»­i yÃªu cáº§u REG tÃ i khoáº£n
                         </div>
                     </div>
                 </div>
@@ -992,7 +997,7 @@ tr:last-child td{
                 <div class="card">
 
                     <div class="card-title">
-                        Tạo đơn REG
+                        Táº¡o Ä‘Æ¡n REG
                     </div>
 
                     <div class="form">
@@ -1001,12 +1006,12 @@ tr:last-child td{
 
                             <div class="field">
                                 <label>STK</label>
-                                <input id="regStk" placeholder="Số tài khoản">
+                                <input id="regStk" placeholder="Sá»‘ tÃ i khoáº£n">
                             </div>
 
                             <div class="field">
-                                <label>Tên tài khoản</label>
-                                <input id="regName" placeholder="Tên chủ tài khoản">
+                                <label>TÃªn tÃ i khoáº£n</label>
+                                <input id="regName" placeholder="TÃªn chá»§ tÃ i khoáº£n">
                             </div>
 
                         </div>
@@ -1014,24 +1019,24 @@ tr:last-child td{
                         <div class="row">
 
                             <div class="field">
-                                <label>Ngân hàng</label>
-                                <input id="regBank" placeholder="Ngân hàng">
+                                <label>NgÃ¢n hÃ ng</label>
+                                <input id="regBank" placeholder="NgÃ¢n hÃ ng">
                             </div>
 
                             <div class="field">
-                                <label>Ghi chú</label>
-                                <input id="regNote" placeholder="Ghi chú nếu có">
+                                <label>Ghi chÃº</label>
+                                <input id="regNote" placeholder="Ghi chÃº náº¿u cÃ³">
                             </div>
 
                         </div>
 
                         <div class="notice">
-                            Phí REG:
-                            <b id="regFeeText">0đ</b>
+                            PhÃ­ REG:
+                            <b id="regFeeText">0Ä‘</b>
                         </div>
 
                         <button class="btn primary" onclick="createRegOrder()">
-                            Gửi đơn REG
+                            Gá»­i Ä‘Æ¡n REG
                         </button>
 
                     </div>
@@ -1041,7 +1046,7 @@ tr:last-child td{
                 <div class="card" style="margin-top:15px">
 
                     <div class="card-title">
-                        Đơn REG của tôi
+                        ÄÆ¡n REG cá»§a tÃ´i
                     </div>
 
                     <div id="myRegList"></div>
@@ -1056,9 +1061,9 @@ tr:last-child td{
 
                 <div class="page-head">
                     <div>
-                        <h1 class="page-title">Lịch sử</h1>
+                        <h1 class="page-title">Lá»‹ch sá»­</h1>
                         <div class="page-sub">
-                            Lịch sử giao dịch của tài khoản
+                            Lá»‹ch sá»­ giao dá»‹ch cá»§a tÃ i khoáº£n
                         </div>
                     </div>
                 </div>
@@ -1080,12 +1085,12 @@ tr:last-child td{
                     <div>
                         <h1 class="page-title">ACC Products</h1>
                         <div class="page-sub">
-                            Quản lý sản phẩm ACC
+                            Quáº£n lÃ½ sáº£n pháº©m ACC
                         </div>
                     </div>
 
                     <button class="btn primary" onclick="openProductModal()">
-                        + Thêm sản phẩm
+                        + ThÃªm sáº£n pháº©m
                     </button>
 
                 </div>
@@ -1103,7 +1108,7 @@ tr:last-child td{
                     <div>
                         <h1 class="page-title">Kho Bank</h1>
                         <div class="page-sub">
-                            Upload dữ liệu STK
+                            Upload dá»¯ liá»‡u STK
                         </div>
                     </div>
 
@@ -1118,9 +1123,9 @@ tr:last-child td{
                         </div>
 
                         <div class="notice">
-                            Mỗi dòng:
+                            Má»—i dÃ²ng:
                             <br>
-                            <b>STK|Tên|Ngân hàng</b>
+                            <b>STK|TÃªn|NgÃ¢n hÃ ng</b>
                         </div>
 
                         <textarea
@@ -1135,7 +1140,7 @@ tr:last-child td{
                             style="margin-top:10px"
                             onclick="uploadBank()"
                         >
-                            Upload dữ liệu
+                            Upload dá»¯ liá»‡u
                         </button>
 
                     </div>
@@ -1143,11 +1148,11 @@ tr:last-child td{
                     <div class="card">
 
                         <div class="card-title">
-                            Thống kê kho
+                            Thá»‘ng kÃª kho
                         </div>
 
                         <div id="adminBankStats" class="notice">
-                            Đang tải...
+                            Äang táº£i...
                         </div>
 
                     </div>
@@ -1157,7 +1162,7 @@ tr:last-child td{
                 <div class="card" style="margin-top:15px">
 
                     <div class="card-title">
-                        Kho hiện tại
+                        Kho hiá»‡n táº¡i
                     </div>
 
                     <div id="adminBankList"></div>
@@ -1175,7 +1180,7 @@ tr:last-child td{
                     <div>
                         <h1 class="page-title">Users</h1>
                         <div class="page-sub">
-                            Quản lý tài khoản
+                            Quáº£n lÃ½ tÃ i khoáº£n
                         </div>
                     </div>
 
@@ -1198,7 +1203,7 @@ tr:last-child td{
                     <div>
                         <h1 class="page-title">REG Orders</h1>
                         <div class="page-sub">
-                            Quản lý đơn REG
+                            Quáº£n lÃ½ Ä‘Æ¡n REG
                         </div>
                     </div>
 
@@ -1219,9 +1224,9 @@ tr:last-child td{
                 <div class="page-head">
 
                     <div>
-                        <h1 class="page-title">Cài đặt</h1>
+                        <h1 class="page-title">CÃ i Ä‘áº·t</h1>
                         <div class="page-sub">
-                            Cấu hình hệ thống
+                            Cáº¥u hÃ¬nh há»‡ thá»‘ng
                         </div>
                     </div>
 
@@ -1232,23 +1237,23 @@ tr:last-child td{
                     <div class="card">
 
                         <div class="card-title">
-                            Giá hệ thống
+                            GiÃ¡ há»‡ thá»‘ng
                         </div>
 
                         <div class="form">
 
                             <div class="field">
-                                <label>Giá Bank / data</label>
+                                <label>GiÃ¡ Bank / data</label>
                                 <input id="settingBankPrice" type="number">
                             </div>
 
                             <div class="field">
-                                <label>Phí REG</label>
+                                <label>PhÃ­ REG</label>
                                 <input id="settingRegFee" type="number">
                             </div>
 
                             <button class="btn primary" onclick="saveSettings()">
-                                Lưu cài đặt
+                                LÆ°u cÃ i Ä‘áº·t
                             </button>
 
                         </div>
@@ -1274,7 +1279,7 @@ tr:last-child td{
                             </div>
 
                             <button class="btn purple" onclick="saveSettings()">
-                                Lưu Telegram
+                                LÆ°u Telegram
                             </button>
 
                         </div>
@@ -1294,23 +1299,23 @@ tr:last-child td{
     <div class="mobile-nav">
 
         <button data-page="dashboard" onclick="openPage('dashboard')">
-            📊<br>Home
+            ðŸ“Š<br>Home
         </button>
 
         <button data-page="bank" onclick="openPage('bank')">
-            🏦<br>Bank
+            ðŸ¦<br>Bank
         </button>
 
         <button data-page="acc" onclick="openPage('acc')">
-            🎮<br>ACC
+            ðŸŽ®<br>ACC
         </button>
 
         <button data-page="reg" onclick="openPage('reg')">
-            📝<br>REG
+            ðŸ“<br>REG
         </button>
 
         <button data-page="history" onclick="openPage('history')">
-            🧾<br>Lịch sử
+            ðŸ§¾<br>Lá»‹ch sá»­
         </button>
 
     </div>
@@ -1326,11 +1331,11 @@ tr:last-child td{
         <div class="modal-head">
 
             <b id="productModalTitle">
-                Thêm sản phẩm
+                ThÃªm sáº£n pháº©m
             </b>
 
             <button class="close" onclick="closeProductModal()">
-                ×
+                Ã—
             </button>
 
         </div>
@@ -1340,24 +1345,24 @@ tr:last-child td{
         <div class="form">
 
             <div class="field">
-                <label>Tên sản phẩm</label>
+                <label>TÃªn sáº£n pháº©m</label>
                 <input id="productName" placeholder="ACC Single">
             </div>
 
             <div class="field">
-                <label>Mô tả</label>
-                <input id="productDescription" placeholder="Mô tả">
+                <label>MÃ´ táº£</label>
+                <input id="productDescription" placeholder="MÃ´ táº£">
             </div>
 
             <div class="row">
 
                 <div class="field">
-                    <label>Giá</label>
+                    <label>GiÃ¡</label>
                     <input id="productPrice" type="number" placeholder="10000">
                 </div>
 
                 <div class="field">
-                    <label>Loại</label>
+                    <label>Loáº¡i</label>
 
                     <select id="productType">
                         <option value="single">Single</option>
@@ -1370,7 +1375,7 @@ tr:last-child td{
             </div>
 
             <button class="btn primary" onclick="saveProduct()">
-                Lưu sản phẩm
+                LÆ°u sáº£n pháº©m
             </button>
 
         </div>
@@ -1420,7 +1425,7 @@ let bankSearchTimer = null;
 ========================================================= */
 
 function money(value){
-    return Number(value || 0).toLocaleString("vi-VN") + "đ";
+    return Number(value || 0).toLocaleString("vi-VN") + "Ä‘";
 }
 
 function escapeHtml(value){
@@ -1455,14 +1460,14 @@ function authMessage(message,type="error"){
 }
 
 function supabaseError(error){
-    if(!error) return "Có lỗi không xác định.";
+    if(!error) return "CÃ³ lá»—i khÃ´ng xÃ¡c Ä‘á»‹nh.";
 
     console.error(error);
 
     return error.message ||
         error.details ||
         error.hint ||
-        "Supabase trả về lỗi.";
+        "Supabase tráº£ vá» lá»—i.";
 }
 
 
@@ -1471,9 +1476,10 @@ function supabaseError(error){
 ========================================================= */
 
 function saveSession(user){
+    // Chá»‰ lÆ°u ID Ä‘á»ƒ khÃ´i phá»¥c phiÃªn; khÃ´ng lÆ°u máº­t kháº©u/há»“ sÆ¡ Ä‘áº§y Ä‘á»§.
     localStorage.setItem(
         "dm_current_user",
-        JSON.stringify(user)
+        JSON.stringify({id:user.id})
     );
 }
 
@@ -1527,11 +1533,11 @@ async function login(){
         document.getElementById("loginPassword").value;
 
     if(!username || !password){
-        authMessage("Nhập đầy đủ tài khoản và mật khẩu.");
+        authMessage("Nháº­p Ä‘áº§y Ä‘á»§ tÃ i khoáº£n vÃ  máº­t kháº©u.");
         return;
     }
 
-    authMessage("Đang đăng nhập...","success");
+    authMessage("Äang Ä‘Äƒng nháº­p...","success");
 
     const {data,error} = await sb
         .from("users")
@@ -1546,13 +1552,13 @@ async function login(){
     }
 
     if(!data){
-        authMessage("Tài khoản không tồn tại.");
+        authMessage("TÃ i khoáº£n khÃ´ng tá»“n táº¡i.");
         return;
     }
 
     /*
-      Hỗ trợ cả password và password_hash
-      vì bảng hiện tại của m đang có cả hai.
+      Há»— trá»£ cáº£ password vÃ  password_hash
+      vÃ¬ báº£ng hiá»‡n táº¡i cá»§a m Ä‘ang cÃ³ cáº£ hai.
     */
 
     const valid =
@@ -1560,17 +1566,17 @@ async function login(){
         data.password_hash === password;
 
     if(!valid){
-        authMessage("Sai mật khẩu.");
+        authMessage("Sai máº­t kháº©u.");
         return;
     }
 
     if(data.disabled){
-        authMessage("Tài khoản đã bị khóa.");
+        authMessage("TÃ i khoáº£n Ä‘Ã£ bá»‹ khÃ³a.");
         return;
     }
 
     if(data.role !== "admin" && !data.approved){
-        authMessage("Tài khoản đang chờ admin duyệt.");
+        authMessage("TÃ i khoáº£n Ä‘ang chá» admin duyá»‡t.");
         return;
     }
 
@@ -1599,21 +1605,21 @@ async function registerUser(){
         document.getElementById("regPassword2").value;
 
     if(username.length < 3){
-        authMessage("Tài khoản phải có ít nhất 3 ký tự.");
+        authMessage("TÃ i khoáº£n pháº£i cÃ³ Ã­t nháº¥t 3 kÃ½ tá»±.");
         return;
     }
 
     if(password.length < 4){
-        authMessage("Mật khẩu phải có ít nhất 4 ký tự.");
+        authMessage("Máº­t kháº©u pháº£i cÃ³ Ã­t nháº¥t 4 kÃ½ tá»±.");
         return;
     }
 
     if(password !== password2){
-        authMessage("Mật khẩu nhập lại không khớp.");
+        authMessage("Máº­t kháº©u nháº­p láº¡i khÃ´ng khá»›p.");
         return;
     }
 
-    authMessage("Đang tạo tài khoản...","success");
+    authMessage("Äang táº¡o tÃ i khoáº£n...","success");
 
     const {data:exists,error:checkError} =
         await sb
@@ -1628,7 +1634,7 @@ async function registerUser(){
     }
 
     if(exists){
-        authMessage("Tài khoản đã tồn tại.");
+        authMessage("TÃ i khoáº£n Ä‘Ã£ tá»“n táº¡i.");
         return;
     }
 
@@ -1650,7 +1656,7 @@ async function registerUser(){
     }
 
     authMessage(
-        "Tạo tài khoản thành công. Chờ admin duyệt.",
+        "Táº¡o tÃ i khoáº£n thÃ nh cÃ´ng. Chá» admin duyá»‡t.",
         "success"
     );
 
@@ -1670,6 +1676,20 @@ async function registerUser(){
 
 async function afterLogin(){
 
+    // KhÃ´ng má»Ÿ á»©ng dá»¥ng náº¿u chÆ°a cÃ³ user há»£p lá»‡.
+    if(!currentUser || !currentUser.id || currentUser.disabled ||
+       (currentUser.role !== "admin" && !currentUser.approved)){
+        currentUser = null;
+        clearSession();
+        document.getElementById("app").classList.remove("authenticated");
+        document.getElementById("app").classList.add("hidden");
+        document.getElementById("authScreen").classList.remove("hidden");
+        showAuth("login");
+        authMessage("PhiÃªn Ä‘Äƒng nháº­p khÃ´ng há»£p lá»‡ hoáº·c chÆ°a Ä‘Æ°á»£c duyá»‡t.");
+        return;
+    }
+
+    document.getElementById("app").classList.add("authenticated");
     document.getElementById("authScreen")
         .classList.add("hidden");
 
@@ -1739,6 +1759,8 @@ function logout(){
 
     document.getElementById("app")
         .classList.add("hidden");
+    document.getElementById("app")
+        .classList.remove("authenticated");
 
     document.getElementById("authScreen")
         .classList.remove("hidden");
@@ -1755,6 +1777,10 @@ function logout(){
 ========================================================= */
 
 function openPage(page){
+
+    // Cháº·n Ä‘iá»u hÆ°á»›ng náº¿u chÆ°a xÃ¡c thá»±c; cháº·n user thÆ°á»ng vÃ o trang admin.
+    if(!currentUser || !document.getElementById("app").classList.contains("authenticated")) return;
+    if(page.startsWith("admin-") && currentUser.role !== "admin") return;
 
     document.querySelectorAll(".page")
         .forEach(el=>el.classList.remove("active"));
@@ -1840,10 +1866,10 @@ async function loadDashboard(){
 
     document.getElementById("profileInfo").innerHTML = `
         <b>${escapeHtml(currentUser.username)}</b><br>
-        Quyền:
+        Quyá»n:
         <b>${escapeHtml(currentUser.role)}</b><br>
-        Trạng thái:
-        <span class="badge green">Đang hoạt động</span>
+        Tráº¡ng thÃ¡i:
+        <span class="badge green">Äang hoáº¡t Ä‘á»™ng</span>
     `;
 
     const {count:bankCount} =
@@ -1921,7 +1947,7 @@ async function loadBank(){
     const current = select.value;
 
     select.innerHTML =
-        `<option value="">Tất cả ngân hàng</option>` +
+        `<option value="">Táº¥t cáº£ ngÃ¢n hÃ ng</option>` +
         banks.map(bank=>
             `<option value="${escapeHtml(bank)}">
                 ${escapeHtml(bank)}
@@ -1937,7 +1963,7 @@ function renderBankList(list){
     if(!list.length){
         document.getElementById("bankList").innerHTML =
             `<div class="empty">
-                Không có dữ liệu phù hợp.
+                KhÃ´ng cÃ³ dá»¯ liá»‡u phÃ¹ há»£p.
             </div>`;
         return;
     }
@@ -1948,8 +1974,8 @@ function renderBankList(list){
                 <thead>
                     <tr>
                         <th>STK</th>
-                        <th>Tên</th>
-                        <th>Ngân hàng</th>
+                        <th>TÃªn</th>
+                        <th>NgÃ¢n hÃ ng</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -1992,13 +2018,13 @@ function searchBank(){
 async function buyBank(id){
 
     if(!confirm(
-        `Mua dữ liệu này với giá ${money(settings.bank_price)}?`
+        `Mua dá»¯ liá»‡u nÃ y vá»›i giÃ¡ ${money(settings.bank_price)}?`
     )) return;
 
     await refreshCurrentUser();
 
     if(Number(currentUser.balance) < settings.bank_price){
-        toast("Không đủ số dư.");
+        toast("KhÃ´ng Ä‘á»§ sá»‘ dÆ°.");
         return;
     }
 
@@ -2010,7 +2036,7 @@ async function buyBank(id){
             .maybeSingle();
 
     if(fetchError || !item){
-        toast("Dữ liệu không còn.");
+        toast("Dá»¯ liá»‡u khÃ´ng cÃ²n.");
         await loadBank();
         return;
     }
@@ -2063,12 +2089,12 @@ async function buyBank(id){
 
     await refreshCurrentUser();
 
-    toast("Mua thành công.");
+    toast("Mua thÃ nh cÃ´ng.");
 
     alert(
         `STK: ${item.stk}\n` +
-        `Tên: ${item.name}\n` +
-        `Ngân hàng: ${item.bank}`
+        `TÃªn: ${item.name}\n` +
+        `NgÃ¢n hÃ ng: ${item.bank}`
     );
 
     await loadBank();
@@ -2086,7 +2112,7 @@ async function buyRandomBank(){
             .maybeSingle();
 
     if(error || !data){
-        toast("Kho Bank đang hết.");
+        toast("Kho Bank Ä‘ang háº¿t.");
         return;
     }
 
@@ -2120,7 +2146,7 @@ async function loadProducts(){
     if(!products.length){
         document.getElementById("productList").innerHTML =
             `<div class="empty">
-                Chưa có sản phẩm ACC.
+                ChÆ°a cÃ³ sáº£n pháº©m ACC.
             </div>`;
         return;
     }
@@ -2147,7 +2173,7 @@ async function loadProducts(){
                 </div>
 
                 <div class="product-info">
-                    Tồn kho: <b>${count || 0}</b>
+                    Tá»“n kho: <b>${count || 0}</b>
                 </div>
 
                 <div class="product-price">
@@ -2184,18 +2210,18 @@ async function buyAcc(productId){
             .maybeSingle();
 
     if(productError || !product){
-        toast("Không tìm thấy sản phẩm.");
+        toast("KhÃ´ng tÃ¬m tháº¥y sáº£n pháº©m.");
         return;
     }
 
     if(!confirm(
-        `Mua ${product.name} với giá ${money(product.price)}?`
+        `Mua ${product.name} vá»›i giÃ¡ ${money(product.price)}?`
     )) return;
 
     await refreshCurrentUser();
 
     if(Number(currentUser.balance) < Number(product.price)){
-        toast("Không đủ số dư.");
+        toast("KhÃ´ng Ä‘á»§ sá»‘ dÆ°.");
         return;
     }
 
@@ -2209,7 +2235,7 @@ async function buyAcc(productId){
             .maybeSingle();
 
     if(itemError || !item){
-        toast("Sản phẩm đã hết hàng.");
+        toast("Sáº£n pháº©m Ä‘Ã£ háº¿t hÃ ng.");
         return;
     }
 
@@ -2261,10 +2287,10 @@ async function buyAcc(productId){
 
     await refreshCurrentUser();
 
-    toast("Mua ACC thành công.");
+    toast("Mua ACC thÃ nh cÃ´ng.");
 
     alert(
-        `Sản phẩm: ${product.name}\n\n` +
+        `Sáº£n pháº©m: ${product.name}\n\n` +
         `TK: ${item.username}\n` +
         `MK: ${item.password}`
     );
@@ -2293,14 +2319,14 @@ async function createRegOrder(){
         document.getElementById("regNote").value.trim();
 
     if(!stk || !name || !bank){
-        toast("Nhập đủ STK, tên và ngân hàng.");
+        toast("Nháº­p Ä‘á»§ STK, tÃªn vÃ  ngÃ¢n hÃ ng.");
         return;
     }
 
     await refreshCurrentUser();
 
     if(Number(currentUser.balance) < settings.reg_fee){
-        toast("Không đủ số dư.");
+        toast("KhÃ´ng Ä‘á»§ sá»‘ dÆ°.");
         return;
     }
 
@@ -2365,7 +2391,7 @@ async function createRegOrder(){
 
     await refreshCurrentUser();
 
-    toast("Đã gửi đơn REG.");
+    toast("ÄÃ£ gá»­i Ä‘Æ¡n REG.");
 
     await loadMyReg();
     await loadDashboard();
@@ -2392,7 +2418,7 @@ async function loadMyReg(){
     if(!data || !data.length){
         document.getElementById("myRegList").innerHTML =
             `<div class="empty">
-                Chưa có đơn REG.
+                ChÆ°a cÃ³ Ä‘Æ¡n REG.
             </div>`;
         return;
     }
@@ -2403,10 +2429,10 @@ async function loadMyReg(){
                 <thead>
                     <tr>
                         <th>STK</th>
-                        <th>Tên</th>
+                        <th>TÃªn</th>
                         <th>Bank</th>
-                        <th>Phí</th>
-                        <th>Trạng thái</th>
+                        <th>PhÃ­</th>
+                        <th>Tráº¡ng thÃ¡i</th>
                     </tr>
                 </thead>
 
@@ -2452,7 +2478,7 @@ async function loadHistory(){
     if(!data || !data.length){
         document.getElementById("historyList").innerHTML =
             `<div class="empty">
-                Chưa có lịch sử.
+                ChÆ°a cÃ³ lá»‹ch sá»­.
             </div>`;
         return;
     }
@@ -2462,10 +2488,10 @@ async function loadHistory(){
             <table>
                 <thead>
                     <tr>
-                        <th>Loại</th>
-                        <th>Nội dung</th>
-                        <th>Số tiền</th>
-                        <th>Thời gian</th>
+                        <th>Loáº¡i</th>
+                        <th>Ná»™i dung</th>
+                        <th>Sá»‘ tiá»n</th>
+                        <th>Thá»i gian</th>
                     </tr>
                 </thead>
 
@@ -2526,7 +2552,7 @@ async function loadAdminProducts(){
     if(!data || !data.length){
         document.getElementById("adminProductList").innerHTML =
             `<div class="empty">
-                Chưa có sản phẩm.
+                ChÆ°a cÃ³ sáº£n pháº©m.
             </div>`;
         return;
     }
@@ -2567,14 +2593,14 @@ async function loadAdminProducts(){
                         class="btn small"
                         onclick='editProduct(${JSON.stringify(p)})'
                     >
-                        Sửa
+                        Sá»­a
                     </button>
 
                     <button
                         class="btn small danger"
                         onclick="deleteProduct('${p.id}')"
                     >
-                        Xóa
+                        XÃ³a
                     </button>
 
                 </td>
@@ -2592,11 +2618,11 @@ async function loadAdminProducts(){
 
                     <thead>
                         <tr>
-                            <th>Tên</th>
-                            <th>Loại</th>
-                            <th>Giá</th>
-                            <th>Tồn</th>
-                            <th>Trạng thái</th>
+                            <th>TÃªn</th>
+                            <th>Loáº¡i</th>
+                            <th>GiÃ¡</th>
+                            <th>Tá»“n</th>
+                            <th>Tráº¡ng thÃ¡i</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -2624,7 +2650,7 @@ function openProductModal(){
     document.getElementById("productType").value = "single";
 
     document.getElementById("productModalTitle")
-        .textContent = "Thêm sản phẩm";
+        .textContent = "ThÃªm sáº£n pháº©m";
 
     document.getElementById("productModal")
         .classList.add("show");
@@ -2656,7 +2682,7 @@ function editProduct(product){
         product.type || "single";
 
     document.getElementById("productModalTitle")
-        .textContent = "Sửa sản phẩm";
+        .textContent = "Sá»­a sáº£n pháº©m";
 
     document.getElementById("productModal")
         .classList.add("show");
@@ -2677,7 +2703,7 @@ async function saveProduct(){
     };
 
     if(!payload.name){
-        toast("Nhập tên sản phẩm.");
+        toast("Nháº­p tÃªn sáº£n pháº©m.");
         return;
     }
 
@@ -2707,7 +2733,7 @@ async function saveProduct(){
 
     closeProductModal();
 
-    toast("Đã lưu sản phẩm.");
+    toast("ÄÃ£ lÆ°u sáº£n pháº©m.");
 
     await loadAdminProducts();
 }
@@ -2715,7 +2741,7 @@ async function saveProduct(){
 
 async function deleteProduct(id){
 
-    if(!confirm("Xóa sản phẩm này?")) return;
+    if(!confirm("XÃ³a sáº£n pháº©m nÃ y?")) return;
 
     const {error} =
         await sb
@@ -2728,7 +2754,7 @@ async function deleteProduct(id){
         return;
     }
 
-    toast("Đã xóa.");
+    toast("ÄÃ£ xÃ³a.");
 
     await loadAdminProducts();
 }
@@ -2744,7 +2770,7 @@ async function uploadBank(){
         document.getElementById("bankUpload").value.trim();
 
     if(!text){
-        toast("Chưa có dữ liệu.");
+        toast("ChÆ°a cÃ³ dá»¯ liá»‡u.");
         return;
     }
 
@@ -2769,7 +2795,7 @@ async function uploadBank(){
     }
 
     if(!rows.length){
-        toast("Không đọc được dữ liệu.");
+        toast("KhÃ´ng Ä‘á»c Ä‘Æ°á»£c dá»¯ liá»‡u.");
         return;
     }
 
@@ -2785,7 +2811,7 @@ async function uploadBank(){
 
     document.getElementById("bankUpload").value = "";
 
-    toast(`Đã upload ${rows.length} dữ liệu.`);
+    toast(`ÄÃ£ upload ${rows.length} dá»¯ liá»‡u.`);
 
     await loadAdminBank();
 }
@@ -2801,7 +2827,7 @@ async function loadAdminBank(){
     document.getElementById("adminBankStats").innerHTML =
         error
             ? escapeHtml(supabaseError(error))
-            : `Kho hiện có <b>${count || 0}</b> dữ liệu Bank.`;
+            : `Kho hiá»‡n cÃ³ <b>${count || 0}</b> dá»¯ liá»‡u Bank.`;
 
     const {data} =
         await sb
@@ -2813,7 +2839,7 @@ async function loadAdminBank(){
     if(!data || !data.length){
 
         document.getElementById("adminBankList").innerHTML =
-            `<div class="empty">Kho trống.</div>`;
+            `<div class="empty">Kho trá»‘ng.</div>`;
 
         return;
     }
@@ -2826,7 +2852,7 @@ async function loadAdminBank(){
                 <thead>
                     <tr>
                         <th>STK</th>
-                        <th>Tên</th>
+                        <th>TÃªn</th>
                         <th>Bank</th>
                         <th></th>
                     </tr>
@@ -2844,7 +2870,7 @@ async function loadAdminBank(){
                                     class="btn small danger"
                                     onclick="deleteBank('${item.id}')"
                                 >
-                                    Xóa
+                                    XÃ³a
                                 </button>
                             </td>
                         </tr>
@@ -2860,7 +2886,7 @@ async function loadAdminBank(){
 
 async function deleteBank(id){
 
-    if(!confirm("Xóa dữ liệu này khỏi kho?")) return;
+    if(!confirm("XÃ³a dá»¯ liá»‡u nÃ y khá»i kho?")) return;
 
     const {error} =
         await sb
@@ -2873,7 +2899,7 @@ async function deleteBank(id){
         return;
     }
 
-    toast("Đã xóa.");
+    toast("ÄÃ£ xÃ³a.");
 
     await loadAdminBank();
 }
@@ -2903,7 +2929,7 @@ async function loadAdminUsers(){
 
     if(!data || !data.length){
         document.getElementById("adminUsersList").innerHTML =
-            `<div class="empty">Chưa có user.</div>`;
+            `<div class="empty">ChÆ°a cÃ³ user.</div>`;
         return;
     }
 
@@ -2917,9 +2943,9 @@ async function loadAdminUsers(){
                     <tr>
                         <th>User</th>
                         <th>Role</th>
-                        <th>Duyệt</th>
-                        <th>Khóa</th>
-                        <th>Số dư</th>
+                        <th>Duyá»‡t</th>
+                        <th>KhÃ³a</th>
+                        <th>Sá»‘ dÆ°</th>
                         <th></th>
                     </tr>
 
@@ -2943,15 +2969,15 @@ async function loadAdminUsers(){
 
                             <td>
                                 ${user.approved
-                                    ? `<span class="badge green">Đã duyệt</span>`
-                                    : `<span class="badge yellow">Chờ duyệt</span>`
+                                    ? `<span class="badge green">ÄÃ£ duyá»‡t</span>`
+                                    : `<span class="badge yellow">Chá» duyá»‡t</span>`
                                 }
                             </td>
 
                             <td>
                                 ${user.disabled
-                                    ? `<span class="badge red">Khóa</span>`
-                                    : `<span class="badge green">Mở</span>`
+                                    ? `<span class="badge red">KhÃ³a</span>`
+                                    : `<span class="badge green">Má»Ÿ</span>`
                                 }
                             </td>
 
@@ -2969,32 +2995,32 @@ async function loadAdminUsers(){
                                         class="btn small success"
                                         onclick="approveUser('${user.id}',${!user.approved})"
                                     >
-                                        ${user.approved ? "Bỏ duyệt" : "Duyệt"}
+                                        ${user.approved ? "Bá» duyá»‡t" : "Duyá»‡t"}
                                     </button>
 
                                     <button
                                         class="btn small warning"
                                         onclick="toggleUser('${user.id}',${!user.disabled})"
                                     >
-                                        ${user.disabled ? "Mở" : "Khóa"}
+                                        ${user.disabled ? "Má»Ÿ" : "KhÃ³a"}
                                     </button>
 
                                     <button
                                         class="btn small primary"
                                         onclick="addBalance('${user.id}','${escapeHtml(user.username)}')"
                                     >
-                                        + Tiền
+                                        + Tiá»n
                                     </button>
 
                                     <button
                                         class="btn small danger"
                                         onclick="deleteUser('${user.id}')"
                                     >
-                                        Xóa
+                                        XÃ³a
                                     </button>
                                     `
                                     :
-                                    `<span class="badge blue">Bạn</span>`
+                                    `<span class="badge blue">Báº¡n</span>`
                                 }
 
                             </td>
@@ -3027,7 +3053,7 @@ async function approveUser(id,value){
         return;
     }
 
-    toast(value ? "Đã duyệt user." : "Đã bỏ duyệt.");
+    toast(value ? "ÄÃ£ duyá»‡t user." : "ÄÃ£ bá» duyá»‡t.");
 
     await loadAdminUsers();
 }
@@ -3048,7 +3074,7 @@ async function toggleUser(id,value){
         return;
     }
 
-    toast(value ? "Đã khóa." : "Đã mở khóa.");
+    toast(value ? "ÄÃ£ khÃ³a." : "ÄÃ£ má»Ÿ khÃ³a.");
 
     await loadAdminUsers();
 }
@@ -3058,7 +3084,7 @@ async function addBalance(id,username){
 
     const amount =
         Number(prompt(
-            `Cộng bao nhiêu tiền cho ${username}?`
+            `Cá»™ng bao nhiÃªu tiá»n cho ${username}?`
         ));
 
     if(!Number.isFinite(amount) || amount <= 0){
@@ -3073,7 +3099,7 @@ async function addBalance(id,username){
             .maybeSingle();
 
     if(findError || !user){
-        toast("Không tìm thấy user.");
+        toast("KhÃ´ng tÃ¬m tháº¥y user.");
         return;
     }
 
@@ -3098,12 +3124,12 @@ async function addBalance(id,username){
         .insert({
             user_id:id,
             username,
-            type:"NẠP TIỀN",
-            content:`Admin cộng ${money(amount)}`,
+            type:"Náº P TIá»€N",
+            content:`Admin cá»™ng ${money(amount)}`,
             amount:amount
         });
 
-    toast(`Đã cộng ${money(amount)}.`);
+    toast(`ÄÃ£ cá»™ng ${money(amount)}.`);
 
     await loadAdminUsers();
 }
@@ -3112,7 +3138,7 @@ async function addBalance(id,username){
 async function deleteUser(id){
 
     if(!confirm(
-        "Xóa tài khoản này? Dữ liệu user sẽ bị xóa."
+        "XÃ³a tÃ i khoáº£n nÃ y? Dá»¯ liá»‡u user sáº½ bá»‹ xÃ³a."
     )) return;
 
     const {error} =
@@ -3126,7 +3152,7 @@ async function deleteUser(id){
         return;
     }
 
-    toast("Đã xóa user.");
+    toast("ÄÃ£ xÃ³a user.");
 
     await loadAdminUsers();
 }
@@ -3155,7 +3181,7 @@ async function loadAdminReg(){
     if(!data || !data.length){
         document.getElementById("adminRegList").innerHTML =
             `<div class="empty">
-                Chưa có đơn REG.
+                ChÆ°a cÃ³ Ä‘Æ¡n REG.
             </div>`;
         return;
     }
@@ -3170,9 +3196,9 @@ async function loadAdminReg(){
                     <tr>
                         <th>User</th>
                         <th>STK</th>
-                        <th>Tên</th>
+                        <th>TÃªn</th>
                         <th>Bank</th>
-                        <th>Phí</th>
+                        <th>PhÃ­</th>
                         <th>Status</th>
                         <th></th>
                     </tr>
@@ -3205,22 +3231,22 @@ async function loadAdminReg(){
 
                                     <option value="pending"
                                         ${order.status==="pending"?"selected":""}>
-                                        Chờ
+                                        Chá»
                                     </option>
 
                                     <option value="processing"
                                         ${order.status==="processing"?"selected":""}>
-                                        Đang xử lý
+                                        Äang xá»­ lÃ½
                                     </option>
 
                                     <option value="done"
                                         ${order.status==="done"?"selected":""}>
-                                        Hoàn thành
+                                        HoÃ n thÃ nh
                                     </option>
 
                                     <option value="cancelled"
                                         ${order.status==="cancelled"?"selected":""}>
-                                        Hủy
+                                        Há»§y
                                     </option>
 
                                 </select>
@@ -3255,7 +3281,7 @@ async function changeRegStatus(id,status){
         return;
     }
 
-    toast("Đã cập nhật trạng thái.");
+    toast("ÄÃ£ cáº­p nháº­t tráº¡ng thÃ¡i.");
 
     await loadAdminReg();
 }
@@ -3311,7 +3337,7 @@ async function saveSettings(){
 
     await loadSettings();
 
-    toast("Đã lưu cài đặt.");
+    toast("ÄÃ£ lÆ°u cÃ i Ä‘áº·t.");
 }
 
 
@@ -3328,10 +3354,10 @@ function isAdmin(){
 function statusBadge(status){
 
     const map = {
-        pending:["Chờ xử lý","yellow"],
-        processing:["Đang xử lý","blue"],
-        done:["Hoàn thành","green"],
-        cancelled:["Đã hủy","red"]
+        pending:["Chá» xá»­ lÃ½","yellow"],
+        processing:["Äang xá»­ lÃ½","blue"],
+        done:["HoÃ n thÃ nh","green"],
+        cancelled:["ÄÃ£ há»§y","red"]
     };
 
     const item =
@@ -3376,7 +3402,7 @@ async function startup(){
     currentUser = session;
 
     /*
-      Kiểm tra lại user trên Supabase.
+      Kiá»ƒm tra láº¡i user trÃªn Supabase.
     */
 
     const {data,error} =
@@ -3405,7 +3431,7 @@ async function startup(){
 
         showAuth("login");
 
-        authMessage("Tài khoản đã bị khóa.");
+        authMessage("TÃ i khoáº£n Ä‘Ã£ bá»‹ khÃ³a.");
 
         return;
     }
@@ -3416,7 +3442,7 @@ async function startup(){
 
         showAuth("login");
 
-        authMessage("Tài khoản chưa được admin duyệt.");
+        authMessage("TÃ i khoáº£n chÆ°a Ä‘Æ°á»£c admin duyá»‡t.");
 
         return;
     }
